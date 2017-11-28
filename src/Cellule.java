@@ -1,17 +1,19 @@
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 /**
- * Cellules contenues dans le conteneur, permet d'y attribuer des formules qui seront stockées et calculées en donnée numérique
+ * Cellules contenues dans le conteneur, permet d'y attribuer des formules qui
+ * seront stockées et calculées en donnée numérique
  */
 public class Cellule {
 
-	Collection<Cellule> cellsNeedMe;
-	Collection<Cellule> cellsUsed;
+	List<Cellule> cellsNeedMe;
+	List<Cellule> cellsUsed;
 	Resultat resultat;
 	/**
 	 * Valeur textuelle de la cellule
 	 */
-	private string formule;
+	private String formule;
 	/**
 	 * Boolean permettant de savoir s'il y a une valeur numerique a la cellule
 	 */
@@ -19,21 +21,28 @@ public class Cellule {
 	/**
 	 * Nom de la cellule
 	 */
-	private string nom;
+	private String name;
 
 	/**
 	 * Constructeur de la classe, initialise les attributs de la classe
-	 * @param nom Nom de la cellule
-	 * @param formule Valeur textuelle attribuée à la cellule
+	 * 
+	 * @param nom
+	 *            Nom de la cellule
+	 * @param formule
+	 *            Valeur textuelle attribuée à la cellule
 	 */
-	public Cellule(string nom, string formule) {
+	public Cellule(String nom, String formule) {
+		this.name = nom;
+		this.formule = formule;
 		// TODO - implement Cellule.Cellule
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * Recalcule la valeur numerique de la cellule
-	 * @param conteneur Conteneur qui contient la cellule
+	 * 
+	 * @param conteneur
+	 *            Conteneur qui contient la cellule
 	 */
 	public void actualise(Conteneur conteneur) {
 		// TODO - implement Cellule.actualise
@@ -41,8 +50,11 @@ public class Cellule {
 	}
 
 	/**
-	 * Permet de supprimer la cellule en paramètre de l'attribut CellsNeedMe de la cellule courante
-	 * @param cellule Cellule qui sera supprimer de la liste CellsNeedMe 
+	 * Permet de supprimer la cellule en paramètre de l'attribut CellsNeedMe de la
+	 * cellule courante
+	 * 
+	 * @param cellule
+	 *            Cellule qui sera supprimer de la liste CellsNeedMe
 	 */
 	public void oublier(Cellule cellule) {
 		// TODO - implement Cellule.oublier
@@ -51,42 +63,45 @@ public class Cellule {
 
 	/**
 	 * Ajoute a la liste cellsUsed les cellules utilisées dans la formule
-	 * @param cellule Cellule à ajouter à la liste des cellules cellsUsed
+	 * 
+	 * @param cellule
+	 *            Cellule à ajouter à la liste des cellules cellsUsed
 	 */
 	public void addToCellsUsed(Cellule cellule) {
-		// TODO - implement Cellule.addToCellsUsed
-		throw new UnsupportedOperationException();
+		this.cellsUsed.add(cellule);
 	}
 
 	/**
-	 * vide la liste cellsUsed
+	 * 	Vide la liste cellsUsed
 	 */
 	public void clearCellsUsed() {
-		// TODO - implement Cellule.clearCellsUsed
-		throw new UnsupportedOperationException();
+		this.cellsUsed.clear();
 	}
 
 	/**
 	 * ajoute la cellule "cellule" dans la liste des cellules qui l'utilisent
-	 * @param cellule cellule à ajouter à la liste
+	 * 
+	 * @param cellule
+	 *            cellule à ajouter à la liste
 	 */
 	public void addToCellsNeedMe(Cellule cellule) {
-		// TODO - implement Cellule.addToCellsNeedMe
-		throw new UnsupportedOperationException();
+		this.cellsNeedMe.add(cellule);
 	}
 
 	/**
 	 * Modifie la valeur de l'attribut formule
-	 * @param formule Valeur à saisir dans la cellule
+	 * 
+	 * @param formule
+	 *            Valeur à saisir dans la cellule
 	 */
-	public void setFormule(string formule) {
+	public void setFormule(String formule) {
 		this.formule = formule;
 	}
 
 	/**
 	 * retourne la valeur textuelle stocké dans la cellule
 	 */
-	public string getFormule() {
+	public String getFormule() {
 		return this.formule;
 	}
 
@@ -100,9 +115,8 @@ public class Cellule {
 	/**
 	 * Retoune le nom de la cellule
 	 */
-	public string getName() {
-		// TODO - implement Cellule.getName
-		throw new UnsupportedOperationException();
+	public String getName() {
+		return this.name;
 	}
 
 	/**

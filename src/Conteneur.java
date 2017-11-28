@@ -1,27 +1,33 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Entitée qui regroupe toutes les cellules
  */
 public class Conteneur {
 
-	Collection<Cellule> cellules;
+	List<Cellule> cellules;
 
 	/**
 	 * Constructeur de la classe conteneur, crée un conteneur de cellules vide
 	 */
 	public Conteneur() {
-		// TODO - implement Conteneur.Conteneur
-		throw new UnsupportedOperationException();
+		this.cellules = new ArrayList<>();
 	}
 
 	/**
 	 * Recherche une cellule. Si elle existe, la fonction la renvoie, sinon la fonction crée une cellule vierge et la retourne
 	 * @param nom Nom d'une cellule
 	 */
-	public Cellule getCellule(string nom) {
-		// TODO - implement Conteneur.getCellule
-		throw new UnsupportedOperationException();
+	public Cellule getCellule(String nom) {
+		Cellule res = null;
+		for (Cellule c : this.cellules) {
+			if (c.getName().equals(nom)) {
+				res = c;
+				break;
+			}
+		}
+		return res;
 	}
 
 	/**
@@ -29,8 +35,7 @@ public class Conteneur {
 	 * @param cellule Valeur à saisir dans la cellule
 	 */
 	public void addCellule(Cellule cellule) {
-		// TODO - implement Conteneur.addCellule
-		throw new UnsupportedOperationException();
+		this.cellules.add(cellule);
 	}
 
 	/**
@@ -38,7 +43,7 @@ public class Conteneur {
 	 * @param nom nom de la cellule à éditer
 	 * @param formule formule à donner à la cellule
 	 */
-	public void editerCellule(string nom, string formule) {
+	public void editerCellule(String nom, String formule) {
 		// TODO - implement Conteneur.editerCellule
 		throw new UnsupportedOperationException();
 	}
@@ -47,17 +52,19 @@ public class Conteneur {
 	 * Enlève la cellule du conteneur et la détruit
 	 * @param cellule nom de la cellule
 	 */
-	public void removeCellule(string cellule) {
-		// TODO - implement Conteneur.removeCellule
-		throw new UnsupportedOperationException();
+	public void removeCellule(String cellule) {
+		for (Cellule c : this.cellules) {
+			if (c.getName().equals(cellule)) {
+				this.cellules.remove(c);
+			}
+		}
 	}
 
 	/**
 	 * Retourne la liste des cellules contenues dans le conteneur
 	 */
 	public List<Cellule> getAllCellules() {
-		// TODO - implement Conteneur.getAllCellules
-		throw new UnsupportedOperationException();
+		return this.cellules;
 	}
 
 }

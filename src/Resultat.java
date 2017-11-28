@@ -13,16 +13,14 @@ public class Resultat {
 	 * @param resultat Valeur attribuee a l'attribut resultat
 	 */
 	public Resultat(double resultat) {
-		// TODO - implement Resultat.Resultat
-		throw new UnsupportedOperationException();
+		value = resultat;
 	}
 
 	/**
 	 * Retourne le resultat sous la forme d'un double
 	 */
 	public double getResultat() {
-		// TODO - implement Resultat.getResultat
-		throw new UnsupportedOperationException();
+		return value;
 	}
 
 }

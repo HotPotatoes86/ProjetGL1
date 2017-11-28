@@ -7,7 +7,7 @@ public class SaveManager {
 	 * Importe une base de donnée grace à une requete
 	 * @param requete requete sql permettant de récupérer une table depuis une base de données
 	 */
-	public Conteneur importBase(string requete) {
+	public Conteneur importBase(String requete) {
 		// TODO - implement SaveManager.importBase
 		throw new UnsupportedOperationException();
 	}
@@ -16,7 +16,7 @@ public class SaveManager {
 	 * Cette fonction permet au parseur de lire le fichier (.nlb) et de créer les cellules correspondantes dans un conteneur qu'il aura créé
 	 * @param chemin
 	 */
-	public Conteneur ImportFile(string chemin) {
+	public Conteneur ImportFile(String chemin) {
 		// TODO - implement SaveManager.ImportFile
 		throw new UnsupportedOperationException();
 	}
@@ -26,7 +26,7 @@ public class SaveManager {
 	 * @param chemin Chemin de sauvegarde du fichier
 	 * @param conteneur
 	 */
-	public void sauvegarde(string chemin, Conteneur conteneur) {
+	public void sauvegarde(String chemin, Conteneur conteneur) {
 		// TODO - implement SaveManager.sauvegarde
 		throw new UnsupportedOperationException();
 	}

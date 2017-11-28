@@ -10,8 +10,7 @@ public class Valeur extends Arbre {
 	 * @param valeur Valeur attribuée à l'attribut resultat
 	 */
 	public Valeur(double valeur) {
-		// TODO - implement Valeur.Valeur
-		throw new UnsupportedOperationException();
+		this.resultat = valeur;
 	}
 
 	/**

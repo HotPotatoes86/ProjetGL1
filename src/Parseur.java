@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Classe permettant la communication entre le systeme et le stockage pour les fonctionnalités "Charger" et "Sauvegarder"
  */
@@ -7,7 +9,7 @@ public class Parseur {
 	 * Extrait les données du fichier nlb et crée une cellule correspondante
 	 * @param line Ligne du fichier texte qui est interprété
 	 */
-	public Cellule extractFile(string line) {
+	public Cellule extractFile(String line) {
 		// TODO - implement Parseur.extractFile
 		throw new UnsupportedOperationException();
 	}
@@ -16,7 +18,7 @@ public class Parseur {
 	 * Extrait les informations d'une ligne de la base de données pour créer une cellule correspondante
 	 * @param requete requete vers la base de données
 	 */
-	public Conteneur extractBase(string requete) {
+	public Conteneur extractBase(String requete) {
 		// TODO - implement Parseur.extractBase
 		throw new UnsupportedOperationException();
 	}
@@ -42,7 +44,7 @@ public class Parseur {
 	 * @param nomColonne nom de la colonne dans la base de données
 	 * @param x numéro de ligne
 	 */
-	public string createNom(string nomColonne, int x) {
+	public String createNom(String nomColonne, int x) {
 		// TODO - implement Parseur.createNom
 		throw new UnsupportedOperationException();
 	}
