@@ -1,12 +1,9 @@
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Contient la liste des opérations possibles
  */
 public class Operation extends Arbre {
-
-	List<Arbre> fils = new ArrayList<>();
 	
 	/**
 	 * Resultat de l'operation
@@ -29,14 +26,40 @@ public class Operation extends Arbre {
 
 	/**
 	 * Renvoie le résultat du noeud actuel en faisant les opérations de ses fils
+	 * @throws Exception 
 	 */
-	public double getResultat() {
+	public double getResultat() throws Exception {
 		switch(operation.toLowerCase()) {
 		case "max": 
-			this.resultat = Math.max(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+			if (this.fils.size()>1) {
+				this.resultat = Math.max(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+			}else {
+				throw new Exception("Pas assez d'opérandes pour l'opération max.");
+			}
 			break;
 		case "min":
-			this.resultat = Math.min(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+			if (this.fils.size()>1) {
+				this.resultat = Math.min(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+			}else {
+				throw new Exception("Pas assez d'opérandes pour l'opération min.");
+			}
+			break;
+		case "moy":
+			if (this.fils.size()>0) {
+				for (Arbre a : this.fils) {
+					this.resultat += a.getResultat();
+				}
+				this.resultat /= this.fils.size();
+			}else {
+				throw new Exception("Pas assez d'opérandes pour l'opération moy.");
+			}
+			break;
+		case "sqrt":
+			if (this.fils.size()>0) {
+				this.resultat = Math.sqrt(this.fils.get(0).getResultat());
+			}else {
+				throw new Exception("Pas assez d'opérandes pour l'opération sqrt.");
+			}
 			break;
 			//etc...
 		}

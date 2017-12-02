@@ -6,9 +6,12 @@ import java.util.List;
  */
 public abstract class Arbre {
 
+	List<Arbre> fils = new ArrayList<>();
+	
 	/**
 	 * Renvoie le résultat du noeud actuel en faisant les opérations de ses fils
+	 * @throws Exception 
 	 */
-	public abstract double getResultat();
+	public abstract double getResultat() throws Exception;
 
 }
