@@ -1,5 +1,9 @@
+package cells;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import calcul.Calcul;
 
 /**
  * Entitée qui regroupe toutes les cellules
@@ -44,8 +48,20 @@ public class Conteneur {
 	 * @param formule formule à donner à la cellule
 	 */
 	public void editerCellule(String nom, String formule) {
-		// TODO - implement Conteneur.editerCellule
-		throw new UnsupportedOperationException();
+		
+		Cellule cellToEdit = getCellule(nom);
+		
+		if(cellToEdit != null) {
+			cellToEdit.setFormule(formule);
+			for (Cellule cellAOublier : cellToEdit.getCellsUsed()) {
+				cellAOublier.oublier(cellToEdit);
+			}
+			cellToEdit.clearCellsUsed();
+		}else {
+			cellToEdit = new Cellule(nom,formule);
+		}
+		
+		Calcul.calcul(cellToEdit,this);
 	}
 
 	/**

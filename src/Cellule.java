@@ -1,4 +1,8 @@
+package cells;
+
 import java.util.List;
+
+import calcul.Calcul;
 
 /**
  * Cellules contenues dans le conteneur, permet d'y attribuer des formules qui
@@ -7,8 +11,8 @@ import java.util.List;
 public class Cellule {
 
 	List<Cellule> cellsNeedMe;
-	List<Cellule> cellsUsed;
-	Resultat resultat;
+	private List<Cellule> cellsUsed;
+	private Resultat resultat;
 	/**
 	 * Valeur textuelle de la cellule
 	 */
@@ -44,8 +48,7 @@ public class Cellule {
 	 *            Conteneur qui contient la cellule
 	 */
 	public void actualise(Conteneur conteneur) {
-		// TODO - implement Cellule.actualise
-		throw new UnsupportedOperationException();
+		Calcul.calcul(this, conteneur);
 	}
 
 	/**
@@ -56,8 +59,7 @@ public class Cellule {
 	 *            Cellule qui sera supprimer de la liste CellsNeedMe
 	 */
 	public void oublier(Cellule cellule) {
-		// TODO - implement Cellule.oublier
-		throw new UnsupportedOperationException();
+		this.cellsNeedMe.remove(cellule);
 	}
 
 	/**
@@ -123,6 +125,23 @@ public class Cellule {
 	 */
 	public Resultat getResultat() {
 		return this.resultat;
+	}
+	
+	/**
+	 * Renvoie les cellules utilisées
+	 */
+	public List<Cellule> getCellsUsed() {
+		return this.cellsUsed;
+	}
+	
+	/**
+	 * Modifie l'attribut resultat
+	 * 
+	 * @param resultat
+	 *            resultat de la formule dans la cellule
+	 */
+	public void setResultat(Resultat resultat) {
+		this.resultat = resultat;
 	}
 
 }

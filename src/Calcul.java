@@ -1,4 +1,10 @@
+package calcul;
+
 import java.util.List;
+
+import cells.Cellule;
+import cells.Conteneur;
+import cells.Resultat;
 
 /**
  * Classe communiquant avec la grammaire pour interpréter les formules et
@@ -16,24 +22,42 @@ public class Calcul {
 	 *            Conteneur contenant la cellule à calculer (sert à vérifier
 	 *            l'existence des cellules vers lesquelles il y a des références)
 	 */
-	public boolean formuleCorrect(String formule, Conteneur conteneur) {
+	public static boolean formuleCorrect(String formule, Conteneur conteneur) {
 		// TODO - implement Calcul.formuleCorrect
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * Permet d'effectuer le calcul a partir d'une donnee textuelle, renvoie une
+	 * Permet d'effectuer le calcul a partir d'une donnee textuelle(formule), cree une
 	 * instance de la classe Résultat (qui peut contenir plusieurs types de valeurs
 	 * : float, double, int...)
 	 * 
-	 * @param formule
-	 *            Valeur textuelle a calculer pour obtenir une donnee numerique
+	 * @param cellule
+	 *            Cellule à calculer
 	 * @param conteneur
 	 *            Conteneur contenant la cellule à calculer
 	 */
-	public Resultat calcul(String formule, Conteneur conteneur) {
-		// TODO - implement Calcul.calcul
-		throw new UnsupportedOperationException();
+	public static void calcul(Cellule cellule, Conteneur conteneur) {
+		
+		String formule = cellule.getFormule();
+		
+		boolean possible = formuleCorrect(formule, conteneur);
+		
+		if(possible) {
+			List<Cellule> refs = extractRef(formule,conteneur);
+			for (Cellule celluleRef : refs) {
+				if(!celluleRef.getIsNumeric()) {
+					celluleRef.actualise(conteneur);
+				}
+				celluleRef.addToCellsNeedMe(cellule);
+				cellule.addToCellsUsed(celluleRef);
+			}
+			Arbre arbre = creerArbre();
+			double resultatArbre = arbre.getResultat();
+			cellule.setResultat(new Resultat(resultatArbre));
+		}else {
+			cellule.setResultat(null);
+		}
 	}
 
 	/**
@@ -44,7 +68,7 @@ public class Calcul {
 	 * @param conteneur
 	 *            Conteneur contenant les cellules
 	 */
-	public List<Cellule> extractRef(String formule, Conteneur conteneur) {
+	public static List<Cellule> extractRef(String formule, Conteneur conteneur) {
 		// TODO - implement Calcul.extractRef
 		throw new UnsupportedOperationException();
 	}
@@ -53,7 +77,7 @@ public class Calcul {
 	 * Créer l'arbre contenant les opérations à effectueur, communique avec la
 	 * grammaire
 	 */
-	private Arbre creerArbre() {
+	private static Arbre creerArbre() {
 		// TODO - implement Calcul.creerArbre
 		throw new UnsupportedOperationException();
 	}
