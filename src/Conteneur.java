@@ -1,9 +1,5 @@
-package cells;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import calcul.Calcul;
 
 /**
  * Entitée qui regroupe toutes les cellules
@@ -46,8 +42,9 @@ public class Conteneur {
 	 * méthode permettant d'éditer une cellule en passant au conteneur son nom et sa nouvelle formule
 	 * @param nom nom de la cellule à éditer
 	 * @param formule formule à donner à la cellule
+	 * @throws Exception 
 	 */
-	public void editerCellule(String nom, String formule) {
+	public void editerCellule(String nom, String formule) throws Exception {
 		
 		Cellule cellToEdit = getCellule(nom);
 		

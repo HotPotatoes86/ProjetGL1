@@ -1,8 +1,4 @@
-package cells;
-
 import java.util.List;
-
-import calcul.Calcul;
 
 /**
  * Cellules contenues dans le conteneur, permet d'y attribuer des formules qui
@@ -37,8 +33,6 @@ public class Cellule {
 	public Cellule(String nom, String formule) {
 		this.name = nom;
 		this.formule = formule;
-		// TODO - implement Cellule.Cellule
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -46,8 +40,9 @@ public class Cellule {
 	 * 
 	 * @param conteneur
 	 *            Conteneur qui contient la cellule
+	 * @throws Exception 
 	 */
-	public void actualise(Conteneur conteneur) {
+	public void actualise(Conteneur conteneur) throws Exception {
 		Calcul.calcul(this, conteneur);
 	}
 

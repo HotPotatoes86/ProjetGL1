@@ -1,10 +1,6 @@
-package calcul;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import cells.Cellule;
-import cells.Conteneur;
-import cells.Resultat;
 
 /**
  * Classe communiquant avec la grammaire pour interpréter les formules et
@@ -36,8 +32,9 @@ public class Calcul {
 	 *            Cellule à calculer
 	 * @param conteneur
 	 *            Conteneur contenant la cellule à calculer
+	 * @throws Exception 
 	 */
-	public static void calcul(Cellule cellule, Conteneur conteneur) {
+	public static void calcul(Cellule cellule, Conteneur conteneur) throws Exception {
 		
 		String formule = cellule.getFormule();
 		
@@ -69,8 +66,24 @@ public class Calcul {
 	 *            Conteneur contenant les cellules
 	 */
 	public static List<Cellule> extractRef(String formule, Conteneur conteneur) {
-		// TODO - implement Calcul.extractRef
-		throw new UnsupportedOperationException();
+		List<Cellule> res = new ArrayList<>();
+		List<Character> stopChar = Arrays.asList('+','-','*',')',',','/'); //caractere possible apres une reference
+		boolean found = false; //quand on trouve un $, cela signifie qu'il y a une référence d'une cellule
+		String name = "";
+		for (int i=0; i<formule.length(); i++) {
+			if (!found && formule.charAt(i) == '$') {
+				name = "";
+				found = true;
+			//on s'arrete quand on est au derniere caractere ou qu'on a trouvé un caractere de fin
+			}else if (found && (stopChar.contains(formule.charAt(i)) || i==(formule.length()-1))) {
+				found = false;
+				Cellule c = conteneur.getCellule(name);
+				if (c!=null) res.add(c);
+			}else if (found) {
+				name += formule.charAt(i);
+			}
+		}
+		return res;
 	}
 
 	/**

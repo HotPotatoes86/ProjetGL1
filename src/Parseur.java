@@ -9,9 +9,27 @@ public final class Parseur {
 	 * Extrait les données du fichier nlb et crée une cellule correspondante
 	 * @param line Ligne du fichier texte qui est interprété
 	 */
-	public static Cellule extractFile(String line) {
-		// TODO - implement Parseur.extractFile
-		throw new UnsupportedOperationException();
+	public static Cellule extractLine(String line) {
+		Cellule res = null;
+		boolean found = false;
+		String nom = "";
+		String formule= "";
+		for (int i=0; i<line.length(); i++) {
+			if (!found) {
+				if (line.charAt(i)=='(') {
+					found = true;
+				}else {
+					nom += line.charAt(i);
+				}
+			}else {
+				if (line.charAt(i)==')') {
+					res = new Cellule(nom,formule);
+				}else {
+					formule += line.charAt(i);
+				}
+			}
+		}
+		return res;
 	}
 
 	/**
@@ -28,14 +46,6 @@ public final class Parseur {
 	 */
 	public static List<String> extractChamps() {
 		// TODO - implement Parseur.extractChamps
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * méthode qui va extraire le nom et la formule de la ligne, crée une cellule et la retourne.
-	 */
-	public static Cellule getCelluleFromLine() {
-		// TODO - implement Parseur.getCelluleFromLine
 		throw new UnsupportedOperationException();
 	}
 
