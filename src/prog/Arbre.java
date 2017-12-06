@@ -1,3 +1,5 @@
+package prog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public abstract class Arbre {
 	List<Arbre> fils = new ArrayList<>();
 	
 	/**
-	 * Renvoie le résultat du noeud actuel en faisant les opérations de ses fils
+	 * Renvoie le resultat du noeud actuel en faisant les operations de ses fils
 	 * @throws Exception 
 	 */
 	public abstract double getResultat() throws Exception;

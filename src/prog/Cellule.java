@@ -1,8 +1,10 @@
+package prog;
+
 import java.util.List;
 
 /**
  * Cellules contenues dans le conteneur, permet d'y attribuer des formules qui
- * seront stockées et calculées en donnée numérique
+ * seront stockees et calculees en donnee numerique
  */
 public class Cellule {
 
@@ -28,7 +30,7 @@ public class Cellule {
 	 * @param nom
 	 *            Nom de la cellule
 	 * @param formule
-	 *            Valeur textuelle attribuée à la cellule
+	 *            Valeur textuelle attribuee a la cellule
 	 */
 	public Cellule(String nom, String formule) {
 		this.name = nom;
@@ -47,7 +49,7 @@ public class Cellule {
 	}
 
 	/**
-	 * Permet de supprimer la cellule en paramètre de l'attribut CellsNeedMe de la
+	 * Permet de supprimer la cellule en parametre de l'attribut CellsNeedMe de la
 	 * cellule courante
 	 * 
 	 * @param cellule
@@ -58,10 +60,10 @@ public class Cellule {
 	}
 
 	/**
-	 * Ajoute a la liste cellsUsed les cellules utilisées dans la formule
+	 * Ajoute a la liste cellsUsed les cellules utilisees dans la formule
 	 * 
 	 * @param cellule
-	 *            Cellule à ajouter à la liste des cellules cellsUsed
+	 *            Cellule a ajouter a la liste des cellules cellsUsed
 	 */
 	public void addToCellsUsed(Cellule cellule) {
 		this.cellsUsed.add(cellule);
@@ -78,7 +80,7 @@ public class Cellule {
 	 * ajoute la cellule "cellule" dans la liste des cellules qui l'utilisent
 	 * 
 	 * @param cellule
-	 *            cellule à ajouter à la liste
+	 *            cellule a ajouter a la liste
 	 */
 	public void addToCellsNeedMe(Cellule cellule) {
 		this.cellsNeedMe.add(cellule);
@@ -88,14 +90,14 @@ public class Cellule {
 	 * Modifie la valeur de l'attribut formule
 	 * 
 	 * @param formule
-	 *            Valeur à saisir dans la cellule
+	 *            Valeur a saisir dans la cellule
 	 */
 	public void setFormule(String formule) {
 		this.formule = formule;
 	}
 
 	/**
-	 * retourne la valeur textuelle stocké dans la cellule
+	 * retourne la valeur textuelle stockee dans la cellule
 	 */
 	public String getFormule() {
 		return this.formule;
@@ -123,7 +125,7 @@ public class Cellule {
 	}
 	
 	/**
-	 * Renvoie les cellules utilisées
+	 * Renvoie les cellules utilisees
 	 */
 	public List<Cellule> getCellsUsed() {
 		return this.cellsUsed;

@@ -1,3 +1,5 @@
+package prog;
+
 /**
  * Permet de stocker la valeur numerique de la cellule
  */

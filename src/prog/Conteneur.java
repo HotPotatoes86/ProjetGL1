@@ -1,22 +1,24 @@
+package prog;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Entitée qui regroupe toutes les cellules
+ * Entitee qui regroupe toutes les cellules
  */
 public class Conteneur {
 
 	List<Cellule> cellules;
 
 	/**
-	 * Constructeur de la classe conteneur, crée un conteneur de cellules vide
+	 * Constructeur de la classe conteneur, cree un conteneur de cellules vide
 	 */
 	public Conteneur() {
 		this.cellules = new ArrayList<>();
 	}
 
 	/**
-	 * Recherche une cellule. Si elle existe, la fonction la renvoie, sinon la fonction crée une cellule vierge et la retourne
+	 * Recherche une cellule. Si elle existe, la fonction la renvoie, sinon la fonction cree une cellule vierge et la retourne
 	 * @param nom Nom d'une cellule
 	 */
 	public Cellule getCellule(String nom) {
@@ -31,17 +33,17 @@ public class Conteneur {
 	}
 
 	/**
-	 * ajoute la cellule qui a été retourné par extractInformation(String)
-	 * @param cellule Valeur à saisir dans la cellule
+	 * ajoute la cellule qui a ete retourne par extractInformation(String)
+	 * @param cellule Valeur a saisir dans la cellule
 	 */
 	public void addCellule(Cellule cellule) {
 		this.cellules.add(cellule);
 	}
 
 	/**
-	 * méthode permettant d'éditer une cellule en passant au conteneur son nom et sa nouvelle formule
-	 * @param nom nom de la cellule à éditer
-	 * @param formule formule à donner à la cellule
+	 * methode permettant d'editer une cellule en passant au conteneur son nom et sa nouvelle formule
+	 * @param nom nom de la cellule a editer
+	 * @param formule formule a donner a la cellule
 	 * @throws Exception 
 	 */
 	public void editerCellule(String nom, String formule) throws Exception {
@@ -62,7 +64,7 @@ public class Conteneur {
 	}
 
 	/**
-	 * Enlève la cellule du conteneur et la détruit
+	 * Enleve la cellule du conteneur et la detruit
 	 * @param cellule nom de la cellule
 	 */
 	public void removeCellule(String cellule) {

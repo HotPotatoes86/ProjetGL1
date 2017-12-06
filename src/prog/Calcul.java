@@ -1,9 +1,11 @@
+package prog;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * Classe communiquant avec la grammaire pour interpréter les formules et
+ * Classe communiquant avec la grammaire pour interpreter les formules et
  * calculer un resultat
  */
 public class Calcul {
@@ -15,8 +17,8 @@ public class Calcul {
 	 *            Valeur textuelle de la cellule a verifier pour voir si le calcul
 	 *            est correct
 	 * @param conteneur
-	 *            Conteneur contenant la cellule à calculer (sert à vérifier
-	 *            l'existence des cellules vers lesquelles il y a des références)
+	 *            Conteneur contenant la cellule a calculer (sert a verifier
+	 *            l'existence des cellules vers lesquelles il y a des references)
 	 */
 	public static boolean formuleCorrect(String formule, Conteneur conteneur) {
 		// TODO - implement Calcul.formuleCorrect
@@ -25,13 +27,13 @@ public class Calcul {
 
 	/**
 	 * Permet d'effectuer le calcul a partir d'une donnee textuelle(formule), cree une
-	 * instance de la classe Résultat (qui peut contenir plusieurs types de valeurs
+	 * instance de la classe Resultat (qui peut contenir plusieurs types de valeurs
 	 * : float, double, int...)
 	 * 
 	 * @param cellule
-	 *            Cellule à calculer
+	 *            Cellule a calculer
 	 * @param conteneur
-	 *            Conteneur contenant la cellule à calculer
+	 *            Conteneur contenant la cellule a calculer
 	 * @throws Exception 
 	 */
 	public static void calcul(Cellule cellule, Conteneur conteneur) throws Exception {
@@ -58,7 +60,7 @@ public class Calcul {
 	}
 
 	/**
-	 * Crée une liste de cellules vers laquelle la formule fait référence
+	 * Cree une liste de cellules vers laquelle la formule fait reference
 	 * 
 	 * @param formule
 	 *            Formule de la cellule en cours
@@ -68,13 +70,13 @@ public class Calcul {
 	public static List<Cellule> extractRef(String formule, Conteneur conteneur) {
 		List<Cellule> res = new ArrayList<>();
 		List<Character> stopChar = Arrays.asList('+','-','*',')',',','/'); //caractere possible apres une reference
-		boolean found = false; //quand on trouve un $, cela signifie qu'il y a une référence d'une cellule
+		boolean found = false; //quand on trouve un $, cela signifie qu'il y a une reference d'une cellule
 		String name = "";
 		for (int i=0; i<formule.length(); i++) {
 			if (!found && formule.charAt(i) == '$') {
 				name = "";
 				found = true;
-			//on s'arrete quand on est au derniere caractere ou qu'on a trouvé un caractere de fin
+			//on s'arrete quand on est au derniere caractere ou qu'on a trouve un caractere de fin
 			}else if (found && (stopChar.contains(formule.charAt(i)) || i==(formule.length()-1))) {
 				found = false;
 				Cellule c = conteneur.getCellule(name);
@@ -87,7 +89,7 @@ public class Calcul {
 	}
 
 	/**
-	 * Créer l'arbre contenant les opérations à effectueur, communique avec la
+	 * Creer l'arbre contenant les operations a effectueur, communique avec la
 	 * grammaire
 	 */
 	private static Arbre creerArbre() {
