@@ -32,6 +32,7 @@ public class CelluleTest {
 		res = "";
 		assertTrue("reafectation formule vide", cel.getFormule().compareTo(res) == 0);
 	}
+	
 	@Test
 	public final void testGetIsNumeric() {
 		Cellule cel = new Cellule("bonjour", "=3+5");

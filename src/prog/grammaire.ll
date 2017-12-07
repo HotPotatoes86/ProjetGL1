@@ -13,9 +13,10 @@
 "^"							{return POW;}
 "("							{return PAROUV;}
 ")"							{return PARFER;}
-"$"							{return DOLLAR;}
-[0-9]+("."[0-9]+)?			{yylval.p = atof(yytext); return CNUM;}
-[a-zA-Z]+					{yylval.s = strdup(yytext); return FUNC;}
-.|\n|\t 						/* ignore all whitespace */
+","							{return COMMA;}
+"|"							{return PIPE;}
+[0-9]+("."[0-9]+)?			{yylval.p = atof(yytext); return NUM;}
+[a-zA-Z]+					{yylval.s = strdup(yytext); return NAME;}
+.|\n|\t 					/* ignore all whitespace */
 
 %%

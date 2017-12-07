@@ -12,26 +12,8 @@ public final class Parseur {
 	 * @param line Ligne du fichier texte qui est interprété
 	 */
 	public static Cellule extractLine(String line) {
-		Cellule res = null;
-		boolean found = false;
-		String nom = "";
-		String formule= "";
-		for (int i=0; i<line.length(); i++) {
-			if (!found) {
-				if (line.charAt(i)=='(') {
-					found = true;
-				}else {
-					nom += line.charAt(i);
-				}
-			}else {
-				if (line.charAt(i)==')') {
-					res = new Cellule(nom,formule);
-				}else {
-					formule += line.charAt(i);
-				}
-			}
-		}
-		return res;
+		// TODO - implement Parseur.extractLine
+		throw new UnsupportedOperationException();
 	}
 
 	/**

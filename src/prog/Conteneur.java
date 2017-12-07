@@ -35,9 +35,14 @@ public class Conteneur {
 	/**
 	 * ajoute la cellule qui a ete retourne par extractInformation(String)
 	 * @param cellule Valeur a saisir dans la cellule
+	 * @throws Exception 
 	 */
-	public void addCellule(Cellule cellule) {
-		this.cellules.add(cellule);
+	public void addCellule(Cellule cellule) throws Exception {
+		if (this.cellules.contains(cellule)){
+			this.editerCellule(cellule.getName(), cellule.getFormule());
+		}else{
+			this.cellules.add(cellule);
+		}
 	}
 
 	/**

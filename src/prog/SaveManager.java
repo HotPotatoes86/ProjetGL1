@@ -8,13 +8,13 @@ import java.io.PrintWriter;
 /**
  * Cette classe sert à communiquer avec les systèmes de sauvegarde, elle permet de charger et de sauvegarder depuis et vers un fichier nlb, ainsi que charger les données depuis une base de données.
  */
-public class SaveManager {
+public final class SaveManager {
 
 	/**
 	 * Importe une base de donnée grace à une requete
 	 * @param requete requete sql permettant de récupérer une table depuis une base de données
 	 */
-	public Conteneur importBase(String requete) {
+	public static Conteneur importBase(String requete) {
 		// TODO - implement SaveManager.importBase
 		throw new UnsupportedOperationException();
 	}
@@ -22,9 +22,9 @@ public class SaveManager {
 	/**
 	 * Cette fonction permet au parseur de lire le fichier (.nlb) et de créer les cellules correspondantes dans un conteneur qu'il aura créé
 	 * @param chemin
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public Conteneur ImportFile(String chemin) throws IOException {
+	public static Conteneur ImportFile(String chemin) throws Exception {
 		Conteneur res = new Conteneur();
 	    BufferedReader reader = new BufferedReader(new FileReader(chemin));
 	    String line;
@@ -42,10 +42,10 @@ public class SaveManager {
 	 * @param conteneur
 	 * @throws IOException 
 	 */
-	public void sauvegarde(String chemin, Conteneur conteneur) throws IOException {
+	public static void sauvegarde(String chemin, Conteneur conteneur) throws IOException {
 		PrintWriter writer = new PrintWriter(chemin, "UTF-8");
 		for (Cellule c : conteneur.getAllCellules()) {
-			writer.println(c.getName()+"("+c.getFormule()+")");
+			writer.println(c.getName()+"|"+c.getFormule());
 		}
 		writer.close();
 	}

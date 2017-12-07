@@ -1,6 +1,17 @@
-%{
-#include <iostream>
-#include "stdio.h"
+%language "Java"
+%name-prefix "Grammaire"
+%define parser_class_name "Grammaire"
+%define public
+
+%code{
+
+public static void main(String args[]){
+	Grammaire g = new Grammaire();
+	g.parse();
+
+%code imports {
+	prog.Parseur.java;
+}
 
 extern int yylex();
 
@@ -23,22 +34,39 @@ int powI(int x, int y){
     char* s;
 };
 
-%type<p> expr CNUM
-%type<s> ID
+/*%type<p> operation NUM
+%type<s> NAME*/
 
-/*declarations : %token (lexeme), %start (axiome, optionnel sinon 1ere regle)*/
-%token FUNC CNUM PLUS MOINS FOIS DIV PAROUV PARFER POW DOLLAR
+%token NAME NUM PLUS MOINS FOIS DIV PAROUV PARFER POW PIPE COMMA
 
-%left PLUS MOINS	
-%left FOIS DIV
-%right PUISS
+%left PLUS MINUS	
+%left TIMES DIVIDE
+%right POW
 
 %start S
 
 %%
 
+S : cellule S {}
+  | {}
+  ;
+  
+cellule : NAME PIPE operation {}
 
+operation : operation PLUS operation 	{$$ = $1 + $3;}
+		  | operation MINUS operation 	{$$ = $1 - $3;}
+		  | operation DIVIDE operation 	{$$ = $1 / $3;}
+		  | operation TIMES operation 	{$$ = $1 * $3;}
+		  | NAME PAROUV argument PARFER{}
+		  | PAROUV operation PARFER 	{$$ = $2;}
+		  | NUM 						{$$ = $1;}
+		  ;
+
+argument : operation COMMA argument {}
+         | operation 				{}
+         |							{}
+         ;					
 
 %%
 
-/*compilation bison -d fichier.yy*/
+/*compilation bison -d -java fichier.yy*/
