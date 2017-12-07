@@ -48,8 +48,12 @@ public class Calcul {
 				if(!celluleRef.getIsNumeric()) {
 					celluleRef.actualise(conteneur);
 				}
-				celluleRef.addToCellsNeedMe(cellule);
-				cellule.addToCellsUsed(celluleRef);
+				if (celluleRef.getIsNumeric()){
+					celluleRef.addToCellsNeedMe(cellule);
+					cellule.addToCellsUsed(celluleRef);
+				}else{
+					return;
+				}
 			}
 			Arbre arbre = creerArbre();
 			double resultatArbre = arbre.getResultat();

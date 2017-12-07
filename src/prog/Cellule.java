@@ -35,6 +35,7 @@ public class Cellule {
 	public Cellule(String nom, String formule) {
 		this.name = nom;
 		this.formule = formule;
+		this.isNumeric = false;
 	}
 
 	/**
@@ -94,6 +95,7 @@ public class Cellule {
 	 */
 	public void setFormule(String formule) {
 		this.formule = formule;
+		this.isNumeric = false;
 	}
 
 	/**
@@ -139,6 +141,7 @@ public class Cellule {
 	 */
 	public void setResultat(Resultat resultat) {
 		this.resultat = resultat;
+		if (this.resultat!=null) this.isNumeric=true;
 	}
 
 }
