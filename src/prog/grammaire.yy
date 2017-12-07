@@ -1,18 +1,4 @@
-%language "Java"
-%name-prefix "Grammaire"
-%define parser_class_name "Grammaire"
-%define public
-
-%code{
-
-public static void main(String args[]){
-	Grammaire g = new Grammaire();
-	g.parse();
-
-%code imports {
-	prog.Parseur.java;
-}
-
+%{
 extern int yylex();
 
 void yyerror(const char* msg){
@@ -34,8 +20,8 @@ int powI(int x, int y){
     char* s;
 };
 
-/*%type<p> operation NUM
-%type<s> NAME*/
+%type<p> operation NUM
+%type<s> NAME
 
 %token NAME NUM PLUS MOINS FOIS DIV PAROUV PARFER POW PIPE COMMA
 
@@ -53,7 +39,7 @@ S : cellule S {}
   
 cellule : NAME PIPE operation {}
 
-operation : operation PLUS operation 	{$$ = $1 + $3;}
+operation : operation PLUS operation 	{ $$ = $1 + $3; }
 		  | operation MINUS operation 	{$$ = $1 - $3;}
 		  | operation DIVIDE operation 	{$$ = $1 / $3;}
 		  | operation TIMES operation 	{$$ = $1 * $3;}
