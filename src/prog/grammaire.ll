@@ -1,8 +1,9 @@
-%{
-/*#include "grammaire.tab.hh"
-#include <string.h>*/
-%}
+/*%{
+#include "grammaire.tab.hh"
+#include <string.h>
+%}*/
 
+%%
 
 %%
 
@@ -17,6 +18,4 @@
 "|"							{ return PIPE; }
 [0-9]+("."[0-9]+)?			{ yylval.p = atof(yytext); return NUM; }
 [a-zA-Z]+					{ yylval.s = strdup(yytext); return NAME; }
-.|\n|\t 					/* ignore all whitespace */
-
-%%
+[^]|\n|\t 					{}/* ignore all whitespace */

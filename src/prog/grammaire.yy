@@ -1,7 +1,7 @@
 %{
 extern int yylex();
 
-void yyerror(const char* msg){
+/*void yyerror(const char* msg){
 	std::cerr << "ERROR : " << msg << std::endl;
 }
 
@@ -11,7 +11,7 @@ int powI(int x, int y){
 		res *= x;
 	}
 	return res;
-}		
+}*/		
 
 %}
 
