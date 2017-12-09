@@ -1,6 +1,7 @@
 package prog;
 
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,39 +28,39 @@ public class Calcul {
 	}
 
 	/**
-	 * Permet d'effectuer le calcul a partir d'une donnee textuelle(formule), cree une
-	 * instance de la classe Resultat (qui peut contenir plusieurs types de valeurs
-	 * : float, double, int...)
+	 * Permet d'effectuer le calcul a partir d'une donnee textuelle(formule), cree
+	 * une instance de la classe Resultat (qui peut contenir plusieurs types de
+	 * valeurs : float, double, int...)
 	 * 
 	 * @param cellule
 	 *            Cellule a calculer
 	 * @param conteneur
 	 *            Conteneur contenant la cellule a calculer
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static void calcul(Cellule cellule, Conteneur conteneur) throws Exception {
-		
+
 		String formule = cellule.getFormule();
-		
+
 		boolean possible = formuleCorrect(formule, conteneur);
-		
-		if(possible) {
-			List<Cellule> refs = extractRef(formule,conteneur);
+
+		if (possible) {
+			List<Cellule> refs = extractRef(formule, conteneur);
 			for (Cellule celluleRef : refs) {
-				if(!celluleRef.getIsNumeric()) {
+				if (!celluleRef.getIsNumeric()) {
 					celluleRef.actualise(conteneur);
 				}
-				if (celluleRef.getIsNumeric()){
+				if (celluleRef.getIsNumeric()) {
 					celluleRef.addToCellsNeedMe(cellule);
 					cellule.addToCellsUsed(celluleRef);
-				}else{
+				} else {
 					return;
 				}
 			}
 			Arbre arbre = creerArbre(formule);
 			double resultatArbre = arbre.getResultat();
 			cellule.setResultat(new Resultat(resultatArbre));
-		}else {
+		} else {
 			cellule.setResultat(null);
 		}
 	}
@@ -74,19 +75,22 @@ public class Calcul {
 	 */
 	public static List<Cellule> extractRef(String formule, Conteneur conteneur) {
 		List<Cellule> res = new ArrayList<>();
-		List<Character> stopChar = Arrays.asList('+','-','*',')',',','/'); //caractere possible apres une reference
-		boolean found = false; //quand on trouve un $, cela signifie qu'il y a une reference d'une cellule
+		List<Character> stopChar = Arrays.asList('+', '-', '*', ')', ',', '/'); // caractere possible apres une
+																				// reference
+		boolean found = false; // quand on trouve un $, cela signifie qu'il y a une reference d'une cellule
 		String name = "";
-		for (int i=0; i<formule.length(); i++) {
+		for (int i = 0; i < formule.length(); i++) {
 			if (!found && formule.charAt(i) == '$') {
 				name = "";
 				found = true;
-			//on s'arrete quand on est au derniere caractere ou qu'on a trouve un caractere de fin
-			}else if (found && (stopChar.contains(formule.charAt(i)) || i==(formule.length()-1))) {
+				// on s'arrete quand on est au derniere caractere ou qu'on a trouve un caractere
+				// de fin
+			} else if (found && (stopChar.contains(formule.charAt(i)) || i == (formule.length() - 1))) {
 				found = false;
 				Cellule c = conteneur.getCellule(name);
-				if (c!=null) res.add(c);
-			}else if (found) {
+				if (c != null)
+					res.add(c);
+			} else if (found) {
 				name += formule.charAt(i);
 			}
 		}
@@ -96,11 +100,12 @@ public class Calcul {
 	/**
 	 * Creer l'arbre contenant les operations a effectueur, communique avec la
 	 * grammaire
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	private static Arbre creerArbre(String formule) throws Exception {
 		Parser yyparser;
-		yyparser = new Parser(new InputStreamReader(System.in));
+		yyparser = new Parser(new StringReader(formule));
 		return yyparser.yyparse();
 	}
 

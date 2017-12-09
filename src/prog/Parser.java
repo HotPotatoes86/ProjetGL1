@@ -339,14 +339,6 @@ static boolean interactive;
 static Operation func;
 static List<Arbre> funcArgs = new ArrayList<>();
 
-public static void main(String args[]) throws Exception {
-
-	Parser yyparser;
-	yyparser = new Parser(new InputStreamReader(System.in));
-
-	yyparser.yyparse();
-}
-
 
 /*compilation : byaccj -J grammaire.y*/
 //#line 289 "Parser.java"
