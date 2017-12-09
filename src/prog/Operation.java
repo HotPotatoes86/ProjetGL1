@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Contient la liste des opérations possibles
  */
-public class Operation {
+public class Operation extends Arbre {
 	
 	/**
 	 * Resultat de l'operation
@@ -13,32 +13,56 @@ public class Operation {
 	private double resultat;
 	
 	private String operation;
-	
-	protected Traitement traitement;
 
 	/**
 	 * Constructeur de la classe Operation, crée un noeud dans l'arbre contenant l'opération et ses opérandes
 	 * @param operation operation (min, max, +, -, ...) sous forme de String qui sera analysée par la classe
 	 * @param operandes operandes de l'opération de type arbre (donc soit une operation soit une valeur)
 	 */
-	public Operation(String operation, Traitement traitement) {
+	public Operation(String operation, List<Arbre> operandes) {
 		this.operation = operation;
-		this.traitement = traitement;
+		this.fils = operandes;
 	}
 
 	/**
 	 * Renvoie le résultat du traitement de l'opération
 	 */
-	public double getResultat() {
-		return traitement.getResultat();
-	}
-	
-	/**
-	 * enregistre les arguments qui seront utilisés par getResultat()
-	 * @param args
-	 */
-	public void setArgs(List<Double> args) {
-		traitement.setArgs(args);
+	public double getResultat() throws Exception {
+	    switch(operation.toLowerCase()) {
+	    case "max":  
+	      this.resultat = Math.max(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+	      if (this.fils.size()>1) {
+	        this.resultat = Math.max(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+	      }else {
+	        throw new Exception("Pas assez d'operandes pour l'operation max.");
+	      }
+	      break;
+	    case "min":
+	      this.resultat = Math.min(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+	      if (this.fils.size()>1) {
+	        this.resultat = Math.min(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
+	      }else {
+	        throw new Exception("Pas assez d'operandes pour l'operation min.");
+	      }
+	      break;
+	    case "moy":
+	      if (this.fils.size()>0) {
+	        for (Arbre a : this.fils) {
+	          this.resultat += a.getResultat();
+	        }	 
+	        this.resultat /= this.fils.size();	 
+	      }else {	 
+	        throw new Exception("Pas assez d'operandes pour l'operation moy.");
+	      }	 
+	      break;	 
+	    case "sqrt":	 
+	      if (this.fils.size()>0) { 
+	        this.resultat = Math.sqrt(this.fils.get(0).getResultat()); 
+	      }else { 
+	        throw new Exception("Pas assez d'operandes pour l'operation sqrt.");
+	      }
+	    }
+	    return this.resultat;
 	}
 
 }

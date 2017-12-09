@@ -1,5 +1,6 @@
 package prog;
 
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +56,7 @@ public class Calcul {
 					return;
 				}
 			}
-			Arbre arbre = creerArbre();
+			Arbre arbre = creerArbre(formule);
 			double resultatArbre = arbre.getResultat();
 			cellule.setResultat(new Resultat(resultatArbre));
 		}else {
@@ -95,10 +96,12 @@ public class Calcul {
 	/**
 	 * Creer l'arbre contenant les operations a effectueur, communique avec la
 	 * grammaire
+	 * @throws Exception 
 	 */
-	private static Arbre creerArbre() {
-		// TODO - implement Calcul.creerArbre
-		throw new UnsupportedOperationException();
+	private static Arbre creerArbre(String formule) throws Exception {
+		Parser yyparser;
+		yyparser = new Parser(new InputStreamReader(System.in));
+		return yyparser.yyparse();
 	}
 
 }

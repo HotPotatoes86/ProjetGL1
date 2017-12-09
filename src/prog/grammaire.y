@@ -4,11 +4,15 @@
   import java.util.List;
 %}
 
+%token NAME NUM PLUS MOINS FOIS DIV POW PAROUV PARFER PIPE COMMA
 
-%token NAME NUM PLUS MOINS FOIS DIV POW PAROUV PARFER PIPE COMMA SIN COS TAN MINIMUM MAXIMUM MOY SQRT
+%type<val> operation NUM argument axiome
+%type<sval> NAME
 
-%type<dval> operation NUM argument
-%type<Operation> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
+%union {
+    Arbre val;
+    String sval;
+};
 
 %left PLUS MINUS	
 %left TIMES DIVIDE
@@ -17,39 +21,22 @@
 
 %%
 
-/*S : cellule S 	{}
-  | 		{}
-  ;
-*/  
-/*cellule : NAME PIPE operation {}*/
+axiome : operation axiome		{return $1;}
+	   | {}
+	   ;
 
-axiome : axiome operation		{System.out.println("resultat : " + $2);}
-	|
-	;
+operation : operation PLUS operation{$$ = new Valeur($1.getResultat() + $3.getResultat());}
+	| operation MINUS operation 	{$$ = new Valeur($1.getResultat() - $3.getResultat());}
+	| operation DIVIDE operation 	{$$ = new Valeur($1.getResultat() / $3.getResultat());}
+	| operation TIMES operation 	{$$ = new Valeur($1.getResultat() * $3.getResultat());}
+	| NAME PAROUV argument PARFER	{funcArgs.clear();
+									$$ = new Operation($1,funcArgs);}
+	| NUM	 						{$$ = $1;}
+	| PAROUV operation PARFER 		{$$ = $2;}
 
-operation : operation PLUS operation	{$$ = $1 + $3;}
-	| operation MINUS operation 	{$$ = $1 - $3;}
-	| operation DIVIDE operation 	{$$ = $1 / $3;}
-	| operation TIMES operation 	{$$ = $1 * $3;}
-	| method PAROUV argument PARFER	{func.setArgs(funcArgs);
-					funcArgs.clear();
-					$$ = func.getResultat();}
-	| NUM	 			{$$ = $1;}
-	| PAROUV operation PARFER 	{$$ = $2;}
-	;
-
-method : SIN 			{ func = new Operation("sinus", new Sinus());}
-	| COS			{ func = new Operation("cosinus", new Cosinus());}
-	| TAN			{ func = new Operation("tangente", new Tangente());}
-	| MINIMUM		{ func = new Operation("minimum", new Minimum());}
-	| MAXIMUM		{ func = new Operation("maximum", new Maximum());}
-	| MOY			{ func = new Operation("moyenne", new Moyenne());}
-	| SQRT			{ func = new Operation("sqrt", new Sqrt());}
-	;
-
-argument : operation COMMA argument 		{funcArgs.add($1);}
+argument : operation COMMA argument {funcArgs.add($1);}
          | operation 				{funcArgs.add($1);}
-         |					{}
+         |							{}
          ;					
 
 	
@@ -83,7 +70,7 @@ public Parser(Reader r) {
 
 static boolean interactive;
 static Operation func;
-static List<Double> funcArgs = new ArrayList<>();
+static List<Arbre> funcArgs = new ArrayList<>();
 
 public static void main(String args[]) throws IOException {
 

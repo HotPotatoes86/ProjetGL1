@@ -26,15 +26,8 @@ NL  = \n | \r | \r\n
 ")"					{return Parser.PARFER;}
 ","					{return Parser.COMMA;}
 "|"					{return Parser.PIPE;}
-"sin"					{return Parser.SIN;}
-"cos"					{return Parser.COS;}
-"tan"					{return Parser.TAN;}
-"min"					{return Parser.MINIMUM;}
-"max"					{return Parser.MAXIMUM;}
-"avg"					{return Parser.MOY;}
-"sqrt"					{return Parser.SQRT;}
-{Digit}+("."{Digit}+)?			{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
-					return Parser.NUM;}
+{Digit}+("."{Digit}+)?	{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
+						return Parser.NUM;}
 {Letter}+				{return Parser.NAME;}
 [ \t]+					{}
 {NL}					{}
