@@ -4,13 +4,16 @@
   import java.util.List;
 %}
 
-%token NAME NUM PLUS MOINS FOIS DIV POW PAROUV PARFER PIPE COMMA
+%token PLUS MOINS FOIS DIV POW PAROUV PARFER PIPE COMMA
 
-%type<val> operation NUM argument axiome
-%type<sval> NAME
+%token<dval> NUM
+%token<sval> NAME
+
+%type<val> argument axiome operation
 
 %union {
     Arbre val;
+    double dval;
     String sval;
 };
 
@@ -21,7 +24,7 @@
 
 %%
 
-axiome : operation axiome		{return $1;}
+axiome : operation		{res = new Arbre($1);}
 	   | {}
 	   ;
 
@@ -31,7 +34,7 @@ operation : operation PLUS operation{$$ = new Valeur($1.getResultat() + $3.getRe
 	| operation TIMES operation 	{$$ = new Valeur($1.getResultat() * $3.getResultat());}
 	| NAME PAROUV argument PARFER	{funcArgs.clear();
 									$$ = new Operation($1,funcArgs);}
-	| NUM	 						{$$ = $1;}
+	| NUM	 						{$$ = new Valeur($1);}
 	| PAROUV operation PARFER 		{$$ = $2;}
 
 argument : operation COMMA argument {funcArgs.add($1);}
@@ -69,16 +72,5 @@ public Parser(Reader r) {
 
 
 static boolean interactive;
-static Operation func;
+static Arbre res;
 static List<Arbre> funcArgs = new ArrayList<>();
-
-public static void main(String args[]) throws IOException {
-
-	Parser yyparser;
-	yyparser = new Parser(new InputStreamReader(System.in));
-
-	yyparser.yyparse();
-}
-
-
-/*compilation : byaccj -J grammaire.y*/

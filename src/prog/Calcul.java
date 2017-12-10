@@ -1,6 +1,5 @@
 package prog;
 
-import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +12,33 @@ import java.util.List;
 public class Calcul {
 
 	/**
+	 * liste des references vers d'autres cellules
+	 */
+	List<Cellule> refs;
+	
+	/**
+	 * formule a calculer
+	 */
+	String formule;
+	
+	/**
+	 * cellule a modifier
+	 */
+	Cellule cellule;
+	
+	/**
+	 * conteneur contenant la cellule
+	 */
+	Conteneur conteneur;
+	
+	public Calcul(Cellule cel, Conteneur cont) {
+		formule = cel.getFormule();
+		cellule = cel;
+		conteneur = cont;
+		refs = new ArrayList<>();
+	}
+	
+	/**
 	 * Verifie la formule et renvoie vrai s'elle est correct
 	 * 
 	 * @param formule
@@ -22,9 +48,8 @@ public class Calcul {
 	 *            Conteneur contenant la cellule a calculer (sert a verifier
 	 *            l'existence des cellules vers lesquelles il y a des references)
 	 */
-	public static boolean formuleCorrect(String formule, Conteneur conteneur) {
-		// TODO - implement Calcul.formuleCorrect
-		throw new UnsupportedOperationException();
+	public boolean formuleCorrect(String formule, Conteneur conteneur) {
+		return true;
 	}
 
 	/**
@@ -38,14 +63,10 @@ public class Calcul {
 	 *            Conteneur contenant la cellule a calculer
 	 * @throws Exception
 	 */
-	public static void calcul(Cellule cellule, Conteneur conteneur) throws Exception {
-
-		String formule = cellule.getFormule();
-
+	public void calcul() throws Exception {
 		boolean possible = formuleCorrect(formule, conteneur);
-
 		if (possible) {
-			List<Cellule> refs = extractRef(formule, conteneur);
+			extractRef();
 			for (Cellule celluleRef : refs) {
 				if (!celluleRef.getIsNumeric()) {
 					celluleRef.actualise(conteneur);
@@ -57,7 +78,7 @@ public class Calcul {
 					return;
 				}
 			}
-			Arbre arbre = creerArbre(formule);
+			Arbre arbre = creerArbre();
 			double resultatArbre = arbre.getResultat();
 			cellule.setResultat(new Resultat(resultatArbre));
 		} else {
@@ -73,28 +94,38 @@ public class Calcul {
 	 * @param conteneur
 	 *            Conteneur contenant les cellules
 	 */
-	public static List<Cellule> extractRef(String formule, Conteneur conteneur) {
-		List<Cellule> res = new ArrayList<>();
-		List<Character> stopChar = Arrays.asList('+', '-', '*', ')', ',', '/'); // caractere possible apres une
-																				// reference
+	public void extractRef() {
+		List<Character> stopChar = Arrays.asList('+', '-', '*', ')', ',', '/'); // caractere possible apres une reference
 		boolean found = false; // quand on trouve un $, cela signifie qu'il y a une reference d'une cellule
-		String name = "";
+		String name = "", newFormule="";
 		for (int i = 0; i < formule.length(); i++) {
 			if (!found && formule.charAt(i) == '$') {
 				name = "";
 				found = true;
-				// on s'arrete quand on est au derniere caractere ou qu'on a trouve un caractere
-				// de fin
-			} else if (found && (stopChar.contains(formule.charAt(i)) || i == (formule.length() - 1))) {
+				// on s'arrete quand on est au derniere caractere ou qu'on a trouve un caractere de fin
+			} else if (found && stopChar.contains(formule.charAt(i))) {
 				found = false;
 				Cellule c = conteneur.getCellule(name);
-				if (c != null)
-					res.add(c);
+				if (c!=null) {
+					newFormule += c.getResultat().getResultat();
+					newFormule += formule.charAt(i);
+					refs.add(c);
+				}
+			} else if (found && i == (formule.length() - 1)){
+				found = false;
+				name += formule.charAt(i);
+				Cellule c = conteneur.getCellule(name);
+				if (c!=null) {
+					newFormule += c.getResultat().getResultat();
+					refs.add(c);
+				}
 			} else if (found) {
 				name += formule.charAt(i);
+			}else{
+				newFormule += formule.charAt(i);
 			}
 		}
-		return res;
+		formule = newFormule;
 	}
 
 	/**
@@ -103,10 +134,14 @@ public class Calcul {
 	 * 
 	 * @throws Exception
 	 */
-	private static Arbre creerArbre(String formule) throws Exception {
+	private Arbre creerArbre() throws Exception {
 		Parser yyparser;
 		yyparser = new Parser(new StringReader(formule));
-		return yyparser.yyparse();
+		if (yyparser.yyparse()==0) {
+			return yyparser.getResultat();
+		}else {
+			return null;
+		}
 	}
 
 }

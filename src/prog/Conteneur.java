@@ -63,9 +63,10 @@ public class Conteneur {
 			cellToEdit.clearCellsUsed();
 		}else {
 			cellToEdit = new Cellule(nom,formule);
+			this.addCellule(cellToEdit);
 		}
-		
-		Calcul.calcul(cellToEdit,this);
+		Calcul calc = new Calcul(cellToEdit,this);
+		calc.calcul();
 	}
 
 	/**

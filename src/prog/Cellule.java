@@ -1,5 +1,6 @@
 package prog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public class Cellule {
 
-	List<Cellule> cellsNeedMe;
+	private List<Cellule> cellsNeedMe;
 	private List<Cellule> cellsUsed;
 	private Resultat resultat;
 	/**
@@ -36,6 +37,8 @@ public class Cellule {
 		this.name = nom;
 		this.formule = formule;
 		this.isNumeric = false;
+		this.cellsNeedMe = new ArrayList<>();
+		this.cellsUsed = new ArrayList<>();
 	}
 
 	/**
@@ -46,7 +49,8 @@ public class Cellule {
 	 * @throws Exception 
 	 */
 	public void actualise(Conteneur conteneur) throws Exception {
-		Calcul.calcul(this, conteneur);
+		Calcul c = new Calcul(this,conteneur);
+		c.calcul();
 	}
 
 	/**

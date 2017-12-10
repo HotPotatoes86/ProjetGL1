@@ -28,6 +28,7 @@ NL  = \n | \r | \r\n
 "|"					{return Parser.PIPE;}
 {Digit}+("."{Digit}+)?	{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
 						return Parser.NUM;}
-{Letter}+				{return Parser.NAME;}
+{Letter}+				{yyparser.yylval = new ParserVal(yytext()); 
+						return Parser.NAME;}
 [ \t]+					{}
 {NL}					{}

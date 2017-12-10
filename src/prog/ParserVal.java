@@ -12,9 +12,14 @@ package prog;
 public class ParserVal
 {
 /**
- * arbre value of this 'union'
+ * integer value of this 'union'
  */
 public Arbre val;
+
+/**
+ * double value of this 'union'
+ */
+public double dval;
 
 /**
  * string value of this 'union'
@@ -41,6 +46,14 @@ public ParserVal()
 public ParserVal(Arbre val)
 {
   this.val=val;
+}
+
+/**
+ * Initialize me as a double
+ */
+public ParserVal(double val)
+{
+  dval=val;
 }
 
 /**
