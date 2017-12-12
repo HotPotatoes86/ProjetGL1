@@ -36,6 +36,11 @@ Letter = [a-zA-Z]
 "if"					{return Parser.IF};
 "then"					{return Parser.THEN};
 "else"					{return Parser.ELSE};
+
+"or"					{return Parser.OR};
+"and"					{return Parser.AND};
+"xor"					{return Parser.XOR};
+"not"					{return Parser.NOT};
 	
 {Digit}+("."{Digit}+)?		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
 							return Parser.NUM;}
