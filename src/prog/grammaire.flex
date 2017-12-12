@@ -13,22 +13,36 @@
 
 Digit = [0-9]
 Letter = [a-zA-Z]
-NL  = \n | \r | \r\n
 
 %%
 
-"+"					{return Parser.PLUS;}
-"-"					{return Parser.MINUS;}
-"*"					{return Parser.TIMES;}
-"/"					{return Parser.DIVIDE;}
-"^"					{return Parser.POW;}
-"("					{return Parser.PAROUV;}
-")"					{return Parser.PARFER;}
-","					{return Parser.COMMA;}
-"|"					{return Parser.PIPE;}
-{Digit}+("."{Digit}+)?	{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
-						return Parser.NUM;}
-{Letter}+				{yyparser.yylval = new ParserVal(yytext()); 
-						return Parser.NAME;}
-[ \t]+					{}
-{NL}					{}
+"+"						{return Parser.PLUS;}
+"-"						{return Parser.MINUS;}
+"*"						{return Parser.TIMES;}
+"/"						{return Parser.DIVIDE;}
+"mod"					{return Parser.MOD;}
+"^"						{return Parser.POW;}
+	
+"<"						{return Parser.INF;}
+">"						{return Parser.SUP}
+"="						{return Parser.EQ;}
+"!="					{return PArser.DIFF;}
+	
+"("						{return Parser.PAROUV;}
+")"						{return Parser.PARFER;}
+","						{return Parser.COMMA;}
+"|"						{return Parser.PIPE;}
+
+"if"					{return Parser.IF};
+"then"					{return Parser.THEN};
+"else"					{return Parser.ELSE};
+	
+{Digit}+("."{Digit}+)?		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
+							return Parser.NUM;}
+
+{Letter}+					{yyparser.yylval = new ParserVal(yytext()); 
+							return Parser.NAME;}
+
+.|\n|\t  				/* ignore all whitespace */
+
+%%
