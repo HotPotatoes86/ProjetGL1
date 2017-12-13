@@ -4,24 +4,17 @@
   import java.util.List;
 %}
 
-%token PLUS MOINS FOIS DIV MOD POW PAROUV PARFER PIPE COMMA INF SUP EQ DIFF IF THEN ELSE AND OR NOT XOR
+%token PLUS MOINS FOIS DIV MOD POW PAROUV PARFER PIPE COMMA INF SUP EQ DIFF IF THEN ELSE AND OR NOT XOR QUOTE
+%token<boolean> BOOLEAN
+%token<double> NUM
+%token<String> NAME
 
-%token<dval> NUM
-%token<sval> NAME
-
-%type<val> argument axiome operation
-
-%union {
-    Arbre val;
-    double dval;
-    String sval;
-};
+%type<Arbre> argument axiome operation
 
 %left PLUS MINUS	
 %left TIMES DIVIDE MOD
 %left NEG
 %right POW
-
 
 %%
 
@@ -40,7 +33,9 @@ operation : operation PLUS Operation 	{$$ = new Valeur($1.getResultat() + $3.get
 		  								$$ = new Operation($1,funcArgs);}
 		  | MOINS operation %prec NEG  	{$$=-$2;}
 		  | NUM	 						{$$ = new Valeur($1);}
-		  | PAROUV operation PARFER 		{$$ = $2;}
+		  | PAROUV operation PARFER 	{$$ = $2;}
+		  |	QUOTE NAME QUOTE			{$$ = $2;}
+		  | BOOLEAN 					{$$ = $2;}
 		  ;
 
 argument : operation COMMA argument {funcArgs.add($1);}
@@ -51,6 +46,20 @@ argument : operation COMMA argument {funcArgs.add($1);}
 	
 condition : IF test THEN operation ELSE operation
 		  ;
+
+test : test2			{}
+	 | test2 XOR test 	{}
+	 | test2 OR test 	{}
+	 | test2 AND test 	{}
+	 | NOT PAROUV test2 PARFER {}
+	 ;
+
+test2 : operation INF operation {}
+	  | operation SUP operation {}
+	  | operation EQ operation 	{} 
+	  | operation DIFF operation{}
+	  | NOT test2				{}
+	  ;
 
 
 %%

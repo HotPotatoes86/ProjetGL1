@@ -26,12 +26,13 @@ Letter = [a-zA-Z]
 "<"						{return Parser.INF;}
 ">"						{return Parser.SUP}
 "="						{return Parser.EQ;}
-"!="					{return PArser.DIFF;}
+"!="					{return Parser.DIFF;}
 	
 "("						{return Parser.PAROUV;}
 ")"						{return Parser.PARFER;}
 ","						{return Parser.COMMA;}
 "|"						{return Parser.PIPE;}
+"\""					{return Parser.QUOTE;}
 
 "if"					{return Parser.IF};
 "then"					{return Parser.THEN};
@@ -41,6 +42,9 @@ Letter = [a-zA-Z]
 "and"					{return Parser.AND};
 "xor"					{return Parser.XOR};
 "not"					{return Parser.NOT};
+
+"true"|"false"				{yylval.val = new ParserVal(Boolean.parseBoolean(yytext));
+							return Parser.BOOLEAN;}
 	
 {Digit}+("."{Digit}+)?		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
 							return Parser.NUM;}

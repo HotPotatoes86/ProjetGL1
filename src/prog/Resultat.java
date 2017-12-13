@@ -3,26 +3,14 @@ package prog;
 /**
  * Permet de stocker la valeur numerique de la cellule
  */
-public class Resultat {
+public abstract class Resultat {
 
-	/**
-	 * valeur d'une cellule
-	 */
-	private double value;
-
-	/**
-	 * Constructeur de la classe
-	 * @param resultat Valeur attribuee a l'attribut resultat
-	 */
-	public Resultat(double resultat) {
-		value = resultat;
-	}
-
-	/**
-	 * Retourne le resultat sous la forme d'un double
-	 */
-	public double getResultat() {
-		return value;
-	}
+	public abstract Resultat addition(ResultatDouble res);
+	
+	public abstract Resultat addition(ResultatBoolean res);
+	
+	public abstract Resultat addition(ResultatString res);
+	
+	public abstract Resultat addition(ResultatErreur res);
 
 }

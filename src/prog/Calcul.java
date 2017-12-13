@@ -79,8 +79,8 @@ public class Calcul {
 				}
 			}
 			Arbre arbre = creerArbre();
-			double resultatArbre = arbre.getResultat();
-			cellule.setResultat(new Resultat(resultatArbre));
+			Resultat resultatArbre = arbre.getResultat();
+			cellule.setResultat(resultatArbre);
 		} else {
 			cellule.setResultat(null);
 		}

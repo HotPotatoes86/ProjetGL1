@@ -10,7 +10,7 @@ public class Operation extends Arbre {
 	/**
 	 * Resultat de l'operation
 	 */
-	private double resultat;
+	private Resultat resultat;
 	
 	private String operation;
 
@@ -29,7 +29,7 @@ public class Operation extends Arbre {
 	/**
 	 * Renvoie le résultat du traitement de l'opération
 	 */
-	public double getResultat() throws Exception {
+	public Resultat getResultat() throws Exception {
 	    switch(operation.toLowerCase()) {
 	    case "max":  
 	      if (this.fils.size()>1) {
