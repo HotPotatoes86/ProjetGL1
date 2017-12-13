@@ -34,16 +34,16 @@ Letter = [a-zA-Z]
 "|"						{return Parser.PIPE;}
 "\""					{return Parser.QUOTE;}
 
-"if"					{return Parser.IF};
-"then"					{return Parser.THEN};
-"else"					{return Parser.ELSE};
+"if"					{return Parser.IF;}
+"then"					{return Parser.THEN;}
+"else"					{return Parser.ELSE;}
 
-"or"					{return Parser.OR};
-"and"					{return Parser.AND};
-"xor"					{return Parser.XOR};
-"not"					{return Parser.NOT};
+"or"					{return Parser.OR;}
+"and"					{return Parser.AND;}
+"xor"					{return Parser.XOR;}
+"not"					{return Parser.NOT;}
 
-"true"|"false"				{yylval.val = new ParserVal(Boolean.parseBoolean(yytext));
+"true"|"false"				{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;}
 	
 {Digit}+("."{Digit}+)?		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
@@ -52,6 +52,4 @@ Letter = [a-zA-Z]
 {Letter}+					{yyparser.yylval = new ParserVal(yytext()); 
 							return Parser.NAME;}
 
-.|\n|\t  				/* ignore all whitespace */
-
-%%
+[^]|\n|\t  				{}/* ignore all whitespace */

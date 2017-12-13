@@ -23,19 +23,19 @@ axiome : operation	{res = new Arbre($1);}
 	   | {}
 	   ;
 
-operation : operation PLUS Operation 	{$$ = new Valeur($1.getResultat() + $3.getResultat());}
+operation : operation PLUS operation 	{$$ = new Valeur($1.getResultat() + $3.getResultat());}
 	  	  | operation MINUS operation 	{$$ = new Valeur($1.getResultat() - $3.getResultat());}
 		  | operation DIVIDE operation 	{$$ = new Valeur($1.getResultat() / $3.getResultat());}
 		  | operation TIMES operation 	{$$ = new Valeur($1.getResultat() * $3.getResultat());}
 		  | operation MOD operation 	{$$ = new Valeur($1.getResultat() mod $3.getResultat());}
-		  | operation POW Operation    	{$$ = new Valeur(Math.pow($1,$3));}
+		  | operation POW operation    	{$$ = new Valeur(Math.pow($1,$3));}
 		  | NAME PAROUV argument PARFER	{funcArgs.clear();
 		  								$$ = new Operation($1,funcArgs);}
 		  | MOINS operation %prec NEG  	{$$=-$2;}
 		  | NUM	 						{$$ = new Valeur($1);}
 		  | PAROUV operation PARFER 	{$$ = $2;}
-		  |	QUOTE NAME QUOTE			{$$ = $2;}
-		  | BOOLEAN 					{$$ = $2;}
+		  |	QUOTE NAME QUOTE			{$$ = new Valeur($2);}
+		  | BOOLEAN 					{$$ = new Valeur($1);}
 		  ;
 
 argument : operation COMMA argument {funcArgs.add($1);}
