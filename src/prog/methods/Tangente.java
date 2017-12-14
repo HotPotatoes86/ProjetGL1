@@ -1,24 +1,19 @@
 package prog.methods;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import prog.results.Resultat;
+import prog.results.ResultatDouble;
 
 public class Tangente implements Operation{
 	
-	List<Double> args = new ArrayList<>();
+	ResultatDouble res;
 
+	public Tangente(ResultatDouble arg) {
+		res = new ResultatDouble(Math.tan(arg.getValue()));
+	}
+	
 	@Override
 	public Resultat getResultat() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setArgs(List<Resultat> args) {
-		// TODO Auto-generated method stub
-		
+		return res;
 	}
 
 }

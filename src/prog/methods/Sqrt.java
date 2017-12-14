@@ -1,25 +1,19 @@
 package prog.methods;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import prog.results.Resultat;
+import prog.results.ResultatDouble;
 
 public class Sqrt implements Operation{
+	
+	ResultatDouble res;
 
-	List<Double> args = new ArrayList<>();
-
+	public Sqrt(ResultatDouble arg) {
+		res = new ResultatDouble(Math.sqrt(arg.getValue()));
+	}
+	
 	@Override
 	public Resultat getResultat() {
-		// TODO Auto-generated method stub
-		return null;
+		return res;
 	}
 
-	@Override
-	public void setArgs(List<Resultat> args) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 }
