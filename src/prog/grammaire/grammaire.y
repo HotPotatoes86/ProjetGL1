@@ -1,6 +1,6 @@
 %{
-  package prog;
-  import prog.methods.*;
+  package prog.grammaire;
+  import prog..*;
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
