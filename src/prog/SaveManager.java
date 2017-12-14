@@ -19,6 +19,94 @@ import java.sql.SQLException;
  */
 public final class SaveManager {
 
+	
+/**
+ * 
+ * Permet d'établir une connection avec une base donnée.
+ * 
+ * @param url
+ * 
+ * 			adresse de la base de donnée
+ * 	
+ * @param user
+ * 
+ * 			nom de l'utilisateur
+
+ * 
+ * @param password
+ * 
+ * 			mot de passe pour se connecter à la base donnée
+ * 
+ * @return Connection
+ */
+	
+	private static Connection ConnecterBase(String url, String user,
+			String password) {
+
+		try {
+
+			if (url.contains("jdbc:sqlite:")) {
+
+				Class.forName("org.sqlite.JDBC");
+
+			} else if (url.contains("jdbc:oracle:thin:")) {
+
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+
+			} else {
+
+				return null;
+
+			}
+
+			Connection connection = DriverManager.getConnection(url, user,
+					password);
+
+			return connection;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return null;
+
+	}
+	
+	
+	/**
+	 * 
+	 * @param s
+	 * 
+	 * 			permet d'exécuter les instruction sql et de retourner les résultat
+	 * 
+	 * @param Requete
+	 * 
+	 * 			Requete sql à exécuter
+	 * 
+	 * @return ResultSetMetaData
+	 */
+	private static ResultSetMetaData RetournerResultat(Statement s, String Requete) {
+
+		try {
+
+			ResultSet r = ((java.sql.Statement) s).executeQuery(Requete);
+			ResultSetMetaData rm = r.getMetaData();
+			return rm;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		
+		return null;
+
+		
+
+	}
+	
 	/**
 	 * Importe une base de donnée grace à une requete
 	 * 
@@ -28,32 +116,18 @@ public final class SaveManager {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public static Conteneur importBase(String requete,String url,String user,String password)
-			throws ClassNotFoundException, SQLException {
+
+	public static Conteneur ImportBase(String requete, String url, String user,
+			String password) throws ClassNotFoundException, SQLException {
 
 		Conteneur c = new Conteneur();
 
-
 		try {
 
-			if(url.contains("jdbc:sqlite:")){
-				
-				Class.forName("org.sqlite.JDBC");
-
-				
-			}else if(url.contains("jdbc:oracle:thin:")){
-				
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-
-				
-			}
-
-
-			Connection connection = DriverManager.getConnection(url, user, password);
-
-			Statement s = (Statement) connection.createStatement();
-			ResultSet r = ((java.sql.Statement) s).executeQuery(requete);
-			ResultSetMetaData rm = r.getMetaData();
+			Statement s = (Statement) ConnecterBase(url, user, password)
+					.createStatement();
+			
+			ResultSetMetaData rm=RetournerResultat(s, requete);
 
 			Cellule cell = null;
 
@@ -66,6 +140,9 @@ public final class SaveManager {
 				c.addCellule(cell);
 
 			}
+
+			((BufferedReader) rm).close();
+			((Connection) s).close();
 
 		} catch (Exception e) {
 
