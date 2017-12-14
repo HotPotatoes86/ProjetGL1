@@ -16,6 +16,8 @@ Letter = [a-zA-Z]
 
 %%
 
+"@"{Letter}+{Digit}+				{yyparser.yylval = new ParserVal(yytext()); /*TODO changer la reconnaissance de la reference*/ 
+							return Parser.REF;}
 "+"						{return Parser.PLUS;}
 "-"						{return Parser.MINUS;}
 "*"						{return Parser.TIMES;}
@@ -24,7 +26,7 @@ Letter = [a-zA-Z]
 "^"						{return Parser.POW;}
 	
 "<"						{return Parser.INF;}
-">"						{return Parser.SUP}
+">"						{return Parser.SUP;}
 "="						{return Parser.EQ;}
 "!="					{return Parser.DIFF;}
 	
@@ -42,6 +44,12 @@ Letter = [a-zA-Z]
 "and"					{return Parser.AND;}
 "xor"					{return Parser.XOR;}
 "not"					{return Parser.NOT;}
+
+"sin"					{return Parser.SIN;}
+"cos"					{return Parser.COS;}
+"tan"					{return Parser.TAN;}
+"min"					{return Parser.MINIMUM;}
+"max"					{return Parser.MAXIMUM;}
 
 "true"|"false"				{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;}

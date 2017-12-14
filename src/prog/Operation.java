@@ -2,67 +2,10 @@ package prog;
 
 import java.util.List;
 
-/**
- * Contient la liste des opérations possibles
- */
-public class Operation extends Arbre {
+public interface Operation {
 	
-	/**
-	 * Resultat de l'operation
-	 */
-	private Resultat resultat;
+	public Resultat getResultat();
 	
-	private String operation;
-
-	/**
-	 * Constructeur de la classe Operation, crée un noeud dans l'arbre contenant l'opération et ses opérandes
-	 * @param operation operation (min, max, +, -, ...) sous forme de String qui sera analysée par la classe
-	 * @param operandes operandes de l'opération de type arbre (donc soit une operation soit une valeur)
-	 */
-	public Operation(String operation, List<Arbre> operandes) {
-		this.operation = operation;
-		for (Arbre a : operandes) {
-			this.fils.add(a);
-		}
-	}
-
-	/**
-	 * Renvoie le résultat du traitement de l'opération
-	 */
-	public Resultat getResultat() throws Exception {
-	    switch(operation.toLowerCase()) {
-	    case "max":  
-	      if (this.fils.size()>1) {
-	        this.resultat = Math.max(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
-	      }else {
-	        throw new Exception("Pas assez d'operandes pour l'operation max.");
-	      }
-	      break;
-	    case "min":
-	      if (this.fils.size()>1) {
-	        this.resultat = Math.min(this.fils.get(0).getResultat(),this.fils.get(1).getResultat());
-	      }else {
-	        throw new Exception("Pas assez d'operandes pour l'operation min.");
-	      }
-	      break;
-	    case "moy":
-	      if (this.fils.size()>0) {
-	        for (Arbre a : this.fils) {
-	          this.resultat += a.getResultat();
-	        }	 
-	        this.resultat /= this.fils.size();	 
-	      }else {	 
-	        throw new Exception("Pas assez d'operandes pour l'operation moy.");
-	      }	 
-	      break;	 
-	    case "sqrt":	 
-	      if (this.fils.size()>0) { 
-	        this.resultat = Math.sqrt(this.fils.get(0).getResultat()); 
-	      }else { 
-	        throw new Exception("Pas assez d'operandes pour l'operation sqrt.");
-	      }
-	    }
-	    return this.resultat;
-	}
+	public void setArgs(List<Resultat> args);
 
 }
