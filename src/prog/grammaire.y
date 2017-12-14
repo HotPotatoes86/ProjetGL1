@@ -1,68 +1,63 @@
 %{
+  package prog;
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
 %}
 
-%token PLUS MOINS FOIS DIV MOD POW PAROUV PARFER PIPE COMMA INF SUP EQ DIFF IF THEN ELSE AND OR NOT XOR QUOTE
-%token<boolean> BOOLEAN
-%token<double> NUM
-%token<String> NAME
 
-%type<Arbre> argument axiome operation condition
-%type<boolean> test
+%token NAME NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT
 
+%type<dval> operation NUM oneArgument
+%type<Operation> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
 
 %left PLUS MINUS	
-%left TIMES DIVIDE MOD
-%left NEG
+%left TIMES DIVIDE
 %right POW
+
 
 %%
 
-axiome : operation	{res = new Arbre($1);}
-	   | {}
-	   ;
+/*S : cellule S 	{}
+  | 		{}
+  ;
+*/  
+/*cellule : NAME PIPE operation {}*/
 
-operation : operation PLUS operation 	{$$ = new Valeur($1.getResultat() + $3.getResultat());}
-	  	  | operation MINUS operation 	{$$ = new Valeur($1.getResultat() - $3.getResultat());}
-		  | operation DIVIDE operation 	{$$ = new Valeur($1.getResultat() / $3.getResultat());}
-		  | operation TIMES operation 	{$$ = new Valeur($1.getResultat() * $3.getResultat());}
-		  | operation MOD operation 	{$$ = new Valeur($1.getResultat() mod $3.getResultat());}
-		  | operation POW operation    	{$$ = new Valeur(Math.pow($1,$3));}
-		  | NAME PAROUV argument PARFER	{funcArgs.clear();
-		  								$$ = new Operation($1,funcArgs);}
-		  | MOINS operation %prec NEG  	{$$=-$2;}
-		  | NUM	 						{$$ = new Valeur($1);}
-		  | PAROUV operation PARFER 	{$$ = $2;}
-		  |	QUOTE NAME QUOTE			{$$ = new Valeur($2);}
-		  | BOOLEAN 					{$$ = new Valeur($1);}
-		  | condition					{$$ = $1;}
-		  ;
+axiome : axiome operation		{System.out.println("resultat : " + $2);}
+	|
+	;
 
-argument : operation COMMA argument {funcArgs.add($1);}
-         | operation 				{funcArgs.add($1);}
-         |							{}
-		 ;
+operation : operation PLUS operation	{$$ = $1 + $3;}
+	| operation MINUS operation 	{$$ = $1 - $3;}
+	| operation DIVIDE operation 	{$$ = $1 / $3;}
+	| operation TIMES operation 	{$$ = $1 * $3;}
+	| method						{func.setArgs(funcArgs);
+									funcArgs.clear();
+									$$ = func.getResultat();}
+	| NUM	 			{$$ = $1;}
+	| PAROUV operation PARFER 	{$$ = $2;}
+	;
 
+method : SIN oneArgument		{ func = new Operation("sinus", new Sinus());}
+	| COS oneArgument				{ func = new Operation("cosinus", new Cosinus());}
+	| TAN oneArgument			{ func = new Operation("tangente", new Tangente());}
+	| MINIMUM manyArgument		{ func = new Operation("minimum", new Minimum());}
+	| MAXIMUM manyArgument		{ func = new Operation("maximum", new Maximum());}
+	| MOY manyArgument			{ func = new Operation("moyenne", new Moyenne());}
+	| SQRT oneArgument			{ func = new Operation("sqrt", new Sqrt());}
+	;
 
-condition : IF test THEN operation ELSE operation	{if ($2){$$ = $4; } else {$$ = $6;}}
-		  ;
+oneArgument : PAROUV operation PARFER		{funcArgs.add($2);}
+	;
 
-test : test2			{}
-	 | test2 XOR test 	{}
-	 | test2 OR test 	{}
-	 | test2 AND test 	{}
-	 | NOT PAROUV test2 PARFER {}
-	 ;
+manyArgument : PAROUV listArgument PARFER
+	;
 
-test2 : operation INF operation {}
-	  | operation SUP operation {}
-	  | operation EQ operation 	{} 
-	  | operation DIFF operation{}
-	  | NOT test2				{}
-	  ;
-
+listArgument : operation {funcArgs.add($1);}
+	| operation COMMA listArgument {funcArgs.add($1);}
+	;
+	
 
 %%
 
@@ -92,5 +87,16 @@ public Parser(Reader r) {
 
 
 static boolean interactive;
-static Arbre res;
-static List<Arbre> funcArgs = new ArrayList<>();
+static Operation func;
+static List<Double> funcArgs = new ArrayList<>();
+
+public static void main(String args[]) throws IOException {
+
+	Parser yyparser;
+	yyparser = new Parser(new InputStreamReader(System.in));
+
+	yyparser.yyparse();
+}
+
+
+/*compilation : byaccj -J grammaire.y*/
