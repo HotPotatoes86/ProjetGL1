@@ -3,6 +3,8 @@ package prog;
 import java.util.ArrayList;
 import java.util.List;
 
+import prog.results.Resultat;
+
 /**
  * Cellules contenues dans le conteneur, permet d'y attribuer des formules qui
  * seront stockees et calculees en donnee numerique

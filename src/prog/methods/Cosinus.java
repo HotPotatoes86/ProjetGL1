@@ -3,7 +3,8 @@ package prog.methods;
 import java.util.ArrayList;
 import java.util.List;
 
-import prog.*;
+import prog.results.Resultat;
+import prog.results.ResultatDouble;
 
 public class Cosinus implements Operation{
 	
@@ -11,7 +12,7 @@ public class Cosinus implements Operation{
 
 	@Override
 	public Resultat getResultat() {
-		return new ResultatDouble(Math.cos(Math.toRadians((ResultatDouble)args.get(0).getResultat())));
+		return new ResultatDouble(4);
 	}
 
 	@Override

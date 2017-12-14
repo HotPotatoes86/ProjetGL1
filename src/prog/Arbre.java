@@ -3,6 +3,8 @@ package prog;
 import java.util.ArrayList;
 import java.util.List;
 
+import prog.results.Resultat;
+
 /**
  * Classe permettant de stocker la formule et de la calculer
  */

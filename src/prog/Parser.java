@@ -23,6 +23,8 @@
   import java.util.List;
 //#line 22 "Parser.java"
 
+import prog.methods.Operation;
+
 
 
 

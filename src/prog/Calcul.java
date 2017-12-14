@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import prog.results.Resultat;
+
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
  * calculer un resultat
@@ -107,7 +109,7 @@ public class Calcul {
 				found = false;
 				Cellule c = conteneur.getCellule(name);
 				if (c!=null) {
-					newFormule += c.getResultat().getResultat();
+					newFormule += c.getResultat().getStringResultat();
 					newFormule += formule.charAt(i);
 					refs.add(c);
 				}
@@ -116,7 +118,7 @@ public class Calcul {
 				name += formule.charAt(i);
 				Cellule c = conteneur.getCellule(name);
 				if (c!=null) {
-					newFormule += c.getResultat().getResultat();
+					newFormule += c.getResultat().getStringResultat();
 					refs.add(c);
 				}
 			} else if (found) {
@@ -139,6 +141,7 @@ public class Calcul {
 		yyparser = new Parser(new StringReader(formule));
 		if (yyparser.yyparse()==0) {
 			return yyparser.getResultat();
+			//TODO Ajouter methode getResultat qui retourne l'arbre dans bison
 		}else {
 			return null;
 		}

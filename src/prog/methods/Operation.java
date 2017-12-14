@@ -1,6 +1,8 @@
-package prog;
+package prog.methods;
 
 import java.util.List;
+
+import prog.results.Resultat;
 
 public interface Operation {
 	

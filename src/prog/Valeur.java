@@ -1,5 +1,7 @@
 package prog;
 
+import prog.results.Resultat;
+
 public class Valeur extends Arbre {
 
 	/**

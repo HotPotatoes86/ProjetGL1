@@ -3,27 +3,23 @@ package prog.methods;
 import java.util.ArrayList;
 import java.util.List;
 
-import prog.Traitement;
+import prog.results.Resultat;
 
-public class Minimum implements Traitement{
+public class Minimum implements Operation{
 	
 	List<Double> args = new ArrayList<>();
 
 	@Override
-	public double getResultat() {
-		double min = args.get(0);
-		for(int i = 1; i < args.size(); i++) {
-			if(args.get(i) < min)
-				min = args.get(i);
-		}
-		return min;
+	public Resultat getResultat() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void setArgs(List<Double> args) {
-		for (double arg : args) {
-			this.args.add(arg);
-		}
+	public void setArgs(List<Resultat> args) {
+		// TODO Auto-generated method stub
+		
 	}
+
 
 }

@@ -3,26 +3,23 @@ package prog.methods;
 import java.util.ArrayList;
 import java.util.List;
 
-import prog.Traitement;
+import prog.results.Resultat;
 
-public class Moyenne implements Traitement{
+public class Moyenne implements Operation{
 	
 	List<Double> args = new ArrayList<>();
 
 	@Override
-	public double getResultat() {
-		double somme = 0;
-		for (Double arg : args) {
-			somme += arg;
-		}
-		return somme/args.size();
+	public Resultat getResultat() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void setArgs(List<Double> args) {
-		for (double arg : args) {
-			this.args.add(arg);
-		}
+	public void setArgs(List<Resultat> args) {
+		// TODO Auto-generated method stub
+		
 	}
+
 
 }

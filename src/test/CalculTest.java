@@ -15,7 +15,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Résultat de la cellule calculée",c.getResultat().getResultat()==3);
+		assertTrue("Résultat de la cellule calculée",c.getResultat().getStringResultat().equalsIgnoreCase("3"));
 	}
 	
 	@Test
@@ -27,7 +27,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Résultat de la cellule calculée",c.getResultat().getResultat()==5);
+		assertTrue("Résultat de la cellule calculée",c.getResultat().getStringResultat().equalsIgnoreCase("5"));
 	}
 	
 	@Test
@@ -39,6 +39,6 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Résultat de la cellule calculée",c.getResultat().getResultat()==1);
+		assertTrue("Résultat de la cellule calculée",c.getResultat().getStringResultat().equalsIgnoreCase("1"));
 	}
 }
