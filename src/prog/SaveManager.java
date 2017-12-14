@@ -28,19 +28,28 @@ public final class SaveManager {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public static Conteneur importBase(String requete)
+	public static Conteneur importBase(String requete,String url,String user,String password)
 			throws ClassNotFoundException, SQLException {
 
 		Conteneur c = new Conteneur();
-		c=null;
+
 
 		try {
 
-			String url = "";
-	
-			Class.forName("org.sqlite.JDBC");
+			if(url.contains("jdbc:sqlite:")){
+				
+				Class.forName("org.sqlite.JDBC");
 
-			Connection connection = DriverManager.getConnection(url, "", "");
+				
+			}else if(url.contains("jdbc:oracle:thin:")){
+				
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+
+				
+			}
+
+
+			Connection connection = DriverManager.getConnection(url, user, password);
 
 			Statement s = (Statement) connection.createStatement();
 			ResultSet r = ((java.sql.Statement) s).executeQuery(requete);
