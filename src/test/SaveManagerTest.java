@@ -1,4 +1,4 @@
-package prog;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.beans.Statement;
 import java.sql.SQLException;
 
 import org.junit.Test;
+
+import prog.SaveManager;
 
 public class SaveManagerTest {
 
