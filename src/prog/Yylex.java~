@@ -692,7 +692,7 @@ class Yylex {
             }
           case 50: break;
           case 25: 
-            { yylval.val = new ParserVal(Boolean.parseBoolean(yytext));
+            { yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;
             }
           case 51: break;

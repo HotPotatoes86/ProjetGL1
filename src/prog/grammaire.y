@@ -9,7 +9,9 @@
 %token<double> NUM
 %token<String> NAME
 
-%type<Arbre> argument axiome operation
+%type<Arbre> argument axiome operation condition
+%type<boolean> test
+
 
 %left PLUS MINUS	
 %left TIMES DIVIDE MOD
@@ -19,7 +21,6 @@
 %%
 
 axiome : operation	{res = new Arbre($1);}
-	   | condition
 	   | {}
 	   ;
 
@@ -36,15 +37,16 @@ operation : operation PLUS operation 	{$$ = new Valeur($1.getResultat() + $3.get
 		  | PAROUV operation PARFER 	{$$ = $2;}
 		  |	QUOTE NAME QUOTE			{$$ = new Valeur($2);}
 		  | BOOLEAN 					{$$ = new Valeur($1);}
+		  | condition					{$$ = $1;}
 		  ;
 
 argument : operation COMMA argument {funcArgs.add($1);}
          | operation 				{funcArgs.add($1);}
          |							{}
-         ;					
+		 ;
 
-	
-condition : IF test THEN operation ELSE operation
+
+condition : IF test THEN operation ELSE operation	{if ($2){$$ = $4; } else {$$ = $6;}}
 		  ;
 
 test : test2			{}
