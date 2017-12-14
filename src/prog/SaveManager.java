@@ -32,11 +32,12 @@ public final class SaveManager {
 			throws ClassNotFoundException, SQLException {
 
 		Conteneur c = new Conteneur();
+		c=null;
 
 		try {
 
 			String url = "";
-
+	
 			Class.forName("org.sqlite.JDBC");
 
 			Connection connection = DriverManager.getConnection(url, "", "");
