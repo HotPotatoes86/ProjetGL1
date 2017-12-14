@@ -3,20 +3,20 @@ package prog.methods;
 import java.util.ArrayList;
 import java.util.List;
 
-import prog.Traitement;
+import prog.*;
 
-public class Cosinus implements Traitement{
+public class Cosinus implements Operation{
 	
-	List<Double> args = new ArrayList<>();
+	List<Resultat> args = new ArrayList<>();
 
 	@Override
-	public double getResultat() {
-		return Math.cos(Math.toRadians(args.get(0)));
+	public Resultat getResultat() {
+		return new ResultatDouble(Math.cos(Math.toRadians((ResultatDouble)args.get(0).getResultat())));
 	}
 
 	@Override
-	public void setArgs(List<Double> args) {
-		for (double arg : args) {
+	public void setArgs(List<Resultat> args) {
+		for (Resultat arg : args) {
 			this.args.add(arg);
 		}
 	}

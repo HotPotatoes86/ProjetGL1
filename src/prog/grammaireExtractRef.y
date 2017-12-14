@@ -10,6 +10,7 @@
 %token NAME NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
 
 %type<dval> operation NUM oneArgument
+%type<sval> REF
 %type<Operation> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
 
 %left PLUS MINUS	
@@ -25,38 +26,37 @@
 */  
 /*cellule : NAME PIPE operation {}*/
 
-axiome : axiome operation		{System.out.println("resultat : " + $2);}
+axiome : axiome operation		{}
 	|
 	;
 
-operation : operation PLUS operation	{$$ = $1 + $3;}
-	| operation MINUS operation 	{$$ = $1 - $3;}
-	| operation DIVIDE operation 	{$$ = $1 / $3;}
-	| operation TIMES operation 	{$$ = $1 * $3;}
-	| method						{func.setArgs(funcArgs);
-									funcArgs.clear();
-									$$ = func.getResultat();}
-	| NUM	 			{$$ = $1;}
-	| PAROUV operation PARFER 	{$$ = $2;}
+operation : operation PLUS operation	{}
+	| operation MINUS operation			{}
+	| operation DIVIDE operation		{}
+	| operation TIMES operation			{}
+	| method							{}
+	| NUM								{}
+	| REF								{System.out.println($1);}
+	| PAROUV operation PARFER			{}
 	;
 
-method : SIN oneArgument		{ func = new Operation("sinus", new Sinus());}
-	| COS oneArgument				{ func = new Operation("cosinus", new Cosinus());}
-	| TAN oneArgument			{ func = new Operation("tangente", new Tangente());}
-	| MINIMUM manyArgument		{ func = new Operation("minimum", new Minimum());}
-	| MAXIMUM manyArgument		{ func = new Operation("maximum", new Maximum());}
-	| MOY manyArgument			{ func = new Operation("moyenne", new Moyenne());}
-	| SQRT oneArgument			{ func = new Operation("sqrt", new Sqrt());}
+method : SIN oneArgument				{}
+	| COS oneArgument					{}
+	| TAN oneArgument					{}
+	| MINIMUM manyArgument				{}
+	| MAXIMUM manyArgument				{}
+	| MOY manyArgument					{}
+	| SQRT oneArgument					{}
 	;
 
-oneArgument : PAROUV operation PARFER		{funcArgs.add($2);}
+oneArgument : PAROUV operation PARFER	{}
 	;
 
 manyArgument : PAROUV listArgument PARFER
 	;
 
-listArgument : operation {funcArgs.add($1);}
-	| operation COMMA listArgument {funcArgs.add($1);}
+listArgument : operation				{}
+	| operation COMMA listArgument		{}
 	;
 	
 
