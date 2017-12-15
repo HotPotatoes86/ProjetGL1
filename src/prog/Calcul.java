@@ -1,9 +1,11 @@
 package prog;
 
 import java.io.StringReader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import prog.results.Resultat;
 
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
