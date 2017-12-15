@@ -48,9 +48,9 @@ public class Cellule {
 	 * 
 	 * @param conteneur
 	 *            Conteneur qui contient la cellule
-	 * @throws Exception 
+	 * @throws ParsingException 
 	 */
-	public void actualise(Conteneur conteneur) throws Exception {
+	public void actualise(Conteneur conteneur) throws ParsingException {
 		Calcul c = new Calcul(this,conteneur);
 		c.calcul();
 	}

@@ -3,7 +3,7 @@ package prog.methods;
 import prog.results.Resultat;
 import prog.results.ResultatDouble;
 
-public class Sinus implements Fonction{
+public class Sinus extends Fonction{
 	
 	ResultatDouble res;
 

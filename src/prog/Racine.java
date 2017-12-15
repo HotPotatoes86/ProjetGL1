@@ -9,7 +9,7 @@ public class Racine extends Arbre{
 	}
 
 	@Override
-	public Resultat getResultat() throws Exception {
+	public Resultat getResultat() throws ParsingException {
 		if (this.fils.size()>0) return this.fils.get(0).getResultat();
 		return null;
 	}

@@ -27,275 +27,111 @@ public class ResultatDouble extends Resultat{
 		return value+"";
 	}
 
-	//------------------------------------------Addition-------------------------------------------//
 	@Override
-	public Resultat addition(ResultatDouble res) {
-		return new ResultatDouble(res.getValue() + value);
-	}
-	
-	@Override
-	public Resultat addition(ResultatInteger res) {
-		return new ResultatDouble(res.getValue() + value);
-	}
-
-	@Override
-	public Resultat addition(ResultatBoolean res) {
+	public Resultat addition(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return new ResultatDouble(value+((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return new ResultatDouble(value+((ResultatInteger)res).getValue());
+		}else if (res instanceof ResultatString) {
+			return new ResultatString(value+((ResultatString)res).getValue());
+		}
 		return new ResultatErreur();
 	}
 
 	@Override
-	public Resultat addition(ResultatString res) {
-		return new ResultatErreur();
-	}
-
-	
-	//------------------------------------------Soustraction-------------------------------------------//
-	@Override
-	public Resultat soustraction(ResultatDouble res) {
-		return new ResultatDouble(value-res.getValue());
-	}
-	
-	@Override
-	public Resultat soustraction(ResultatInteger res) {
-		return new ResultatDouble(value-res.getValue());
-	}
-
-	@Override
-	public Resultat soustraction(ResultatBoolean res) {
+	public Resultat soustraction(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return new ResultatDouble(value-((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return new ResultatDouble(value-((ResultatInteger)res).getValue());
+		}
 		return new ResultatErreur();
 	}
 
 	@Override
-	public Resultat soustraction(ResultatString res) {
-		return new ResultatErreur();
-	}
-
-	
-	//------------------------------------------Multiplication-------------------------------------------//
-	@Override
-	public Resultat multiplication(ResultatDouble res) {
-		return new ResultatDouble(value*res.getValue());
-	}
-	
-	@Override
-	public Resultat multiplication(ResultatInteger res) {
-		return new ResultatDouble(value*res.getValue());
-	}
-
-	@Override
-	public Resultat multiplication(ResultatBoolean res) {
+	public Resultat multiplication(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return new ResultatDouble(value*((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return new ResultatDouble(value*((ResultatInteger)res).getValue());
+		}
 		return new ResultatErreur();
 	}
 
 	@Override
-	public Resultat multiplication(ResultatString res) {
-		return new ResultatErreur();
-	}
-
-	
-	//------------------------------------------Division-------------------------------------------//
-	@Override
-	public Resultat division(ResultatDouble res) {
-		return new ResultatDouble(value/res.getValue());
-	}
-	
-	@Override
-	public Resultat division(ResultatInteger res) {
-		return new ResultatDouble(value/res.getValue());
-	}
-
-	@Override
-	public Resultat division(ResultatBoolean res) {
+	public Resultat division(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return new ResultatDouble(value/((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return new ResultatDouble(value/((ResultatInteger)res).getValue());
+		}
 		return new ResultatErreur();
 	}
 
 	@Override
-	public Resultat division(ResultatString res) {
-		return new ResultatErreur();
-	}
-	
-	
-	//------------------------------------------Modulo-------------------------------------------//
-	@Override
-	public Resultat modulo(ResultatDouble res) {
-		return new ResultatErreur();
-	}
-	
-	@Override
-	public Resultat modulo(ResultatInteger res) {
-		return new ResultatErreur();
-	}
-	
-	@Override
-	public Resultat modulo(ResultatBoolean res) {
-		return new ResultatErreur();
-	}
-	
-	@Override
-	public Resultat modulo(ResultatString res) {
+	public Resultat modulo(Resultat res) {
 		return new ResultatErreur();
 	}
 
-	
-	//------------------------------------------Inferieur-------------------------------------------//
 	@Override
-	public boolean estInferieur(ResultatDouble res) {
-		return (value<res.getValue());
-	}
-	
-	@Override
-	public boolean estInferieur(ResultatInteger res) {
-		return (value<res.getValue());
-	}
-
-	@Override
-	public boolean estInferieur(ResultatBoolean res) {
+	public boolean estInferieur(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return (value<((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return (value<((ResultatInteger)res).getValue());
+		}
 		return false;
 	}
 
 	@Override
-	public boolean estInferieur(ResultatString res) {
+	public boolean estInferieurOuEgal(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return (value<=((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return (value<=((ResultatInteger)res).getValue());
+		}
 		return false;
 	}
 
 	@Override
-	public boolean estInferieur(ResultatErreur res) {
-		return false;
-	}
-
-	
-	//------------------------------------------Inferieur Egal-------------------------------------------//
-	@Override
-	public boolean estInferieurOuEgal(ResultatDouble res) {
-		return (value<=res.getValue());
-	}
-	
-	@Override
-	public boolean estInferieurOuEgal(ResultatInteger res) {
-		return (value<=res.getValue());
-	}
-
-	@Override
-	public boolean estInferieurOuEgal(ResultatBoolean res) {
+	public boolean estSuperieur(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return (value>((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return (value>((ResultatInteger)res).getValue());
+		}
 		return false;
 	}
 
 	@Override
-	public boolean estInferieurOuEgal(ResultatString res) {
+	public boolean estSuperieurOuEgal(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return (value>=((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return (value>=((ResultatInteger)res).getValue());
+		}
 		return false;
 	}
 
 	@Override
-	public boolean estInferieurOuEgal(ResultatErreur res) {
-		return false;
-	}
-
-	
-	//------------------------------------------Superieur-------------------------------------------//
-	@Override
-	public boolean estSuperieur(ResultatDouble res) {
-		return (value>res.getValue());
-	}
-	
-	@Override
-	public boolean estSuperieur(ResultatInteger res) {
-		return (value>res.getValue());
-	}
-
-	@Override
-	public boolean estSuperieur(ResultatBoolean res) {
+	public boolean estEgal(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return (value==((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return (value==((ResultatInteger)res).getValue());
+		}
 		return false;
 	}
 
 	@Override
-	public boolean estSuperieur(ResultatString res) {
+	public boolean estDifferent(Resultat res) {
+		if (res instanceof ResultatDouble) {
+			return (value!=((ResultatDouble)res).getValue());
+		}else if (res instanceof ResultatInteger) {
+			return (value!=((ResultatInteger)res).getValue());
+		}
 		return false;
-	}
-
-	@Override
-	public boolean estSuperieur(ResultatErreur res) {
-		return false;
-	}
-
-	
-	//------------------------------------------Superieur Egal-------------------------------------------//
-	@Override
-	public boolean estSuperieurOuEgal(ResultatDouble res) {
-		return (value>=res.getValue());
-	}
-	
-	@Override
-	public boolean estSuperieurOuEgal(ResultatInteger res) {
-		return (value>=res.getValue());
-	}
-
-	@Override
-	public boolean estSuperieurOuEgal(ResultatBoolean res) {
-		return false;
-	}
-
-	@Override
-	public boolean estSuperieurOuEgal(ResultatString res) {
-		return false;
-	}
-
-	@Override
-	public boolean estSuperieurOuEgal(ResultatErreur res) {
-		return false;
-	}
-
-	
-	//------------------------------------------Egal-------------------------------------------//
-	@Override
-	public boolean estEgal(ResultatDouble res) {
-		return (value==res.getValue());
-	}
-	
-	@Override
-	public boolean estEgal(ResultatInteger res) {
-		return (value==res.getValue());
-	}
-
-	@Override
-	public boolean estEgal(ResultatString res) {
-		return false;
-	}
-
-	@Override
-	public boolean estEgal(ResultatBoolean res) {
-		return false;
-	}
-
-	@Override
-	public boolean estEgal(ResultatErreur res) {
-		return false;
-	}
-
-	
-	//------------------------------------------Different-------------------------------------------//
-	@Override
-	public boolean estDifferent(ResultatDouble res) {
-		return (value!=res.getValue());
-	}
-	
-	@Override
-	public boolean estDifferent(ResultatInteger res) {
-		return (value!=res.getValue());
-	}
-
-	@Override
-	public boolean estDifferent(ResultatString res) {
-		return true;
-	}
-
-	@Override
-	public boolean estDifferent(ResultatBoolean res) {
-		return true;
-	}
-
-	@Override
-	public boolean estDifferent(ResultatErreur res) {
-		return true;
 	}
 	
 }

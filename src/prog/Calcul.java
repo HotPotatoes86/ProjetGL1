@@ -63,9 +63,9 @@ public class Calcul {
 	 *            Cellule a calculer
 	 * @param conteneur
 	 *            Conteneur contenant la cellule a calculer
-	 * @throws Exception
+	 * @throws ParsingException
 	 */
-	public void calcul() throws Exception {
+	public void calcul() throws ParsingException {
 		boolean possible = formuleCorrect(formule, conteneur);
 		if (possible) {
 			extractRef();
@@ -97,16 +97,16 @@ public class Calcul {
 	 *            Conteneur contenant les cellules
 	 */
 	public void extractRef() {
-		refs = ParserExtract.extractRef(formule, conteneur);
+		refs = ParseurRef.extractRef(formule, conteneur);
 	}
 
 	/**
 	 * Creer l'arbre contenant les operations a effectueur, communique avec la
 	 * grammaire
 	 * 
-	 * @throws Exception
+	 * @throws ParsingException
 	 */
-	private Arbre creerArbre() throws Exception {
+	private Arbre creerArbre() throws ParsingException {
 		/*Parser yyparser;
 		yyparser = new Parser(new StringReader(formule));
 		if (yyparser.yyparse()==0) {

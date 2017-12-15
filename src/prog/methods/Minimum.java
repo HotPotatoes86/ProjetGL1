@@ -7,7 +7,7 @@ import prog.results.Resultat;
 import prog.results.ResultatDouble;
 import prog.results.ResultatErreur;
 
-public class Minimum implements Fonction{
+public class Minimum extends Fonction{
 	
 	List<ResultatDouble> args = new ArrayList<>();
 

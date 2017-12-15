@@ -3,7 +3,7 @@ package prog.methods;
 import prog.results.Resultat;
 import prog.results.ResultatDouble;
 
-public class Tangente implements Fonction{
+public class Tangente extends Fonction{
 	
 	ResultatDouble res;
 

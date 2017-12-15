@@ -14,8 +14,8 @@ public abstract class Arbre {
 	
 	/**
 	 * Renvoie le resultat du noeud actuel en faisant les operations de ses fils
-	 * @throws Exception 
+	 * @throws ParsingException 
 	 */
-	public abstract Resultat getResultat() throws Exception;
+	public abstract Resultat getResultat() throws ParsingException;
 
 }

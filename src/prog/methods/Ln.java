@@ -3,7 +3,7 @@ package prog.methods;
 import prog.results.Resultat;
 import prog.results.ResultatDouble;
 
-public class Ln implements Fonction{
+public class Ln extends Fonction{
 
 	ResultatDouble res;
 	

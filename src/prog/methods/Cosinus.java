@@ -3,9 +3,9 @@ package prog.methods;
 import prog.results.Resultat;
 import prog.results.ResultatDouble;
 
-public class Cosinus implements Fonction{
+public class Cosinus extends Fonction{
 	
-	ResultatDouble res;
+	Resultat res;
 
 	public Cosinus(ResultatDouble arg) {
 		res = new ResultatDouble(Math.cos(arg.getValue()));

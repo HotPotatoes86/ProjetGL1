@@ -12,432 +12,80 @@ public abstract class Resultat {
 	 */
 	public abstract String getStringResultat();
 	
-	
-	//------------------------------------------Addition-------------------------------------------//
 	/**
-	 * Methode d'addition avec un resultat double
+	 * Methode d'addition avec un resultat
 	 * @param res le resultat double a ajouter
 	 * @return le resultat de l'operation
 	 */
-	public abstract Resultat addition(ResultatDouble res);
+	public abstract Resultat addition(Resultat res);
 	
-	/**
-	 * Methode d'addition avec un resultat integer
-	 * @param res le resultat integer a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat addition(ResultatInteger res);
-	
-	/**
-	 * Methode d'addition avec un resultat boolean
-	 * @param res le resultat boolean a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat addition(ResultatBoolean res);
-	
-	/**
-	 * Methode d'addition avec un resultat string
-	 * @param res le resultat string a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat addition(ResultatString res);
-	
-	/**
-	 * Methode d'addition avec un resultat erreur
-	 * @param res le resultat erreur a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public Resultat addition(ResultatErreur res) {
-		return res;
-	}
-	
-	
-	
-	//-------------------------------------------Soustraction-------------------------------------------//
 	/**
 	 * Methode soustraction avec un resultat double
 	 * @param res le resultat double a ajouter
 	 * @return le resultat de l'operation
 	 */
-	public abstract Resultat soustraction(ResultatDouble res);
+	public abstract Resultat soustraction(Resultat res);
 	
-	/**
-	 * Methode soustraction avec un resultat integer
-	 * @param res le resultat integer a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat soustraction(ResultatInteger res);
-	
-	/**
-	 * Methode soustraction avec un resultat boolean
-	 * @param res le resultat boolean a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat soustraction(ResultatBoolean res);
-	
-	/**
-	 * Methode soustraction avec un resultat string
-	 * @param res le resultat string a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat soustraction(ResultatString res);
-	
-	/**
-	 * Methode soustraction avec un resultat erreur
-	 * @param res le resultat erreur a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public Resultat soustraction(ResultatErreur res) {
-		return res;
-	}
-	
-	
-	
-	//-------------------------------------------Multiplication-------------------------------------------//
 	/**
 	 * Methode multiplication avec un resultat double
 	 * @param res le resultat double a ajouter
 	 * @return le resultat de l'operation
 	 */
-	public abstract Resultat multiplication(ResultatDouble res);
+	public abstract Resultat multiplication(Resultat res);
 	
-	/**
-	 * Methode multiplication avec un resultat integer
-	 * @param res le resultat integer a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat multiplication(ResultatInteger res);
-	
-	/**
-	 * Methode multiplication avec un resultat boolean
-	 * @param res le resultat boolean a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat multiplication(ResultatBoolean res);
-	
-	/**
-	 * Methode multiplication avec un resultat string
-	 * @param res le resultat string a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat multiplication(ResultatString res);
-	
-	/**
-	 * Methode multiplication avec un resultat erreur
-	 * @param res le resultat erreur a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public Resultat multiplication(ResultatErreur res) {
-		return res;
-	}
-	
-	
-	
-	//-------------------------------------------Division-------------------------------------------//
 	/**
 	 * Methode division avec un resultat double
 	 * @param res le resultat double a ajouter
 	 * @return le resultat de l'operation
 	 */
-	public abstract Resultat division(ResultatDouble res);
+	public abstract Resultat division(Resultat res);
 	
-	/**
-	 * Methode division avec un resultat integer
-	 * @param res le resultat integer a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat division(ResultatInteger res);
-	
-	/**
-	 * Methode division avec un resultat boolean
-	 * @param res le resultat boolean a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat division(ResultatBoolean res);
-	
-	/**
-	 * Methode division avec un resultat string
-	 * @param res le resultat string a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat division(ResultatString res);
-	
-	/**
-	 * Methode division avec un resultat erreur
-	 * @param res le resultat erreur a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public Resultat division(ResultatErreur res) {
-		return res;
-	}
-	
-	
-	
-	//-------------------------------------------Modulo-------------------------------------------//
 	/**
 	 * Methode modulo avec un resultat double
 	 * @param res le resultat double a ajouter
 	 * @return le resultat de l'operation
 	 */
-	public abstract Resultat modulo(ResultatDouble res);
-	
-	/**
-	 * Methode modulo avec un resultat integer
-	 * @param res le resultat integer a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat modulo(ResultatInteger res);
-	
-	/**
-	 * Methode modulo avec un resultat boolean
-	 * @param res le resultat boolean a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat modulo(ResultatBoolean res);
-	
-	/**
-	 * Methode modulo avec un resultat string
-	 * @param res le resultat string a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public abstract Resultat modulo(ResultatString res);
-	
-	/**
-	 * Methode modulo avec un resultat erreur
-	 * @param res le resultat erreur a ajouter
-	 * @return le resultat de l'operation
-	 */
-	public Resultat modulo(ResultatErreur res) {
-		return res;
-	}
-	
-	
-	
-	//-------------------------------------------Inferieur-------------------------------------------//
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur au resultat en parametre
-	 */
-	public abstract boolean estInferieur(ResultatDouble res);
+	public abstract Resultat modulo(Resultat res);
 	
 	/**
 	 * Renvoie vrai si le resultat actuel est inferieur au resultat en parametre
 	 * @param res resultat a comparer au resultat actuel
 	 * @return vrai si le resultat actuel est inferieur au resultat en parametre
 	 */
-	public abstract boolean estInferieur(ResultatInteger res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur au resultat en parametre
-	 */
-	public abstract boolean estInferieur(ResultatBoolean res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur au resultat en parametre
-	 */
-	public abstract boolean estInferieur(ResultatString res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur au resultat en parametre
-	 */
-	public abstract boolean estInferieur(ResultatErreur res);
-	
-	
-	
-	//-------------------------------------------Inferieur Egal-------------------------------------------//
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estInferieurOuEgal(ResultatDouble res);
+	public abstract boolean estInferieur(Resultat res);
 	
 	/**
 	 * Renvoie vrai si le resultat actuel est inferieur ou egal au resultat en parametre
 	 * @param res resultat a comparer au resultat actuel
 	 * @return vrai si le resultat actuel est inferieur ou egal au resultat en parametre
 	 */
-	public abstract boolean estInferieurOuEgal(ResultatInteger res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estInferieurOuEgal(ResultatBoolean res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estInferieurOuEgal(ResultatString res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est inferieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estInferieurOuEgal(ResultatErreur res);
-	
-	
-	
-	//-------------------------------------------Superieur-------------------------------------------//
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieur(ResultatDouble res);
+	public abstract boolean estInferieurOuEgal(Resultat res);
 	
 	/**
 	 * Renvoie vrai si le resultat actuel est superieur au resultat en parametre
 	 * @param res resultat a comparer au resultat actuel
 	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
 	 */
-	public abstract boolean estSuperieur(ResultatInteger res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieur(ResultatBoolean res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieur(ResultatString res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieur(ResultatErreur res);
-	
-	
-	
-	//-------------------------------------------Superieur Egal-------------------------------------------//
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieurOuEgal(ResultatDouble res);
+	public abstract boolean estSuperieur(Resultat res);
 	
 	/**
 	 * Renvoie vrai si le resultat actuel est superieur ou egal au resultat en parametre
 	 * @param res resultat a comparer au resultat actuel
 	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
 	 */
-	public abstract boolean estSuperieurOuEgal(ResultatInteger res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieurOuEgal(ResultatBoolean res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieurOuEgal(ResultatString res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est superieur ou egal au resultat en parametre
-	 */
-	public abstract boolean estSuperieurOuEgal(ResultatErreur res);
-	
-	
-	
-	//-------------------------------------------Egal-------------------------------------------//
-	/**
-	 * Renvoie vrai si le resultat actuel est egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est  egal au resultat en parametre
-	 */
-	public abstract boolean estEgal(ResultatDouble res);
+	public abstract boolean estSuperieurOuEgal(Resultat res);
 	
 	/**
 	 * Renvoie vrai si le resultat actuel est egal au resultat en parametre
 	 * @param res resultat a comparer au resultat actuel
 	 * @return vrai si le resultat actuel est  egal au resultat en parametre
 	 */
-	public abstract boolean estEgal(ResultatInteger res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est  egal au resultat en parametre
-	 */
-	public abstract boolean estEgal(ResultatString res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est  egal au resultat en parametre
-	 */
-	public abstract boolean estEgal(ResultatBoolean res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est egal au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est  egal au resultat en parametre
-	 */
-	public abstract boolean estEgal(ResultatErreur res);
-	
-	
-	
-	//-------------------------------------------Different-------------------------------------------//
-	/**
-	 * Renvoie vrai si le resultat actuel est different au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est different au resultat en parametre
-	 */
-	public abstract boolean estDifferent(ResultatDouble res);
+	public abstract boolean estEgal(Resultat res);
 	
 	/**
 	 * Renvoie vrai si le resultat actuel est different au resultat en parametre
 	 * @param res resultat a comparer au resultat actuel
 	 * @return vrai si le resultat actuel est different au resultat en parametre
 	 */
-	public abstract boolean estDifferent(ResultatInteger res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est different au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est different au resultat en parametre
-	 */
-	public abstract boolean estDifferent(ResultatString res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est different au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est different au resultat en parametre
-	 */
-	public abstract boolean estDifferent(ResultatBoolean res);
-	
-	/**
-	 * Renvoie vrai si le resultat actuel est different au resultat en parametre
-	 * @param res resultat a comparer au resultat actuel
-	 * @return vrai si le resultat actuel est different au resultat en parametre
-	 */
-	public abstract boolean estDifferent(ResultatErreur res);
-	
-
+	public abstract boolean estDifferent(Resultat res);
 }

@@ -3,7 +3,7 @@ package prog.methods;
 import prog.results.Resultat;
 import prog.results.ResultatDouble;
 
-public class Sqrt implements Fonction{
+public class Sqrt extends Fonction{
 	
 	ResultatDouble res;
 
