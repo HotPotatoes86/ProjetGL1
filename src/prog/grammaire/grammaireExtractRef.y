@@ -12,33 +12,31 @@
 %%
 
 axiome : importe
-	| formuleReference
-	;
+	   | formuleReference
+	   ;
 
 formuleReference : REF formuleReference 	{String reference = $1; System.out.println(reference);
-				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				conteneur.addCellule(cellule);}
-	| FORMULE formuleReference
-	| REF 			{String reference = $1; System.out.println(reference);
-				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				conteneur.addCellule(cellule);}
-	| FORMULE
-	;
+											Cellule cellule = conteneur.getCellule(reference.substring(1));
+											conteneur.addCellule(cellule);}
+				 | FORMULE formuleReference
+				 | REF 			{String reference = $1; System.out.println(reference);
+								Cellule cellule = conteneur.getCellule(reference.substring(1));
+								conteneur.addCellule(cellule);}
+				 | FORMULE
+				 ;
 
 importe : NAME PIPE FORMULE 	{cellName = $1; 
-					System.out.println("cellName : " + cellName);
-					cellFormule = $3; 
-					System.out.println("cellFormule : " + cellFormule);}
+								cellFormule = $3; 
 
 %%
 
 private YyExtractRef lexer;
 
 private int yylex () {
-    	int yyl_return = -1;
-    	try {
-      		yylval = new ParserVal(0);
-      		yyl_return = lexer.yylex();
+    int yyl_return = -1;
+    try {
+      	yylval = new ParserVal(0);
+      	yyl_return = lexer.yylex();
 	}
 	catch (IOException e) {
 		System.err.println("IO error :"+e);
@@ -81,6 +79,3 @@ public Cellule extractCelluleFromLine(String line) throws IOException, Exception
 	yyparser.yyparse();
 	return new Cellule(cellName, cellFormule);
 }
-
-
-/*compilation : byaccj -J grammaire.y*/

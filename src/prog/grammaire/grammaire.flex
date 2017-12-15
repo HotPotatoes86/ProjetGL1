@@ -16,7 +16,7 @@ Letter = [a-zA-Z]
 
 %%
 
-"@"{Letter}+{Digit}+				{yyparser.yylval = new ParserVal(yytext()); /*TODO changer la reconnaissance de la reference*/ 
+"@"{Letter}+{Digit}+	{yyparser.yylval = new ParserVal(yytext()); /*TODO changer la reconnaissance de la reference*/ 
 							return Parser.REF;}
 "+"						{return Parser.PLUS;}
 "-"						{return Parser.MINUS;}
@@ -59,7 +59,7 @@ Letter = [a-zA-Z]
 {Digit}+("."{Digit}+)?		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
 							return Parser.NUM;}
 
-{Letter}+					{yyparser.yylval = new ParserVal(yytext()); 
-							return Parser.NAME;}
+{Letter}*					{yyparser.yylval = new ParserVal(yytext()); 
+							return Parser.STRING;}
 
 [^]|\n|\t  				{}/* ignore all whitespace */

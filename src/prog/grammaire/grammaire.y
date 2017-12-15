@@ -8,14 +8,15 @@
 %}
 
 
-%token NAME NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
+%token STRING NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
 
 %type<dval> NUM
 %type<Resultat> operation oneArgument
 %type<funcArgs> manyArgument listArgument
 %type<boolean> condition
+%type<sval> STRING
 
-%type<Fonctions> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
+%type<Fonctions> SIN COS TAN MINIMUM MAXIMUM MOY SQRT STRING method
 
 %left PLUS MINUS	
 %left TIMES DIVIDE
@@ -25,14 +26,13 @@
 
 %%
 
-/*S : cellule S 	{}
-  | 		{}
-  ;
-*/  
-/*cellule : NAME PIPE operation {}*/
-
 axiome : operation		{System.out.println("resultat : " + $1);}
-	| IF condition THEN operation ELSE operation { if ($2) {System.out.println($4);}else{System.out.println($6)};}
+	| IF condition THEN operation ELSE operation { 
+										if($2){
+											System.out.println($4);
+										}else{
+											System.out.println($6)
+										};}
 	;
 
 operation : operation PLUS operation	{$$ = $1.addition($3);}
@@ -43,6 +43,8 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 											$$ = func.getResultat();}
 	| NUM								{$$ = new ResultatDouble($1);}
 	/*| PAROUV condition PARFER			{$$ = new ResultatBoolean($2);}*/
+	| BOOLEAN 							{$$ = new ResultatBoolean($1);}
+	| QUOTE STRING QUOTE				{$$ = new ResultatString($2);}
 	| PAROUV operation PARFER			{$$ = $2;}
 	;
 
@@ -58,7 +60,7 @@ method : SIN oneArgument		{ func = new Sinus($2);}
 oneArgument : PAROUV operation PARFER		{$$ = $2;}
 	;
 
-manyArgument : PAROUV listArgument PARFER {$$ = $2;}
+manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
 	;
 
 listArgument : operation			{funcArgs.add($1);
@@ -117,6 +119,3 @@ public static void main(String args[]) throws IOException {
 
 	yyparser.yyparse();
 }
-
-
-/*compilation : byaccj -J grammaire.y*/
