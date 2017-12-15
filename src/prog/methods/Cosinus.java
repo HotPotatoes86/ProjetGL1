@@ -7,9 +7,9 @@ public class Cosinus extends Fonction{
 	Resultat res;
 
 	public Cosinus(Resultat rval) {
-		if (res instanceof ResultatDouble) {
+		if (rval instanceof ResultatDouble) {
 			res = new ResultatDouble(Math.cos(((ResultatDouble)rval).getValue()));
-		}else if (res instanceof ResultatInteger) {
+		}else if (rval instanceof ResultatInteger) {
 			res = new ResultatDouble(Math.cos(((ResultatInteger)rval).getValue()));
 		}else {
 			res = new ResultatErreur();

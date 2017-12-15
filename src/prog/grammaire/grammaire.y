@@ -41,6 +41,7 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| operation MINUS operation			{$$ = $1.soustraction($3);}
 	| operation DIVIDE operation		{$$ = $1.division($3);}
 	| operation TIMES operation			{$$ = $1.multiplication($3);}
+	| operation MOD operation			{$$ = $1.modulo($3);}
 	| method							{$$ = $1.getResultat();
 											funcArgs.clear();}
 	| DOUBLE							{$$ = new ResultatDouble($1);}

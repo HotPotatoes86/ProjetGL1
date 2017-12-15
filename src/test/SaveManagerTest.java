@@ -7,7 +7,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.DriverManager;
 
 import org.junit.Test;
 
@@ -32,23 +31,23 @@ public class SaveManagerTest {
 		Method m = s.getClass().getDeclaredMethod("ConnecterBase", par);
 		m.setAccessible(true);
 		assertNull(
-				"probléme jdbc",
+				"probleme jdbc",
 				m.invoke(s, new Object[] { "jdbc://localhost/gastronomie",
 						"root", "root" }));
 
-		assertNull("probléme nom utilisateur", m.invoke(s, new Object[] {
+		assertNull("probleme nom utilisateur", m.invoke(s, new Object[] {
 				"jdbc:mysql://localhost/gastronomie", "edzed", "root" }));
 
-		assertNull("probléme url base",
+		assertNull("probleme url base",
 				m.invoke(s, new Object[] { "jdbc:mysql:", "root", "root" }));
 
 		assertNull(
-				"probléme mot de passe",
+				"probleme mot de passe",
 				m.invoke(s, new Object[] {
 						"jdbc:mysql://localhost/gastronomie", "root", "edze" }));
 
 		assertNotNull(
-				"Connection établie",
+				"Connection etablie",
 				m.invoke(s, new Object[] {
 						"jdbc:mysql://localhost/gastronomie", "root", "root" }));
 

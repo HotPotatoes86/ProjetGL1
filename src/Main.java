@@ -5,7 +5,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Conteneur cont = new Conteneur();
-		Cellule c = new Cellule("cel","8*2");
+		Cellule c = new Cellule("cel","(1+3+1)*(2+2)");
 		try {
 			System.out.println("Main");
 			cont.editerCellule(c.getName(),c.getFormule());
