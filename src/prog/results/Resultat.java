@@ -6,13 +6,14 @@ package prog.results;
  */
 public abstract class Resultat {
 
-	//------------------------------------------Addition-------------------------------------------//
 	/**
 	 * Retourne la valeur du resultat sous forme de string
 	 * @return la valeur du resultat sous forme de string
 	 */
 	public abstract String getStringResultat();
 	
+	
+	//------------------------------------------Addition-------------------------------------------//
 	/**
 	 * Methode d'addition avec un resultat double
 	 * @param res le resultat double a ajouter

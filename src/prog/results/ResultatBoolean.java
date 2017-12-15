@@ -277,7 +277,7 @@ public class ResultatBoolean extends Resultat {
 	}
 
 	
-	//------------------------------------------Differencie-------------------------------------------//
+	//------------------------------------------Different-------------------------------------------//
 	@Override
 	public boolean estDifferent(ResultatDouble res) {
 		return true;
