@@ -5,6 +5,7 @@
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>grammaire.flex</tt>
  */
+package prog.grammaire;
 class Yylex {
 
   /** This character denotes the end of file */

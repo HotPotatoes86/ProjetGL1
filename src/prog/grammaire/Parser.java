@@ -19,12 +19,11 @@
 //#line 1 "grammaire.y"
 
   package prog.grammaire;
-  import prog.methods.*;
-  import prog.results.*;
+  import prog.methods;
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
-//#line 25 "Parser.java"
+//#line 24 "Parser.java"
 
 
 
@@ -355,7 +354,7 @@ final static String yyrule[] = {
 "listArgument : operation COMMA listArgument",
 };
 
-//#line 64 "grammaire.y"
+//#line 63 "grammaire.y"
 
 
 private Yylex lexer;
@@ -397,7 +396,7 @@ public static void main(String args[]) throws IOException {
 
 
 /*compilation : byaccj -J grammaire.y*/
-//#line 329 "Parser.java"
+//#line 328 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -552,80 +551,80 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 1:
-//#line 29 "grammaire.y"
+//#line 28 "grammaire.y"
 {System.out.println("resultat : " + val_peek(0).dval);}
 break;
 case 3:
-//#line 33 "grammaire.y"
+//#line 32 "grammaire.y"
 {yyval.dval = val_peek(2).dval + val_peek(0).dval;}
 break;
 case 4:
-//#line 34 "grammaire.y"
+//#line 33 "grammaire.y"
 {yyval.dval = val_peek(2).dval - val_peek(0).dval;}
 break;
 case 5:
-//#line 35 "grammaire.y"
+//#line 34 "grammaire.y"
 {yyval.dval = val_peek(2).dval / val_peek(0).dval;}
 break;
 case 6:
-//#line 36 "grammaire.y"
+//#line 35 "grammaire.y"
 {yyval.dval = val_peek(2).dval * val_peek(0).dval;}
 break;
 case 7:
-//#line 37 "grammaire.y"
+//#line 36 "grammaire.y"
 {func.setArgs(funcArgs);
 									funcArgs.clear();
 									yyval.dval = func.getResultat();}
 break;
 case 8:
-//#line 40 "grammaire.y"
+//#line 39 "grammaire.y"
 {yyval.dval = val_peek(0).dval;}
 break;
 case 9:
-//#line 41 "grammaire.y"
+//#line 40 "grammaire.y"
 {yyval.dval = val_peek(1).dval;}
 break;
 case 10:
-//#line 44 "grammaire.y"
+//#line 43 "grammaire.y"
 { func = new Operation("sinus", new Sinus());}
 break;
 case 11:
-//#line 45 "grammaire.y"
+//#line 44 "grammaire.y"
 { func = new Operation("cosinus", new Cosinus());}
 break;
 case 12:
-//#line 46 "grammaire.y"
+//#line 45 "grammaire.y"
 { func = new Operation("tangente", new Tangente());}
 break;
 case 13:
-//#line 47 "grammaire.y"
+//#line 46 "grammaire.y"
 { func = new Operation("minimum", new Minimum());}
 break;
 case 14:
-//#line 48 "grammaire.y"
+//#line 47 "grammaire.y"
 { func = new Operation("maximum", new Maximum());}
 break;
 case 15:
-//#line 49 "grammaire.y"
+//#line 48 "grammaire.y"
 { func = new Operation("moyenne", new Moyenne());}
 break;
 case 16:
-//#line 50 "grammaire.y"
+//#line 49 "grammaire.y"
 { func = new Operation("sqrt", new Sqrt());}
 break;
 case 17:
-//#line 53 "grammaire.y"
+//#line 52 "grammaire.y"
 {funcArgs.add(val_peek(1).dval);}
 break;
 case 19:
-//#line 59 "grammaire.y"
+//#line 58 "grammaire.y"
 {funcArgs.add(val_peek(0).dval);}
 break;
 case 20:
-//#line 60 "grammaire.y"
+//#line 59 "grammaire.y"
 {funcArgs.add(val_peek(2).dval);}
 break;
-//#line 552 "Parser.java"
+//#line 551 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

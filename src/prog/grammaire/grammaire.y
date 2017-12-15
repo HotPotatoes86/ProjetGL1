@@ -1,6 +1,6 @@
 %{
   package prog.grammaire;
-  import prog..*;
+  import prog.methods;
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
@@ -33,23 +33,23 @@ operation : operation PLUS operation	{$$ = $1 + $3;}
 	| operation MINUS operation 	{$$ = $1 - $3;}
 	| operation DIVIDE operation 	{$$ = $1 / $3;}
 	| operation TIMES operation 	{$$ = $1 * $3;}
-	| method						{func.setArgs(funcArgs);
-									funcArgs.clear();
+	| method						{funcArgs.clear();
 									$$ = func.getResultat();}
-	| NUM	 			{$$ = $1;}
+	| NUM	 			{$$ = new ResultatDouble($1);}
 	| PAROUV operation PARFER 	{$$ = $2;}
 	;
 
-method : SIN oneArgument		{ func = new Operation("sinus", new Sinus());}
-	| COS oneArgument				{ func = new Operation("cosinus", new Cosinus());}
-	| TAN oneArgument			{ func = new Operation("tangente", new Tangente());}
-	| MINIMUM manyArgument		{ func = new Operation("minimum", new Minimum());}
-	| MAXIMUM manyArgument		{ func = new Operation("maximum", new Maximum());}
-	| MOY manyArgument			{ func = new Operation("moyenne", new Moyenne());}
-	| SQRT oneArgument			{ func = new Operation("sqrt", new Sqrt());}
+method : SIN oneArgument		{ func = new Sinus($2);}
+	| COS oneArgument				{ func = new Cosinus($2);}
+	| TAN oneArgument			{ func = new Tangente($2);}
+	| MINIMUM manyArgument		{ func = new Minimum($2);}
+	| MAXIMUM manyArgument		{ func = new Maximum($2);}
+	| MOY manyArgument			{ func = new Moyenne($2);}
+	| SQRT oneArgument			{ func = new Sqrt($2);}
 	;
 
-oneArgument : PAROUV operation PARFER		{funcArgs.add($2);}
+oneArgument : PAROUV operation PARFER		{funcArgs.add($2);
+												$$ = funcArgs;}
 	;
 
 manyArgument : PAROUV listArgument PARFER
