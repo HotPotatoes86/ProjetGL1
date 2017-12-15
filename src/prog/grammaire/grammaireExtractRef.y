@@ -1,68 +1,26 @@
 %{
-  package prog;
-  import prog.methods.*;
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
 %}
 
+%token REF
 
-%token NAME NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
-
-%type<dval> operation NUM oneArgument
 %type<sval> REF
-%type<Operation> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
-
-%left PLUS MINUS	
-%left TIMES DIVIDE
-%right POW
 
 
 %%
-
-/*S : cellule S 	{}
-  | 		{}
-  ;
-*/  
-/*cellule : NAME PIPE operation {}*/
-
-axiome : axiome operation		{}
-	|
+axiome : REF axiome 	{String reference = $1;
+			Cellule cellule = conteneur.getCellule(reference.substring(1));
+			conteneur.addCellule(cellule);}
+	| REF 		{String reference = $1;
+			Cellule cellule = conteneur.getCellule(reference.substring(1));
+			conteneur.addCellule(cellule);}
 	;
-
-operation : operation PLUS operation	{}
-	| operation MINUS operation			{}
-	| operation DIVIDE operation		{}
-	| operation TIMES operation			{}
-	| method							{}
-	| NUM								{}
-	| REF								{System.out.println($1);}
-	| PAROUV operation PARFER			{}
-	;
-
-method : SIN oneArgument				{}
-	| COS oneArgument					{}
-	| TAN oneArgument					{}
-	| MINIMUM manyArgument				{}
-	| MAXIMUM manyArgument				{}
-	| MOY manyArgument					{}
-	| SQRT oneArgument					{}
-	;
-
-oneArgument : PAROUV operation PARFER	{}
-	;
-
-manyArgument : PAROUV listArgument PARFER
-	;
-
-listArgument : operation				{}
-	| operation COMMA listArgument		{}
-	;
-	
 
 %%
 
-private Yylex lexer;
+private YyExtractRef lexer;
 
 private int yylex () {
     	int yyl_return = -1;
@@ -82,21 +40,22 @@ public void yyerror (String error) {
 }
 
 
-public Parser(Reader r) {
-	lexer = new Yylex(r, this);
+public ParserExtract(Reader r) {
+	lexer = new YyExtractRef(r, this);
 }
 
+static List<Cellule> refs = new ArrayList<>();
 
-static boolean interactive;
-static Operation func;
-static List<Double> funcArgs = new ArrayList<>();
+static Conteneur conteneur;
 
-public static void main(String args[]) throws IOException {
-
-	Parser yyparser;
-	yyparser = new Parser(new InputStreamReader(System.in));
+public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
+	this.conteneur = conteneur;
+	ParserExtract yyparser;
+	yyparser = new ParserExtract(new StringReader(formule));
 
 	yyparser.yyparse();
+	
+	return refs;
 }
 
 

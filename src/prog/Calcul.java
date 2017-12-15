@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import prog.results.Resultat;
-
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
  * calculer un resultat
@@ -97,37 +95,7 @@ public class Calcul {
 	 *            Conteneur contenant les cellules
 	 */
 	public void extractRef() {
-		List<Character> stopChar = Arrays.asList('+', '-', '*', ')', ',', '/'); // caractere possible apres une reference
-		boolean found = false; // quand on trouve un $, cela signifie qu'il y a une reference d'une cellule
-		String name = "", newFormule="";
-		for (int i = 0; i < formule.length(); i++) {
-			if (!found && formule.charAt(i) == '$') {
-				name = "";
-				found = true;
-				// on s'arrete quand on est au derniere caractere ou qu'on a trouve un caractere de fin
-			} else if (found && stopChar.contains(formule.charAt(i))) {
-				found = false;
-				Cellule c = conteneur.getCellule(name);
-				if (c!=null) {
-					newFormule += c.getResultat().getStringResultat();
-					newFormule += formule.charAt(i);
-					refs.add(c);
-				}
-			} else if (found && i == (formule.length() - 1)){
-				found = false;
-				name += formule.charAt(i);
-				Cellule c = conteneur.getCellule(name);
-				if (c!=null) {
-					newFormule += c.getResultat().getStringResultat();
-					refs.add(c);
-				}
-			} else if (found) {
-				name += formule.charAt(i);
-			}else{
-				newFormule += formule.charAt(i);
-			}
-		}
-		formule = newFormule;
+		refs = ParserExtract.extractRef(formule, conteneur);
 	}
 
 	/**
@@ -137,14 +105,13 @@ public class Calcul {
 	 * @throws Exception
 	 */
 	private Arbre creerArbre() throws Exception {
-		Parser yyparser;
+		/*Parser yyparser;
 		yyparser = new Parser(new StringReader(formule));
 		if (yyparser.yyparse()==0) {
 			return yyparser.getResultat();
-			//TODO Ajouter methode getResultat qui retourne l'arbre dans bison
 		}else {
 			return null;
-		}
+		}*/
 	}
 
 }
