@@ -94,146 +94,122 @@ public class ResultatBoolean extends Resultat {
 
 	@Override
 	public boolean estInferieur(ResultatDouble res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estInferieur(ResultatBoolean res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estInferieur(ResultatString res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estInferieur(ResultatErreur res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estInferieurOuEgal(ResultatDouble res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estInferieurOuEgal(ResultatBoolean res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estInferieurOuEgal(ResultatString res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estInferieurOuEgal(ResultatErreur res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieur(ResultatDouble res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieur(ResultatBoolean res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieur(ResultatString res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieur(ResultatErreur res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieurOuEgal(ResultatDouble res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieurOuEgal(ResultatBoolean res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieurOuEgal(ResultatString res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estSuperieurOuEgal(ResultatErreur res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estEgal(ResultatDouble res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estEgal(ResultatString res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estEgal(ResultatBoolean res) {
-		// TODO Auto-generated method stub
-		return false;
+		return (value==res.getValue());
 	}
 
 	@Override
 	public boolean estEgal(ResultatErreur res) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean estDifferent(ResultatDouble res) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean estDifferent(ResultatString res) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean estDifferent(ResultatBoolean res) {
-		// TODO Auto-generated method stub
-		return false;
+		return (value!=res.getValue());
 	}
 
 	@Override
 	public boolean estDifferent(ResultatErreur res) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 }
