@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prog.results.Resultat;
-import prog.results.ResultatDouble;
 import prog.results.ResultatErreur;
+import prog.results.ResultatInteger;
 
 public class Moyenne extends Fonction{
 	
-	List<ResultatDouble> args = new ArrayList<>();
+	List<Resultat> args = new ArrayList<>();
 
 	Resultat res;
 	
-	public Moyenne(List<ResultatDouble> list) {
-		args = list;
-		if (list.size()<=0) {
+	public Moyenne(List<Resultat> lval) {
+		args = lval;
+		if (lval.size()<=0) {
 			res = new ResultatErreur();
 		}else {
-			double tmp = list.get(0).getValue(); 
-			for (int i=1; i<list.size(); i++) {
-				tmp += list.get(i).getValue();
+			Resultat tmp = lval.get(0); 
+			for (int i=1; i<lval.size(); i++) {
+				tmp = tmp.addition(lval.get(i));
 			}
-			tmp /= list.size();
-			res = new ResultatDouble(tmp);
+			tmp = tmp.division(new ResultatInteger(lval.size()));
+			res = tmp;
 		}
 	}
 	

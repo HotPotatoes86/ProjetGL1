@@ -1,5 +1,6 @@
 package prog;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -10,8 +11,10 @@ public final class Parseur {
 	/**
 	 * Extrait les données du fichier nlb et crée une cellule correspondante
 	 * @param line Ligne du fichier texte qui est interprété
+	 * @throws Exception 
+	 * @throws IOException 
 	 */
-	public static Cellule extractLine(String line) {
+	public static Cellule extractLine(String line) throws IOException, Exception {
 		return ParserExtract.extractCelluleFromLine(line);
 	}
 

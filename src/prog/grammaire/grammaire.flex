@@ -53,13 +53,16 @@ Letter = [a-zA-Z]
 "min"					{return Parser.MINIMUM;}
 "max"					{return Parser.MAXIMUM;}
 
-"true"|"false"				{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
+"true"|"false"			{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;}
 	
-{Digit}+("."{Digit}+)?		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
-							return Parser.NUM;}
+{Digit}+				{yyparser.yylval = new ParserVal(Integer.parseInt(yytext())); 
+							return Parser.INT;}
 
-{Letter}*					{yyparser.yylval = new ParserVal(yytext()); 
+{Digit}+"."{Digit}+		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
+							return Parser.DOUBLE;}
+
+{Letter}*				{yyparser.yylval = new ParserVal(yytext()); 
 							return Parser.STRING;}
 
 [^]|\n|\t  				{}/* ignore all whitespace */

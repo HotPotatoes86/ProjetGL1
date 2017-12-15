@@ -11,7 +11,7 @@ public class CalculTest {
 		Conteneur cont = new Conteneur();
 		Cellule c = new Cellule("cel","1+2");
 		try {
-			cont.addCellule(c);
+			cont.editerCellule(c.getName(),c.getFormule());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -23,7 +23,7 @@ public class CalculTest {
 		Conteneur cont = new Conteneur();
 		Cellule c = new Cellule("cel","sqrt(25)");
 		try {
-			cont.addCellule(c);
+			cont.editerCellule(c.getName(),c.getFormule());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,7 +35,7 @@ public class CalculTest {
 		Conteneur cont = new Conteneur();
 		Cellule c = new Cellule("cel","min(1,2,3)");
 		try {
-			cont.addCellule(c);
+			cont.editerCellule(c.getName(),c.getFormule());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,8 +48,8 @@ public class CalculTest {
 		Cellule c1 = new Cellule("cel1","1+1");
 		Cellule c2 = new Cellule("cel2","$cel1+2");
 		try {
-			cont.addCellule(c1);
-			cont.addCellule(c2);
+			cont.editerCellule(c1.getName(),c1.getFormule());
+			cont.editerCellule(c2.getName(),c2.getFormule());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

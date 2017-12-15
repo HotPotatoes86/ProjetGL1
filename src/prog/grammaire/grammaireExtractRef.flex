@@ -30,7 +30,7 @@ Letter = [a-zA-Z]
 {Letter}({Letter}|{Digit}|"_")*	{yyparser.yylval = new ParserVal(yytext()); 
 									return ParserExtract.NAME;}
 												
-[^]|\n|\t  						/* ignore all whitespace */
+[^]|\n|\t  						{}/* ignore all whitespace */
 
 
 

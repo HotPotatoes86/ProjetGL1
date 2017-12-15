@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prog.results.Resultat;
-import prog.results.ResultatDouble;
 import prog.results.ResultatErreur;
 
 public class Maximum extends Fonction{
 	
-	List<ResultatDouble> args = new ArrayList<>();
+	List<Resultat> args = new ArrayList<>();
 
 	Resultat res;
 	
-	public Maximum(List<ResultatDouble> list) {
-		args = list;
-		if (list.size()<=0) {
+	public Maximum(List<Resultat> lval) {
+		args = lval;
+		if (lval.size()<=0) {
 			res = new ResultatErreur();
 		}else {
-			double tmp = list.get(0).getValue(); 
-			for (int i=1; i<list.size(); i++) {
-				tmp = Math.max(tmp, list.get(i).getValue());
+			Resultat tmp = lval.get(0); 
+			for (int i=1; i<lval.size(); i++) {
+				if (tmp.estInferieur(lval.get(i))) tmp = lval.get(i);
 			}
-			res = new ResultatDouble(tmp);
+			res = tmp;
 		}
 	}
 	

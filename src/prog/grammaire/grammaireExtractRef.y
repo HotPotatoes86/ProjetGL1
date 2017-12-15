@@ -11,14 +11,14 @@
 
 %%
 
-axiome : importe
-	   | formuleReference
+axiome : importe		  {}
+	   | formuleReference {}
 	   ;
 
 formuleReference : REF formuleReference 	{String reference = $1; System.out.println(reference);
 											Cellule cellule = conteneur.getCellule(reference.substring(1));
 											conteneur.addCellule(cellule);}
-				 | FORMULE formuleReference
+				 | FORMULE formuleReference	{}
 				 | REF 			{String reference = $1; System.out.println(reference);
 								Cellule cellule = conteneur.getCellule(reference.substring(1));
 								conteneur.addCellule(cellule);}
@@ -54,12 +54,12 @@ public ParserExtract(Reader r) {
 	lexer = new YyExtractRef(r, this);
 }
 
-static List<Cellule> refs = new ArrayList<>();
+private static List<Cellule> refs = new ArrayList<>();
 
-static Conteneur conteneur = new Conteneur();
+private static Conteneur conteneur = new Conteneur();
 
-static String cellName;
-static String cellFormule;
+private static String cellName;
+private static String cellFormule;
 
 
 public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {

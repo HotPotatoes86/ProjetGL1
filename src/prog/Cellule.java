@@ -1,5 +1,6 @@
 package prog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +49,10 @@ public class Cellule {
 	 * 
 	 * @param conteneur
 	 *            Conteneur qui contient la cellule
-	 * @throws ParsingException 
+	 * @throws Exception 
+	 * @throws IOException 
 	 */
-	public void actualise(Conteneur conteneur) throws ParsingException {
+	public void actualise(Conteneur conteneur) throws IOException, Exception {
 		Calcul c = new Calcul(this,conteneur);
 		c.calcul();
 	}

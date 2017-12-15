@@ -1,12 +1,11 @@
 package prog;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import prog.results.Resultat;
-import prog.*;
 
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
@@ -64,10 +63,10 @@ public class Calcul {
 	 *            Cellule a calculer
 	 * @param conteneur
 	 *            Conteneur contenant la cellule a calculer
-	 * @throws ParsingException
+	 * @throws IOException 
 	 * @throws Exception
 	 */
-	public void calcul() throws ParsingException {
+	public void calcul() throws IOException, Exception {
 		boolean possible = formuleCorrect(formule, conteneur);
 		if (possible) {
 			extractRef();
@@ -82,9 +81,7 @@ public class Calcul {
 					return;
 				}
 			}
-			Arbre arbre = creerArbre();
-			Resultat resultatArbre = arbre.getResultat();
-			cellule.setResultat(resultatArbre);
+			cellule.setResultat(this.creerArbre());
 		} else {
 			cellule.setResultat(null);
 		}
@@ -97,9 +94,11 @@ public class Calcul {
 	 *            Formule de la cellule en cours
 	 * @param conteneur
 	 *            Conteneur contenant les cellules
+	 * @throws Exception 
+	 * @throws IOException 
 	 */
-	public void extractRef() {
-		refs = ParseurRef.extractRef(formule, conteneur);
+	public void extractRef() throws IOException, Exception {
+		refs = ParserExtract.extractRef(formule, conteneur);
 	}
 
 	/**
@@ -109,15 +108,14 @@ public class Calcul {
 	 * @throws ParsingException
 	 * @throws Exception
 	 */
-	private Arbre creerArbre() throws ParsingException {
-		/*Parser yyparser;
+	private Resultat creerArbre() throws ParsingException {
+		Parser yyparser;
 		yyparser = new Parser(new StringReader(formule));
 		if (yyparser.yyparse()==0) {
-			return yyparser.getResultat();
+			return Parser.resultat;
 		}else {
 			return null;
-		}*/
-		return null;
+		}
 	}
 
 }

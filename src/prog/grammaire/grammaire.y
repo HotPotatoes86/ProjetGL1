@@ -1,22 +1,23 @@
 %{
-  package prog.grammaire;
-  import prog.methods;
-  import prog.results;
+  package prog;
+  import prog.methods.*;
+  import prog.results.*;
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
 %}
 
 
-%token STRING NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
+%token STRING INT DOUBLE BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
 
-%type<dval> NUM
-%type<Resultat> operation oneArgument
-%type<funcArgs> manyArgument listArgument
-%type<boolean> condition
-%type<sval> STRING
+%type<ival>	INT 						/*Type Int*/
+%type<dval> DOUBLE						/*Type Double*/
+%type<rval> operation oneArgument axiome/*Type Resultat*/
+%type<lval> manyArgument listArgument	/*Type List<Resultat>*/
+%type<bval> condition BOOLEAN 			/*Type Boolean*/
+%type<sval> STRING  					/*Type String*/
 
-%type<Fonctions> SIN COS TAN MINIMUM MAXIMUM MOY SQRT STRING method
+%type<Fonction> SIN COS TAN MINIMUM MAXIMUM MOY SQRT method /*Type Fonction*/
 
 %left PLUS MINUS	
 %left TIMES DIVIDE
@@ -26,14 +27,14 @@
 
 %%
 
-axiome : operation		{System.out.println("resultat : " + $1);}
-	| IF condition THEN operation ELSE operation { 
+axiome :  operation			{resultat = $1;}
+	   | IF condition THEN operation ELSE operation { 
 										if($2){
-											System.out.println($4);
+											resultat = $4;
 										}else{
-											System.out.println($6)
+											resultat = $6;
 										};}
-	;
+		;
 
 operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| operation MINUS operation			{$$ = $1.soustraction($3);}
@@ -41,7 +42,8 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| operation TIMES operation			{$$ = $1.multiplication($3);}
 	| method							{funcArgs.clear();
 											$$ = func.getResultat();}
-	| NUM								{$$ = new ResultatDouble($1);}
+	| DOUBLE							{$$ = new ResultatDouble($1);}
+	| INT 								{$$ = new ResultatInteger($1);}
 	/*| PAROUV condition PARFER			{$$ = new ResultatBoolean($2);}*/
 	| BOOLEAN 							{$$ = new ResultatBoolean($1);}
 	| QUOTE STRING QUOTE				{$$ = new ResultatString($2);}
@@ -108,14 +110,7 @@ public Parser(Reader r) {
 }
 
 
-static boolean interactive;
-static Operation func;
-static List<Resultat> funcArgs = new ArrayList<>();
-
-public static void main(String args[]) throws IOException {
-
-	Parser yyparser;
-	yyparser = new Parser(new InputStreamReader(System.in));
-
-	yyparser.yyparse();
-}
+private static boolean interactive;
+private static Fonction func;
+private static List<Resultat> funcArgs = new ArrayList<>();
+public static Resultat resultat; 
