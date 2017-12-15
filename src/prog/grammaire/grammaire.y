@@ -9,7 +9,10 @@
 
 %token NAME NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
 
-%type<dval> operation NUM oneArgument
+%type<dval> NUM
+%type <ResultatDouble> operation
+%type <funcArgs> oneArgument manyArgument listArgument
+
 %type<Operation> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
 
 %left PLUS MINUS	
@@ -52,10 +55,11 @@ oneArgument : PAROUV operation PARFER		{funcArgs.add($2);
 												$$ = funcArgs;}
 	;
 
-manyArgument : PAROUV listArgument PARFER
+manyArgument : PAROUV listArgument PARFER {$$ = $2;}
 	;
 
-listArgument : operation {funcArgs.add($1);}
+listArgument : operation {funcArgs.add($1);
+							$$ = funcArgs;}
 	| operation COMMA listArgument {funcArgs.add($1);}
 	;
 	
@@ -89,7 +93,7 @@ public Parser(Reader r) {
 
 static boolean interactive;
 static Operation func;
-static List<Double> funcArgs = new ArrayList<>();
+static List<ResultatDouble> funcArgs = new ArrayList<>();
 
 public static void main(String args[]) throws IOException {
 
