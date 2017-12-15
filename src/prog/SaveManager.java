@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -39,47 +40,83 @@ public final class SaveManager {
  * @return Connection
  */
 	
-	private static Connection ConnecterBase(String url, String user,String password) {
+	private static Connection ConnecterBase(String url, String user,
+			String password) {
+
 		try {
+			
 			if (url.contains("jdbc:sqlite:")) {
+
 				Class.forName("org.sqlite.JDBC");
+
 			} else if (url.contains("jdbc:oracle:thin:")) {
+
 				Class.forName("oracle.jdbc.driver.OracleDriver");
-			}else if(url.contains("jdbc:mysql:")){			
-				Class.forName("com.mysql.jdbc.Driver");								
+
+			}else if(url.contains("jdbc:mysql:")){
+				
+				Class.forName("com.mysql.jdbc.Driver");	
+				
+
+				
+				
 			}else {			
+
 				return null;
+
 			}
-			Connection connection = DriverManager.getConnection(url, user,password);
+
+			Connection connection = DriverManager.getConnection(url, user,
+					password);
+
 			return connection;
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
+
 		}
+
 		return null;
+
 	}
 	
 	
 	/**
 	 * 
 	 * @param s
+	 * 
 	 * 			permet d'ex�cuter les instruction sql et de retourner les r�sultat
+	 * 
 	 * @param Requete
+	 * 
 	 * 			Requete sql � ex�cuter
+	 * 
 	 * @return ResultSetMetaData
 	 */
-	private static ResultSetMetaData RetournerResultat(Statement s, String Requete) {
+	private static ResultSet RetournerResultat(Statement s, String Requete) {
+
 		try {
+
 			ResultSet r = ((java.sql.Statement) s).executeQuery(Requete);
-			ResultSetMetaData rm = r.getMetaData();
-			return rm;
+			//ResultSetMetaData rm = r.getMetaData();
+			return r;
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
+
 		}
+		
 		return null;
+
+		
+
 	}
 	
 	/**
 	 * Importe une base de donn�e grace � une requete
+	 * 
 	 * @param requete
 	 *            requete sql permettant de r�cup�rer une table depuis une base
 	 *            de donn�es
@@ -89,23 +126,48 @@ public final class SaveManager {
 
 	public static Conteneur ImportBase(String requete, String url, String user,
 			String password) throws ClassNotFoundException, SQLException {
+
+		
+
 		try {
+
 			Conteneur c = new Conteneur();
-			Statement s = (Statement)ConnecterBase(url, user, password).createStatement();
-			ResultSetMetaData rm=RetournerResultat(s, requete);
+			
+			Statement s =ConnecterBase(url, user, password)
+					.createStatement();
+			
+			//ResultSetMetaData rm=RetournerResultat(s, requete);
+
+			ResultSet rs=(ResultSet) RetournerResultat(s, requete);
+			
+			
 			Cellule cell = null;
-			while (((ResultSet) rm).next()) {
-				for (int i = 1; i <= rm.getColumnCount(); i++)
-					cell = new Cellule(rm.getColumnName(i).toUpperCase() + "_"
-							+ i, ((ResultSet) rm).getObject(i).toString());
+
+			while (rs.next()) {
+
+				ResultSetMetaData rm=rs.getMetaData();
+				
+				for (int i = 1; i <=  rm.getColumnCount(); i++){
+
+					cell = new Cellule(((ResultSetMetaData) rm).getColumnName(i).toUpperCase() + "_"
+							+ i, ( (ResultSet) rs).getObject(i).toString());
 				c.addCellule(cell);
+				
+				}
+
 			}
-			((BufferedReader) rm).close();
-			((Connection) s).close();	
+
+			(rs).close();
+			(s).close();
+			
 			return c;
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
+
 		}
+
 		return null;
 
 	}
