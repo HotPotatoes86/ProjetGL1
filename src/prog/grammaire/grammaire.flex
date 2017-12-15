@@ -29,6 +29,8 @@ Letter = [a-zA-Z]
 ">"						{return Parser.SUP;}
 "="						{return Parser.EQ;}
 "!="					{return Parser.DIFF;}
+"<="					{return Parser.INFEQ;}
+">="					{return Parser.SUPEQ;}
 	
 "("						{return Parser.PAROUV;}
 ")"						{return Parser.PARFER;}
