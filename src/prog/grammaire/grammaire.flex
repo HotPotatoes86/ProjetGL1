@@ -16,7 +16,7 @@ Letter = [a-zA-Z]
 
 %%
 
-"@"{Letter}+{Digit}+	{yyparser.yylval = new ParserVal(yytext()); /*TODO changer la reconnaissance de la reference*/ 
+"@"{Letter}+{Digit}*	{yyparser.yylval = new ParserVal(yytext()); 
 							return Parser.REF;}
 "+"						{return Parser.PLUS;}
 "-"						{return Parser.MINUS;}

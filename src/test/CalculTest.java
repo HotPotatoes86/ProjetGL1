@@ -15,7 +15,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Résultat de la cellule calculée",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("3"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("3"));
 	}
 	
 	@Test
@@ -27,7 +27,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Résultat de la cellule calculée",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("5.0"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("5.0"));
 	}
 	
 	@Test
@@ -39,22 +39,21 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(c.getResultat());
-		assertTrue("Résultat de la cellule calculée",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("1"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("1"));
 	}
 	
 	@Test
 	public final void testCalculRef(){
 		Conteneur cont = new Conteneur();
 		Cellule c1 = new Cellule("cel1","1+1");
-		Cellule c2 = new Cellule("cel2","$cel1+2");
+		Cellule c2 = new Cellule("cel2","@cel1+2");
 		try {
 			cont.editerCellule(c1.getName(),c1.getFormule());
 			cont.editerCellule(c2.getName(),c2.getFormule());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Résultat de la cellule calculée",cont.getCellule("cel1").getResultat().getStringResultat().equalsIgnoreCase("2"));
-		assertTrue("Résultat de la cellule calculée",cont.getCellule("cel2").getResultat().getStringResultat().equalsIgnoreCase("4"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel1").getResultat().getStringResultat().equalsIgnoreCase("2"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel2").getResultat().getStringResultat().equalsIgnoreCase("4"));
 	}
 }

@@ -19,7 +19,7 @@ Letter = [a-zA-Z]
 
 %%
 
-"@"{Letter}+{Digit}+			{yyparser.yylval = new ParserVal(yytext()); 
+"@"{Letter}+{Digit}*			{yyparser.yylval = new ParserVal(yytext()); 
 									return ParserExtract.REF;}
 
 "|"								{return ParserExtract.PIPE;}

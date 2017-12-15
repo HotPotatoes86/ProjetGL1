@@ -15,15 +15,15 @@ axiome : importe
 	| formuleReference
 	;
 
-formuleReference : REF formuleReference 	{String reference = $1; System.out.println(reference);
-				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				refs.add(cellule);}
-	| FORMULE formuleReference
-	| REF 			{String reference = $1; System.out.println(reference);
-				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				refs.add(cellule);}
-	| FORMULE
-	;
+formuleReference : REF formuleReference 	{String reference = $1; 
+												Cellule cellule = conteneur.getCellule(reference.substring(1));
+												refs.add(cellule);}
+				| FORMULE formuleReference
+				| REF 			{String reference = $1; 
+									Cellule cellule = conteneur.getCellule(reference.substring(1));
+									refs.add(cellule);}
+				| FORMULE
+				;
 
 importe : NAME PIPE FORMULE 	{cellName = $1; 
 					System.out.println("cellName : " + cellName);
