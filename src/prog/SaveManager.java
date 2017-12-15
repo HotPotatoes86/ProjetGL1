@@ -1,6 +1,6 @@
 package prog;
 
-import java.beans.Statement;
+import java.sql.Statement;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,20 +12,20 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 /**
- * Cette classe sert à communiquer avec les systèmes de sauvegarde, elle permet
+ * Cette classe sert ï¿½ communiquer avec les systï¿½mes de sauvegarde, elle permet
  * de charger et de sauvegarder depuis et vers un fichier nlb, ainsi que charger
- * les données depuis une base de données.
+ * les donnï¿½es depuis une base de donnï¿½es.
  */
 public final class SaveManager {
 
 	
 /**
  * 
- * Permet d'établir une connection avec une base donnée.
+ * Permet d'ï¿½tablir une connection avec une base donnï¿½e.
  * 
  * @param url
  * 
- * 			adresse de la base de donnée
+ * 			adresse de la base de donnï¿½e
  * 	
  * @param user
  * 
@@ -34,7 +34,7 @@ public final class SaveManager {
  * 
  * @param password
  * 
- * 			mot de passe pour se connecter à la base donnée
+ * 			mot de passe pour se connecter ï¿½ la base donnï¿½e
  * 
  * @return Connection
  */
@@ -43,7 +43,7 @@ public final class SaveManager {
 			String password) {
 
 		try {
-
+			
 			if (url.contains("jdbc:sqlite:")) {
 
 				Class.forName("org.sqlite.JDBC");
@@ -52,7 +52,14 @@ public final class SaveManager {
 
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			} else {
+			}else if(url.contains("jdbc:mysql:")){
+				
+				Class.forName("com.mysql.jdbc.Driver");	
+				
+
+				
+				
+			}else {			
 
 				return null;
 
@@ -78,11 +85,11 @@ public final class SaveManager {
 	 * 
 	 * @param s
 	 * 
-	 * 			permet d'exécuter les instruction sql et de retourner les résultat
+	 * 			permet d'exï¿½cuter les instruction sql et de retourner les rï¿½sultat
 	 * 
 	 * @param Requete
 	 * 
-	 * 			Requete sql à exécuter
+	 * 			Requete sql ï¿½ exï¿½cuter
 	 * 
 	 * @return ResultSetMetaData
 	 */
@@ -107,11 +114,11 @@ public final class SaveManager {
 	}
 	
 	/**
-	 * Importe une base de donnée grace à une requete
+	 * Importe une base de donnï¿½e grace ï¿½ une requete
 	 * 
 	 * @param requete
-	 *            requete sql permettant de récupérer une table depuis une base
-	 *            de données
+	 *            requete sql permettant de rï¿½cupï¿½rer une table depuis une base
+	 *            de donnï¿½es
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
@@ -119,10 +126,12 @@ public final class SaveManager {
 	public static Conteneur ImportBase(String requete, String url, String user,
 			String password) throws ClassNotFoundException, SQLException {
 
-		Conteneur c = new Conteneur();
+		
 
 		try {
 
+			Conteneur c = new Conteneur();
+			
 			Statement s = (Statement) ConnecterBase(url, user, password)
 					.createStatement();
 			
@@ -142,6 +151,8 @@ public final class SaveManager {
 
 			((BufferedReader) rm).close();
 			((Connection) s).close();
+			
+			return c;
 
 		} catch (Exception e) {
 
@@ -149,13 +160,13 @@ public final class SaveManager {
 
 		}
 
-		return c;
+		return null;
 
 	}
 
 	/**
-	 * Cette fonction permet au parseur de lire le fichier (.nlb) et de créer
-	 * les cellules correspondantes dans un conteneur qu'il aura créé
+	 * Cette fonction permet au parseur de lire le fichier (.nlb) et de crï¿½er
+	 * les cellules correspondantes dans un conteneur qu'il aura crï¿½ï¿½
 	 * 
 	 * @param chemin
 	 * @throws Exception
@@ -174,7 +185,7 @@ public final class SaveManager {
 	}
 
 	/**
-	 * Permet de sauvegarder les données dans un fichier .nlb
+	 * Permet de sauvegarder les donnï¿½es dans un fichier .nlb
 	 * 
 	 * @param chemin
 	 *            Chemin de sauvegarde du fichier
@@ -191,4 +202,5 @@ public final class SaveManager {
 	}
 
 }
+
 
