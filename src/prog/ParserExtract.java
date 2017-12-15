@@ -270,16 +270,13 @@ public static List<Cellule> extractRef(String formule, Conteneur conteneur) thro
 	ParserExtract.conteneur = conteneur;
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(formule));
-
 	yyparser.yyparse();
-	
 	return refs;
 }
 
 public static Cellule extractCelluleFromLine(String line) throws IOException, Exception {
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(line));
-
 	yyparser.yyparse();
 	return new Cellule(cellName, cellFormule);
 }

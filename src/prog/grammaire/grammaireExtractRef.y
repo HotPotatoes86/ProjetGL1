@@ -15,11 +15,11 @@ axiome : importe		  {}
 	   | formuleReference {}
 	   ;
 
-formuleReference : REF formuleReference 	{String reference = $1; System.out.println(reference);
+formuleReference : REF formuleReference 	{String reference = $1;
 											Cellule cellule = conteneur.getCellule(reference.substring(1));
 											conteneur.addCellule(cellule);}
 				 | FORMULE formuleReference	{}
-				 | REF 			{String reference = $1; System.out.println(reference);
+				 | REF 			{String reference = $1;
 								Cellule cellule = conteneur.getCellule(reference.substring(1));
 								conteneur.addCellule(cellule);}
 				 | FORMULE
@@ -66,16 +66,13 @@ public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOEx
 	this.conteneur = conteneur;
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(formule));
-
 	yyparser.yyparse();
-	
 	return refs;
 }
 
 public Cellule extractCelluleFromLine(String line) throws IOException, Exception {
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(line));
-
 	yyparser.yyparse();
 	return new Cellule(cellName, cellFormule);
 }

@@ -52,9 +52,7 @@ public class Conteneur {
 	 * @throws Exception 
 	 */
 	public void editerCellule(String nom, String formule) throws Exception {
-		
 		Cellule cellToEdit = getCellule(nom);
-		
 		if(cellToEdit != null) {
 			cellToEdit.setFormule(formule);
 			for (Cellule cellAOublier : cellToEdit.getCellsUsed()) {
