@@ -99,7 +99,7 @@ public final class SaveManager {
 		try {
 
 			ResultSet r = ((java.sql.Statement) s).executeQuery(Requete);
-			//ResultSetMetaData rm = r.getMetaData();
+		
 			return r;
 
 		} catch (Exception e) {
@@ -136,7 +136,7 @@ public final class SaveManager {
 			Statement s =ConnecterBase(url, user, password)
 					.createStatement();
 			
-			//ResultSetMetaData rm=RetournerResultat(s, requete);
+		
 
 			ResultSet rs=(ResultSet) RetournerResultat(s, requete);
 			
