@@ -1,2 +1,0 @@
-javac -cp .:junit.jar test/CelluleTest.java
-java -cp .:junit.jar:hamcrest-core.jar org.junit.runner.JUnitCore test.CelluleTest
