@@ -1,21 +1,27 @@
 %{
-  package prog;
-  import prog.methods.*;
+  package prog.grammaire;
+  import prog.methods;
+  import prog.results;
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
 %}
 
 
-%token NAME NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
+%token NAME NUM BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
 
-%type<dval> operation NUM oneArgument
-%type<Operation> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
+%type<dval> NUM
+%type<Resultat> operation oneArgument
+%type<funcArgs> manyArgument listArgument
+%type<boolean> condition
+
+%type<Fonctions> SIN COS TAN MINIMUM MAXIMUM MOY SQRT NAME method
 
 %left PLUS MINUS	
 %left TIMES DIVIDE
 %right POW
-
+%left OR XOR
+%left AND
 
 %%
 
@@ -25,40 +31,53 @@
 */  
 /*cellule : NAME PIPE operation {}*/
 
-axiome : axiome operation		{System.out.println("resultat : " + $2);}
-	|
+axiome : operation		{System.out.println("resultat : " + $1);}
+	| IF condition THEN operation ELSE operation { if ($2) {System.out.println($4);}else{System.out.println($6)};}
 	;
 
-operation : operation PLUS operation	{$$ = $1 + $3;}
-	| operation MINUS operation 	{$$ = $1 - $3;}
-	| operation DIVIDE operation 	{$$ = $1 / $3;}
-	| operation TIMES operation 	{$$ = $1 * $3;}
-	| method						{func.setArgs(funcArgs);
-									funcArgs.clear();
-									$$ = func.getResultat();}
-	| NUM	 			{$$ = $1;}
-	| PAROUV operation PARFER 	{$$ = $2;}
+operation : operation PLUS operation	{$$ = $1.addition($3);}
+	| operation MINUS operation			{$$ = $1.soustraction($3);}
+	| operation DIVIDE operation		{$$ = $1.division($3);}
+	| operation TIMES operation			{$$ = $1.multiplication($3);}
+	| method							{funcArgs.clear();
+											$$ = func.getResultat();}
+	| NUM								{$$ = new ResultatDouble($1);}
+	/*| PAROUV condition PARFER			{$$ = new ResultatBoolean($2);}*/
+	| PAROUV operation PARFER			{$$ = $2;}
 	;
 
-method : SIN oneArgument		{ func = new Operation("sinus", new Sinus());}
-	| COS oneArgument				{ func = new Operation("cosinus", new Cosinus());}
-	| TAN oneArgument			{ func = new Operation("tangente", new Tangente());}
-	| MINIMUM manyArgument		{ func = new Operation("minimum", new Minimum());}
-	| MAXIMUM manyArgument		{ func = new Operation("maximum", new Maximum());}
-	| MOY manyArgument			{ func = new Operation("moyenne", new Moyenne());}
-	| SQRT oneArgument			{ func = new Operation("sqrt", new Sqrt());}
+method : SIN oneArgument		{ func = new Sinus($2);}
+	| COS oneArgument			{ func = new Cosinus($2);}
+	| TAN oneArgument			{ func = new Tangente($2);}
+	| MINIMUM manyArgument		{ func = new Minimum($2);}
+	| MAXIMUM manyArgument		{ func = new Maximum($2);}
+	| MOY manyArgument			{ func = new Moyenne($2);}
+	| SQRT oneArgument			{ func = new Sqrt($2);}
 	;
 
-oneArgument : PAROUV operation PARFER		{funcArgs.add($2);}
+oneArgument : PAROUV operation PARFER		{$$ = $2;}
 	;
 
-manyArgument : PAROUV listArgument PARFER
+manyArgument : PAROUV listArgument PARFER {$$ = $2;}
 	;
 
-listArgument : operation {funcArgs.add($1);}
-	| operation COMMA listArgument {funcArgs.add($1);}
+listArgument : operation			{funcArgs.add($1);
+										$$ = funcArgs;}
+	| operation COMMA listArgument	{funcArgs.add($1);}
 	;
-	
+
+condition : condition AND condition {$$ = $1 && $3;}
+	|condition OR condition			{$$ = $1 || $3;}
+	|condition XOR condition		{$$ = $1^$3;}
+	|PAROUV condition PARFER		{$$ = $2;}
+	|operation INF operation		{$$ = $1.estInferieur($3);}
+	|operation SUP operation		{$$ = $1.estSuperieur($3);}
+	|operation EQ operation			{$$ = $1.estEgal($3);}
+	|operation DIFF operation		{$$ = $1.estDifferent($3);}
+	|operation INFEQ operation		{$$ = $1.estInferieurOuEgal($3);}
+	|operation SUPEQ operation		{$$ = $1.estSuperieurOuEgal($3);}
+	;
+
 
 %%
 
@@ -89,7 +108,7 @@ public Parser(Reader r) {
 
 static boolean interactive;
 static Operation func;
-static List<Double> funcArgs = new ArrayList<>();
+static List<Resultat> funcArgs = new ArrayList<>();
 
 public static void main(String args[]) throws IOException {
 
