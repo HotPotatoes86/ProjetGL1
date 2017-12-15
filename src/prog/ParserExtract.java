@@ -266,17 +266,20 @@ static String cellName;
 static String cellFormule;
 
 
-public static List<Cellule> extractRef(String formule, Conteneur conteneur) throws Exception {
-	ParserExtract.conteneur = conteneur;
+public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
+	this.conteneur = conteneur;
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(formule));
+
 	yyparser.yyparse();
+	
 	return refs;
 }
 
-public static Cellule extractCelluleFromLine(String line) throws Exception {
+public Cellule extractCelluleFromLine(String line) throws IOException, Exception {
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(line));
+
 	yyparser.yyparse();
 	return new Cellule(cellName, cellFormule);
 }
@@ -442,13 +445,13 @@ case 3:
 //#line 18 "grammaireExtractRef.y"
 {String reference = val_peek(1).sval; System.out.println(reference);
 				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				conteneur.addCellule(cellule);}
+				refs.add(cellule);}
 break;
 case 5:
 //#line 22 "grammaireExtractRef.y"
 {String reference = val_peek(0).sval; System.out.println(reference);
 				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				conteneur.addCellule(cellule);}
+				refs.add(cellule);}
 break;
 case 7:
 //#line 28 "grammaireExtractRef.y"
