@@ -4,19 +4,31 @@
   import java.util.List;
 %}
 
-%token REF
+%token REF PIPE NAME FORMULE
 
-%type<sval> REF
+%type<sval> REF NAME FORMULE
 
 
 %%
-axiome : REF axiome 	{String reference = $1;
-			Cellule cellule = conteneur.getCellule(reference.substring(1));
-			conteneur.addCellule(cellule);}
-	| REF 		{String reference = $1;
-			Cellule cellule = conteneur.getCellule(reference.substring(1));
-			conteneur.addCellule(cellule);}
+
+axiome : importe
+	| formuleReference
 	;
+
+formuleReference : REF formuleReference 	{String reference = $1; System.out.println(reference);
+				Cellule cellule = conteneur.getCellule(reference.substring(1));
+				conteneur.addCellule(cellule);}
+	| FORMULE formuleReference
+	| REF 			{String reference = $1; System.out.println(reference);
+				Cellule cellule = conteneur.getCellule(reference.substring(1));
+				conteneur.addCellule(cellule);}
+	| FORMULE
+	;
+
+importe : NAME PIPE FORMULE 	{cellName = $1; 
+					System.out.println("cellName : " + cellName);
+					cellFormule = $3; 
+					System.out.println("cellFormule : " + cellFormule);}
 
 %%
 
@@ -46,7 +58,11 @@ public ParserExtract(Reader r) {
 
 static List<Cellule> refs = new ArrayList<>();
 
-static Conteneur conteneur;
+static Conteneur conteneur = new Conteneur();
+
+static String cellName;
+static String cellFormule;
+
 
 public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
 	this.conteneur = conteneur;
@@ -56,6 +72,14 @@ public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOEx
 	yyparser.yyparse();
 	
 	return refs;
+}
+
+public Cellule extractCelluleFromLine(String line) throws IOException, Exception {
+	ParserExtract yyparser;
+	yyparser = new ParserExtract(new StringReader(line));
+
+	yyparser.yyparse();
+	return new Cellule(cellName, cellFormule);
 }
 
 

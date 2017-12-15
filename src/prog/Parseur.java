@@ -12,16 +12,7 @@ public final class Parseur {
 	 * @param line Ligne du fichier texte qui est interprété
 	 */
 	public static Cellule extractLine(String line) {
-		String name = "";
-		Cellule res = null;
-		for (int i=0; i<line.length(); i++) {
-			if (line.charAt(i)=='|') {
-					name += line.charAt(i);
-			}else {
-				res = new Cellule(name,line.substring(i, line.length()-1));
-			}
-		}
-		return res;
+		return ParserExtract.extractCelluleFromLine(line);
 	}
 
 	/**

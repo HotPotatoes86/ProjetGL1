@@ -1,11 +1,12 @@
 package prog;
 
 import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import prog.results.Resultat;
+import prog.*;
 
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
@@ -64,6 +65,7 @@ public class Calcul {
 	 * @param conteneur
 	 *            Conteneur contenant la cellule a calculer
 	 * @throws ParsingException
+	 * @throws Exception
 	 */
 	public void calcul() throws ParsingException {
 		boolean possible = formuleCorrect(formule, conteneur);
@@ -105,6 +107,7 @@ public class Calcul {
 	 * grammaire
 	 * 
 	 * @throws ParsingException
+	 * @throws Exception
 	 */
 	private Arbre creerArbre() throws ParsingException {
 		/*Parser yyparser;
@@ -114,6 +117,7 @@ public class Calcul {
 		}else {
 			return null;
 		}*/
+		return null;
 	}
 
 }

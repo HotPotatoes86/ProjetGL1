@@ -160,43 +160,48 @@ final ParserVal dup_yyval(ParserVal val)
 }
 //#### end semantic value section ####
 public final static short REF=257;
+public final static short PIPE=258;
+public final static short NAME=259;
+public final static short FORMULE=260;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-    0,    0,
+    0,    0,    2,    2,    2,    2,    1,
 };
 final static short yylen[] = {                            2,
-    2,    1,
+    1,    1,    2,    2,    1,    1,    3,
 };
 final static short yydefred[] = {                         0,
-    0,    0,    1,
+    0,    0,    0,    0,    1,    2,    3,    0,    4,    7,
 };
-final static short yydgoto[] = {                          2,
+final static short yydgoto[] = {                          4,
+    5,    6,
 };
 final static short yysindex[] = {                      -257,
- -257,    0,    0,
+ -256, -252, -256,    0,    0,    0,    0, -251,    0,    0,
 };
 final static short yyrindex[] = {                         0,
-    1,    0,    0,
+    8,    0,   10,    0,    0,    0,    0,    0,    0,    0,
 };
-final static short yygindex[] = {                         2,
+final static short yygindex[] = {                         0,
+    0,    4,
 };
-final static int YYTABLESIZE=3;
+final static int YYTABLESIZE=10;
 static short yytable[];
 static { yytable();}
 static void yytable(){
 yytable = new short[]{                          1,
-    2,    0,    3,
+    1,    2,    3,    3,    7,    8,    9,    5,   10,    6,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
 yycheck = new short[] {                        257,
-    0,   -1,    1,
+  257,  259,  260,  260,    1,  258,    3,    0,  260,    0,
 };
 }
-final static short YYFINAL=2;
-final static short YYMAXTOKEN=257;
+final static short YYFINAL=4;
+final static short YYMAXTOKEN=260;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
@@ -214,15 +219,20 @@ null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-null,null,null,"REF",
+null,null,null,"REF","PIPE","NAME","FORMULE",
 };
 final static String yyrule[] = {
 "$accept : axiome",
-"axiome : REF axiome",
-"axiome : REF",
+"axiome : importe",
+"axiome : formuleReference",
+"formuleReference : REF formuleReference",
+"formuleReference : FORMULE formuleReference",
+"formuleReference : REF",
+"formuleReference : FORMULE",
+"importe : NAME PIPE FORMULE",
 };
 
-//#line 22 "grammaireExtractRef.y"
+//#line 34 "grammaireExtractRef.y"
 
 private YyExtractRef lexer;
 
@@ -250,7 +260,11 @@ public ParserExtract(Reader r) {
 
 static List<Cellule> refs = new ArrayList<>();
 
-static Conteneur conteneur;
+static Conteneur conteneur = new Conteneur();
+
+static String cellName;
+static String cellFormule;
+
 
 public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
 	this.conteneur = conteneur;
@@ -262,9 +276,17 @@ public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOEx
 	return refs;
 }
 
+public Cellule extractCelluleFromLine(String line) throws IOException, Exception {
+	ParserExtract yyparser;
+	yyparser = new ParserExtract(new StringReader(line));
+
+	yyparser.yyparse();
+	return new Cellule(cellName, cellFormule);
+}
+
 
 /*compilation : byaccj -J grammaire.y*/
-//#line 195 "ParserExtract.java"
+//#line 217 "ParserExtract.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -419,19 +441,26 @@ boolean doaction;
     switch(yyn)
       {
 //########## USER-SUPPLIED ACTIONS ##########
-case 1:
-//#line 13 "grammaireExtractRef.y"
-{String reference = val_peek(1).sval;
-			Cellule cellule = conteneur.getCellule(reference.substring(1));
-			conteneur.addCellule(cellule);}
+case 3:
+//#line 18 "grammaireExtractRef.y"
+{String reference = val_peek(1).sval; System.out.println(reference);
+				Cellule cellule = conteneur.getCellule(reference.substring(1));
+				conteneur.addCellule(cellule);}
 break;
-case 2:
-//#line 16 "grammaireExtractRef.y"
-{String reference = val_peek(0).sval;
-			Cellule cellule = conteneur.getCellule(reference.substring(1));
-			conteneur.addCellule(cellule);}
+case 5:
+//#line 22 "grammaireExtractRef.y"
+{String reference = val_peek(0).sval; System.out.println(reference);
+				Cellule cellule = conteneur.getCellule(reference.substring(1));
+				conteneur.addCellule(cellule);}
 break;
-//#line 356 "ParserExtract.java"
+case 7:
+//#line 28 "grammaireExtractRef.y"
+{cellName = val_peek(2).sval; 
+					System.out.println("cellName : " + cellName);
+					cellFormule = val_peek(0).sval; 
+					System.out.println("cellFormule : " + cellFormule);}
+break;
+//#line 385 "ParserExtract.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
