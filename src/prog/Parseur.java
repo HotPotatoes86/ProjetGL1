@@ -19,7 +19,9 @@ public final class Parseur {
 	 * @throws ParsingException
 	 * @throws Exception
 	 */
-	public static Resultat formuleToResultat(String formule) {
+	public static Resultat formuleToResultat(String formule, Conteneur conteneur) {
+		// à utiliser pour passer le conteneur au Parser pour pouvoir extraire le résultat à partir d'une référence
+		//return Parser.formuleToResultat(formule, conteneur);
 		Parser yyparser;
 		yyparser = new Parser(new StringReader(formule));
 		if (yyparser.yyparse()==0) {
