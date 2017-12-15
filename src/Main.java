@@ -10,10 +10,10 @@ public class Main {
 			System.out.println("Main");
 			cont.editerCellule(c.getName(),c.getFormule());
 			cont.editerCellule("cel2","$cel+1");
-			//cont.editerCellule("cel3", "min(1,2)");
+			cont.editerCellule("cel3", "sqrt(25)");
 			System.out.println(cont.getCellule("cel").getResultat().getStringResultat());
 			//System.out.println(cont.getCellule("cel2").getResultat().getStringResultat());	//TODO ExtractRef
-			//System.out.println(cont.getCellule("cel3").getResultat().getStringResultat());	//TODO Liste arg null
+			System.out.println(cont.getCellule("cel3").getResultat().getStringResultat());
 			System.out.println("Main");
 		} catch (Exception e) {
 			e.printStackTrace();

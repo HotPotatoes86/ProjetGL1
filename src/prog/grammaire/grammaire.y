@@ -1,10 +1,11 @@
 %{
-  package prog;
-  import prog.methods.*;
-  import prog.results.*;
-  import java.io.*;
-  import java.util.ArrayList;
-  import java.util.List;
+package prog;
+
+import prog.methods.*;
+import prog.results.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 %}
 
 
@@ -40,8 +41,8 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| operation MINUS operation			{$$ = $1.soustraction($3);}
 	| operation DIVIDE operation		{$$ = $1.division($3);}
 	| operation TIMES operation			{$$ = $1.multiplication($3);}
-	| method							{funcArgs.clear();
-											$$ = func.getResultat();}
+	| method							{$$ = $1.getResultat();
+											funcArgs.clear();}
 	| DOUBLE							{$$ = new ResultatDouble($1);}
 	| INT 								{$$ = new ResultatInteger($1);}
 	/*| PAROUV condition PARFER			{$$ = new ResultatBoolean($2);}*/
@@ -50,20 +51,20 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| PAROUV operation PARFER			{$$ = $2;}
 	;
 
-method : SIN oneArgument		{ func = new Sinus($2);}
-	| COS oneArgument			{ func = new Cosinus($2);}
-	| TAN oneArgument			{ func = new Tangente($2);}
-	| MINIMUM manyArgument		{ func = new Minimum($2);}
-	| MAXIMUM manyArgument		{ func = new Maximum($2);}
-	| MOY manyArgument			{ func = new Moyenne($2);}
-	| SQRT oneArgument			{ func = new Sqrt($2);}
+method : SIN oneArgument		{ $$ = new Sinus($2);}
+	| COS oneArgument			{ $$ = new Cosinus($2);}
+	| TAN oneArgument			{ $$ = new Tangente($2);}
+	| MINIMUM manyArgument		{ $$ = new Minimum(funcArgs);}
+	| MAXIMUM manyArgument		{ $$ = new Maximum(funcArgs);}
+	| MOY manyArgument			{ $$ = new Moyenne(funcArgs);}
+	| SQRT oneArgument			{ $$ = new Sqrt($2);}
 	;
 
 oneArgument : PAROUV operation PARFER		{$$ = $2;}
-	;
+			;
 
 manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
-	;
+			;
 
 listArgument : operation			{funcArgs.add($1);
 										$$ = funcArgs;}
@@ -111,6 +112,5 @@ public Parser(Reader r) {
 
 
 private static boolean interactive;
-private static Fonction func;
 private static List<Resultat> funcArgs = new ArrayList<>();
 public static Resultat resultat; 

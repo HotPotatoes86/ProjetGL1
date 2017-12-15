@@ -1,7 +1,9 @@
 %{
-  import java.io.*;
-  import java.util.ArrayList;
-  import java.util.List;
+package prog;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 %}
 
 %token REF PIPE NAME FORMULE
@@ -16,18 +18,18 @@ axiome : importe		  {}
 	   ;
 
 formuleReference : REF formuleReference 	{String reference = $1;
-											Cellule cellule = conteneur.getCellule(reference.substring(1));
-											conteneur.addCellule(cellule);}
+												Cellule cellule = conteneur.getCellule(reference.substring(1));
+												refs.add(cellule);}
 				 | FORMULE formuleReference	{}
 				 | REF 			{String reference = $1;
-								Cellule cellule = conteneur.getCellule(reference.substring(1));
-								conteneur.addCellule(cellule);}
-				 | FORMULE
+									Cellule cellule = conteneur.getCellule(reference.substring(1));
+									refs.add(cellule);}
+				 | FORMULE 		{}
 				 ;
 
 importe : NAME PIPE FORMULE 	{cellName = $1; 
-								cellFormule = $3; 
-
+									cellFormule = $3; 
+		;
 %%
 
 private YyExtractRef lexer;
@@ -59,6 +61,7 @@ private static List<Cellule> refs = new ArrayList<>();
 private static Conteneur conteneur = new Conteneur();
 
 private static String cellName;
+
 private static String cellFormule;
 
 

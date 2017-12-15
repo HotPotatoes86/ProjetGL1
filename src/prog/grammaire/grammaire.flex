@@ -52,6 +52,7 @@ Letter = [a-zA-Z]
 "tan"					{return Parser.TAN;}
 "min"					{return Parser.MINIMUM;}
 "max"					{return Parser.MAXIMUM;}
+"sqrt"					{return Parser.SQRT;}
 
 "true"|"false"			{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;}

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prog.results.Resultat;
+import prog.results.ResultatErreur;
 
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
@@ -114,7 +115,7 @@ public class Calcul {
 		if (yyparser.yyparse()==0) {
 			return Parser.resultat;
 		}else {
-			return null;
+			return new ResultatErreur();
 		}
 	}
 
