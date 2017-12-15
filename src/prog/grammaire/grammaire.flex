@@ -16,7 +16,7 @@ Letter = [a-zA-Z]
 
 %%
 
-"@"{Letter}+{Digit}+				{yyparser.yylval = new ParserVal(yytext()); /*TODO changer la reconnaissance de la reference*/ 
+"@"{Letter}+{Digit}+	{yyparser.yylval = new ParserVal(yytext()); /*TODO changer la reconnaissance de la reference*/ 
 							return Parser.REF;}
 "+"						{return Parser.PLUS;}
 "-"						{return Parser.MINUS;}
@@ -29,6 +29,8 @@ Letter = [a-zA-Z]
 ">"						{return Parser.SUP;}
 "="						{return Parser.EQ;}
 "!="					{return Parser.DIFF;}
+"<="					{return Parser.INFEQ;}
+">="					{return Parser.SUPEQ;}
 	
 "("						{return Parser.PAROUV;}
 ")"						{return Parser.PARFER;}
@@ -51,13 +53,16 @@ Letter = [a-zA-Z]
 "min"					{return Parser.MINIMUM;}
 "max"					{return Parser.MAXIMUM;}
 
-"true"|"false"				{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
+"true"|"false"			{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;}
 	
-{Digit}+("."{Digit}+)?		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
-							return Parser.NUM;}
+{Digit}+				{yyparser.yylval = new ParserVal(Integer.parseInt(yytext())); 
+							return Parser.INT;}
 
-{Letter}+					{yyparser.yylval = new ParserVal(yytext()); 
-							return Parser.NAME;}
+{Digit}+"."{Digit}+		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
+							return Parser.DOUBLE;}
+
+{Letter}*				{yyparser.yylval = new ParserVal(yytext()); 
+							return Parser.STRING;}
 
 [^]|\n|\t  				{}/* ignore all whitespace */
