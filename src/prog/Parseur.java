@@ -1,13 +1,34 @@
 package prog;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.List;
+
+import prog.results.Resultat;
+import prog.results.ResultatErreur;
 
 /**
  * Classe permettant la communication entre le systeme et le stockage pour les fonctionnalités "Charger" et "Sauvegarder"
  */
 public final class Parseur {
 
+	/**
+	 * Creer l'arbre contenant les operations a effectueur, communique avec la
+	 * grammaire
+	 * 
+	 * @throws ParsingException
+	 * @throws Exception
+	 */
+	public static Resultat formuleToResultat(String formule) {
+		Parser yyparser;
+		yyparser = new Parser(new StringReader(formule));
+		if (yyparser.yyparse()==0) {
+			return Parser.resultat;
+		}else {
+			return new ResultatErreur();
+		}
+	}
+	
 	/**
 	 * Extrait les données du fichier nlb et crée une cellule correspondante
 	 * @param line Ligne du fichier texte qui est interprété

@@ -1,12 +1,8 @@
 package prog;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import prog.results.Resultat;
-import prog.results.ResultatErreur;
 
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
@@ -82,7 +78,7 @@ public class Calcul {
 					return;
 				}
 			}
-			cellule.setResultat(this.creerArbre());
+			cellule.setResultat(Parseur.formuleToResultat(formule));
 		} else {
 			cellule.setResultat(null);
 		}
@@ -98,25 +94,8 @@ public class Calcul {
 	 * @throws Exception 
 	 * @throws IOException 
 	 */
-	public void extractRef() throws IOException, Exception {
+	public void extractRef() throws Exception {
 		refs = ParserExtract.extractRef(formule, conteneur);
-	}
-
-	/**
-	 * Creer l'arbre contenant les operations a effectueur, communique avec la
-	 * grammaire
-	 * 
-	 * @throws ParsingException
-	 * @throws Exception
-	 */
-	private Resultat creerArbre() throws ParsingException {
-		Parser yyparser;
-		yyparser = new Parser(new StringReader(formule));
-		if (yyparser.yyparse()==0) {
-			return Parser.resultat;
-		}else {
-			return new ResultatErreur();
-		}
 	}
 
 }

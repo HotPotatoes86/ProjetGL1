@@ -1,5 +1,6 @@
 package prog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +36,10 @@ public class Conteneur {
 	/**
 	 * ajoute la cellule qui a ete retourne par extractInformation(String)
 	 * @param cellule Valeur a saisir dans la cellule
+	 * @throws IOException 
 	 * @throws Exception 
 	 */
-	public void addCellule(Cellule cellule) throws Exception {
+	public void addCellule(Cellule cellule) throws IOException, Exception {
 		if (this.cellules.contains(cellule)){
 			this.editerCellule(cellule.getName(), cellule.getFormule());
 		}else{
@@ -49,9 +51,10 @@ public class Conteneur {
 	 * methode permettant d'editer une cellule en passant au conteneur son nom et sa nouvelle formule
 	 * @param nom nom de la cellule a editer
 	 * @param formule formule a donner a la cellule
+	 * @throws IOException 
 	 * @throws Exception 
 	 */
-	public void editerCellule(String nom, String formule) throws Exception {
+	public void editerCellule(String nom, String formule) throws IOException, Exception {
 		Cellule cellToEdit = getCellule(nom);
 		if(cellToEdit != null) {
 			cellToEdit.setFormule(formule);

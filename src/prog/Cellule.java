@@ -42,6 +42,7 @@ public class Cellule {
 		this.isNumeric = false;
 		this.cellsNeedMe = new ArrayList<>();
 		this.cellsUsed = new ArrayList<>();
+		this.resultat=null;
 	}
 
 	/**

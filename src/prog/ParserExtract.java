@@ -266,7 +266,7 @@ static String cellName;
 static String cellFormule;
 
 
-public static List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
+public static List<Cellule> extractRef(String formule, Conteneur conteneur) throws Exception {
 	ParserExtract.conteneur = conteneur;
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(formule));
@@ -274,7 +274,7 @@ public static List<Cellule> extractRef(String formule, Conteneur conteneur) thro
 	return refs;
 }
 
-public static Cellule extractCelluleFromLine(String line) throws IOException, Exception {
+public static Cellule extractCelluleFromLine(String line) throws Exception {
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(line));
 	yyparser.yyparse();
