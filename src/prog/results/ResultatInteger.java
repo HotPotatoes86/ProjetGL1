@@ -1,24 +1,25 @@
 package prog.results;
 
-public class ResultatDouble extends Resultat{
+public class ResultatInteger extends Resultat{
 
 	/**
-	 * valeur d'une cellule
+	 * valeur du resultat
 	 */
-	private double value;
-
+	private int value;
+	
 	/**
-	 * Constructeur de la classe
-	 * @param resultat Valeur attribuee a l'attribut resultat
+	 * Constructeur de la classe ResultatInteger
+	 * @param val valeur attribuee a l'objet
 	 */
-	public ResultatDouble(double resultat) {
-		value = resultat;
+	public ResultatInteger(int val) {
+		value = val;
 	}
-
+	
 	/**
-	 * Retourne le resultat sous la forme d'un double
+	 * Retourne la valeur du resultat
+	 * @return la valeur du resultat
 	 */
-	public double getValue() {
+	public int getValue() {
 		return value;
 	}
 	
@@ -30,12 +31,12 @@ public class ResultatDouble extends Resultat{
 	//------------------------------------------Addition-------------------------------------------//
 	@Override
 	public Resultat addition(ResultatDouble res) {
-		return new ResultatDouble(res.getValue() + value);
+		return new ResultatDouble(value+res.getValue());
 	}
 	
 	@Override
 	public Resultat addition(ResultatInteger res) {
-		return new ResultatDouble(res.getValue() + value);
+		return new ResultatInteger(value+res.getValue());
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class ResultatDouble extends Resultat{
 	
 	@Override
 	public Resultat soustraction(ResultatInteger res) {
-		return new ResultatDouble(value-res.getValue());
+		return new ResultatInteger(value-res.getValue());
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class ResultatDouble extends Resultat{
 	
 	@Override
 	public Resultat multiplication(ResultatInteger res) {
-		return new ResultatDouble(value*res.getValue());
+		return new ResultatInteger(value*res.getValue());
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class ResultatDouble extends Resultat{
 	public Resultat multiplication(ResultatString res) {
 		return new ResultatErreur();
 	}
-
+	
 	
 	//------------------------------------------Division-------------------------------------------//
 	@Override
@@ -101,7 +102,7 @@ public class ResultatDouble extends Resultat{
 	
 	@Override
 	public Resultat division(ResultatInteger res) {
-		return new ResultatDouble(value/res.getValue());
+		return new ResultatInteger(value/res.getValue());
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class ResultatDouble extends Resultat{
 	public Resultat division(ResultatString res) {
 		return new ResultatErreur();
 	}
-	
+
 	
 	//------------------------------------------Modulo-------------------------------------------//
 	@Override
@@ -123,14 +124,14 @@ public class ResultatDouble extends Resultat{
 	
 	@Override
 	public Resultat modulo(ResultatInteger res) {
-		return new ResultatErreur();
+		return new ResultatInteger(Math.floorMod(value, res.getValue()));
 	}
-	
+
 	@Override
 	public Resultat modulo(ResultatBoolean res) {
 		return new ResultatErreur();
 	}
-	
+
 	@Override
 	public Resultat modulo(ResultatString res) {
 		return new ResultatErreur();
@@ -297,5 +298,5 @@ public class ResultatDouble extends Resultat{
 	public boolean estDifferent(ResultatErreur res) {
 		return true;
 	}
-	
+
 }

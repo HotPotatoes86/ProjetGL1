@@ -27,8 +27,14 @@ public class ResultatString extends Resultat{
 		return value;
 	}
 
+	//------------------------------------------Addition-------------------------------------------//
 	@Override
 	public Resultat addition(ResultatDouble res) {
+		return new ResultatString(value + res.getValue());
+	}
+	
+	@Override
+	public Resultat addition(ResultatInteger res) {
 		return new ResultatString(value + res.getValue());
 	}
 
@@ -46,9 +52,16 @@ public class ResultatString extends Resultat{
 	public Resultat addition(ResultatErreur res) {
 		return new ResultatErreur();
 	}
+	
 
+	//------------------------------------------Soustraction-------------------------------------------//
 	@Override
 	public Resultat soustraction(ResultatDouble res) {
+		return new ResultatErreur();
+	}
+	
+	@Override
+	public Resultat soustraction(ResultatInteger res) {
 		return new ResultatErreur();
 	}
 
@@ -61,9 +74,16 @@ public class ResultatString extends Resultat{
 	public Resultat soustraction(ResultatString res) {
 		return new ResultatErreur();
 	}
-
+	
+	
+	//------------------------------------------Multiplication-------------------------------------------//
 	@Override
 	public Resultat multiplication(ResultatDouble res) {
+		return new ResultatErreur();
+	}
+	
+	@Override
+	public Resultat multiplication(ResultatInteger res) {
 		return new ResultatErreur();
 	}
 
@@ -77,8 +97,15 @@ public class ResultatString extends Resultat{
 		return new ResultatErreur();
 	}
 
+	
+	//------------------------------------------Division-------------------------------------------//
 	@Override
 	public Resultat division(ResultatDouble res) {
+		return new ResultatErreur();
+	}
+	
+	@Override
+	public Resultat division(ResultatInteger res) {
 		return new ResultatErreur();
 	}
 
@@ -92,8 +119,36 @@ public class ResultatString extends Resultat{
 		return new ResultatErreur();
 	}
 
+	//------------------------------------------Modulo-------------------------------------------//
+	@Override
+	public Resultat modulo(ResultatDouble res) {
+		return new ResultatErreur();
+	}
+	
+	@Override
+	public Resultat modulo(ResultatInteger res) {
+		return new ResultatErreur();
+	}
+
+	@Override
+	public Resultat modulo(ResultatBoolean res) {
+		return new ResultatErreur();
+	}
+
+	@Override
+	public Resultat modulo(ResultatString res) {
+		return new ResultatErreur();
+	}
+		
+		
+	//------------------------------------------Inferieur-------------------------------------------//
 	@Override
 	public boolean estInferieur(ResultatDouble res) {
+		return false;
+	}
+	
+	@Override
+	public boolean estInferieur(ResultatInteger res) {
 		return false;
 	}
 
@@ -112,8 +167,15 @@ public class ResultatString extends Resultat{
 		return false;
 	}
 
+	
+	//------------------------------------------Inferieur Egal-------------------------------------------//
 	@Override
 	public boolean estInferieurOuEgal(ResultatDouble res) {
+		return false;
+	}
+	
+	@Override
+	public boolean estInferieurOuEgal(ResultatInteger res) {
 		return false;
 	}
 
@@ -132,8 +194,15 @@ public class ResultatString extends Resultat{
 		return false;
 	}
 
+	
+	//------------------------------------------Superieur-------------------------------------------//
 	@Override
 	public boolean estSuperieur(ResultatDouble res) {
+		return false;
+	}
+	
+	@Override
+	public boolean estSuperieur(ResultatInteger res) {
 		return false;
 	}
 
@@ -152,8 +221,15 @@ public class ResultatString extends Resultat{
 		return false;
 	}
 
+	
+	//------------------------------------------Superieur Egal-------------------------------------------//
 	@Override
 	public boolean estSuperieurOuEgal(ResultatDouble res) {
+		return false;
+	}
+	
+	@Override
+	public boolean estSuperieurOuEgal(ResultatInteger res) {
 		return false;
 	}
 
@@ -172,8 +248,15 @@ public class ResultatString extends Resultat{
 		return false;
 	}
 
+	
+	//------------------------------------------Egal-------------------------------------------//
 	@Override
 	public boolean estEgal(ResultatDouble res) {
+		return false;
+	}
+	
+	@Override
+	public boolean estEgal(ResultatInteger res) {
 		return false;
 	}
 
@@ -192,10 +275,18 @@ public class ResultatString extends Resultat{
 		return false;
 	}
 
+	
+	//------------------------------------------Different-------------------------------------------//
 	@Override
 	public boolean estDifferent(ResultatDouble res) {
-		return false;
+		return true;
 	}
+	
+	@Override
+	public boolean estDifferent(ResultatInteger res) {
+		return true;
+	}
+
 
 	@Override
 	public boolean estDifferent(ResultatString res) {
@@ -204,11 +295,11 @@ public class ResultatString extends Resultat{
 
 	@Override
 	public boolean estDifferent(ResultatBoolean res) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean estDifferent(ResultatErreur res) {
-		return false;
+		return true;
 	}
 }

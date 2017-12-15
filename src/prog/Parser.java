@@ -23,7 +23,7 @@
   import java.util.List;
 //#line 22 "Parser.java"
 
-import prog.methods.Operation;
+import prog.methods.Fonction;
 
 
 
@@ -367,7 +367,7 @@ public Parser(Reader r) {
 
 
 static boolean interactive;
-static Operation func;
+static Fonction func;
 static List<Double> funcArgs = new ArrayList<>();
 
 public static void main(String args[]) throws IOException {
@@ -570,31 +570,31 @@ case 9:
 break;
 case 10:
 //#line 42 "grammaire.y"
-{ func = new Operation("sinus", new Sinus());}
+{ func = new Fonction("sinus", new Sinus());}
 break;
 case 11:
 //#line 43 "grammaire.y"
-{ func = new Operation("cosinus", new Cosinus());}
+{ func = new Fonction("cosinus", new Cosinus());}
 break;
 case 12:
 //#line 44 "grammaire.y"
-{ func = new Operation("tangente", new Tangente());}
+{ func = new Fonction("tangente", new Tangente());}
 break;
 case 13:
 //#line 45 "grammaire.y"
-{ func = new Operation("minimum", new Minimum());}
+{ func = new Fonction("minimum", new Minimum());}
 break;
 case 14:
 //#line 46 "grammaire.y"
-{ func = new Operation("maximum", new Maximum());}
+{ func = new Fonction("maximum", new Maximum());}
 break;
 case 15:
 //#line 47 "grammaire.y"
-{ func = new Operation("moyenne", new Moyenne());}
+{ func = new Fonction("moyenne", new Moyenne());}
 break;
 case 16:
 //#line 48 "grammaire.y"
-{ func = new Operation("sqrt", new Sqrt());}
+{ func = new Fonction("sqrt", new Sqrt());}
 break;
 case 17:
 //#line 51 "grammaire.y"

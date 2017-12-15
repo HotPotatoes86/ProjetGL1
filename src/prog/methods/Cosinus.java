@@ -3,7 +3,7 @@ package prog.methods;
 import prog.results.Resultat;
 import prog.results.ResultatDouble;
 
-public class Cosinus implements Operation{
+public class Cosinus implements Fonction{
 	
 	ResultatDouble res;
 

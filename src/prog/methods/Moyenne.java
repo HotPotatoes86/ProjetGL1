@@ -7,7 +7,7 @@ import prog.results.Resultat;
 import prog.results.ResultatDouble;
 import prog.results.ResultatErreur;
 
-public class Moyenne implements Operation{
+public class Moyenne implements Fonction{
 	
 	List<ResultatDouble> args = new ArrayList<>();
 

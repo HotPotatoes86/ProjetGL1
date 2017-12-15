@@ -7,7 +7,7 @@ import prog.results.Resultat;
 import prog.results.ResultatDouble;
 import prog.results.ResultatErreur;
 
-public class Maximum implements Operation{
+public class Maximum implements Fonction{
 	
 	List<ResultatDouble> args = new ArrayList<>();
 
