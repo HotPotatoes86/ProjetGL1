@@ -47,7 +47,7 @@ class YyExtractRef {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\1\1\3\1\4\1\0\1\5";
+    "\1\0\1\1\1\2\1\1\1\3\1\4\2\5";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[8];
@@ -144,7 +144,7 @@ class YyExtractRef {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\2\1\1\11\1\1\1\0\1\1";
+    "\1\0\1\11\2\1\1\11\3\1";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[8];
@@ -190,6 +190,23 @@ class YyExtractRef {
   /** endRead marks the last character in the buffer, that has been read
       from input */
   private int zzEndRead;
+
+  /** number of newlines encountered up to the start of the matched text */
+  private int yyline;
+
+  /** the number of characters up to the start of the matched text */
+  private int yychar;
+
+  /**
+   * the number of characters from the last newline up to the start of the 
+   * matched text
+   */
+  private int yycolumn;
+
+  /** 
+   * zzAtBOL == true <=> the scanner is currently at the beginning of a line
+   */
+  private boolean zzAtBOL = true;
 
   /** zzAtEOF == true <=> the scanner is at the EOF */
   private boolean zzAtEOF;
@@ -331,11 +348,13 @@ class YyExtractRef {
    */
   public final void yyreset(java.io.Reader reader) {
     zzReader = reader;
+    zzAtBOL  = true;
     zzAtEOF  = false;
     zzEOFDone = false;
     zzEndRead = zzStartRead = 0;
     zzCurrentPos = zzMarkedPos = 0;
     zzFinalHighSurrogate = 0;
+    yyline = yychar = yycolumn = 0;
     zzLexicalState = YYINITIAL;
     if (zzBuffer.length > ZZ_BUFFERSIZE)
       zzBuffer = new char[ZZ_BUFFERSIZE];
@@ -545,7 +564,7 @@ class YyExtractRef {
           case 6: break;
           case 2: 
             { yyparser.yylval = new ParserVal(yytext()); 
-					return ParserExtract.FORMULE;
+									return ParserExtract.FORMULE;
             }
           case 7: break;
           case 3: 
@@ -554,12 +573,12 @@ class YyExtractRef {
           case 8: break;
           case 4: 
             { yyparser.yylval = new ParserVal(yytext()); 
-					return ParserExtract.NAME;
+									return ParserExtract.NAME;
             }
           case 9: break;
           case 5: 
             { yyparser.yylval = new ParserVal(yytext()); 
-					return ParserExtract.REF;
+									return ParserExtract.REF;
             }
           case 10: break;
           default:

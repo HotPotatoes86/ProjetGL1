@@ -17,11 +17,12 @@ package prog;
 
 
 
-//#line 2 "grammaireExtractRef.y"
+//#line 1 "grammaireExtractRef.y"
+
   import java.io.*;
   import java.util.ArrayList;
   import java.util.List;
-//#line 21 "ParserExtract.java"
+//#line 22 "ParserExtract.java"
 
 
 
@@ -232,7 +233,8 @@ final static String yyrule[] = {
 "importe : NAME PIPE FORMULE",
 };
 
-//#line 34 "grammaireExtractRef.y"
+//#line 33 "grammaireExtractRef.y"
+
 
 private YyExtractRef lexer;
 
@@ -266,16 +268,17 @@ static String cellName;
 static String cellFormule;
 
 
-public static List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
-	ParserExtract.conteneur = conteneur;
+public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
+	this.conteneur = conteneur;
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(formule));
 
 	yyparser.yyparse();
+	
 	return refs;
 }
 
-public static Cellule extractCelluleFromLine(String line) throws IOException, Exception {
+public Cellule extractCelluleFromLine(String line) throws IOException, Exception {
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(line));
 
@@ -285,7 +288,7 @@ public static Cellule extractCelluleFromLine(String line) throws IOException, Ex
 
 
 /*compilation : byaccj -J grammaire.y*/
-//#line 217 "ParserExtract.java"
+//#line 219 "ParserExtract.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -442,15 +445,15 @@ boolean doaction;
 //########## USER-SUPPLIED ACTIONS ##########
 case 3:
 //#line 18 "grammaireExtractRef.y"
-{String reference = val_peek(1).sval;
-				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				refs.add(cellule);}
+{String reference = val_peek(1).sval; 
+												Cellule cellule = conteneur.getCellule(reference.substring(1));
+												refs.add(cellule);}
 break;
 case 5:
 //#line 22 "grammaireExtractRef.y"
-{String reference = val_peek(0).sval;
-				Cellule cellule = conteneur.getCellule(reference.substring(1));
-				refs.add(cellule);}
+{String reference = val_peek(0).sval; 
+									Cellule cellule = conteneur.getCellule(reference.substring(1));
+									refs.add(cellule);}
 break;
 case 7:
 //#line 28 "grammaireExtractRef.y"
@@ -459,7 +462,7 @@ case 7:
 					cellFormule = val_peek(0).sval; 
 					System.out.println("cellFormule : " + cellFormule);}
 break;
-//#line 385 "ParserExtract.java"
+//#line 387 "ParserExtract.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
