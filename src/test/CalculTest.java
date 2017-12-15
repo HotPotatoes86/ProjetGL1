@@ -39,6 +39,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(c.getResultat());
 		assertTrue("Résultat de la cellule calculée",c.getResultat().getStringResultat().equalsIgnoreCase("1"));
 	}
 	

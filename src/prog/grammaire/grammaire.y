@@ -18,7 +18,7 @@ import java.util.List;
 %type<bval> condition BOOLEAN 			/*Type Boolean*/
 %type<sval> STRING  					/*Type String*/
 
-%type<Fonction> SIN COS TAN MINIMUM MAXIMUM MOY SQRT method /*Type Fonction*/
+%type<fval> SIN COS TAN MINIMUM MAXIMUM MOY SQRT method /*Type Fonction*/
 
 %left PLUS MINUS	
 %left TIMES DIVIDE

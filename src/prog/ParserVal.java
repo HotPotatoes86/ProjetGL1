@@ -2,6 +2,7 @@ package prog;
 
 import java.util.List;
 
+import prog.methods.Fonction;
 import prog.results.Resultat;
 
 //#############################################
@@ -40,6 +41,8 @@ public Resultat rval;
 public List<Resultat> lval;
 
 public boolean bval;
+
+public Fonction fval;
 
 //#############################################
 //## C O N S T R U C T O R S
@@ -95,6 +98,11 @@ public ParserVal(Resultat val)
 public ParserVal(List<Resultat> val)
 {
   lval=val;
+}
+
+public ParserVal(Fonction val)
+{
+  fval=val;
 }
 }//end class
 

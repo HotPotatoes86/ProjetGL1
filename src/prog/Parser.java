@@ -412,11 +412,9 @@ public Parser(Reader r) {
 }
 
 
-private static boolean interactive;
-private static Fonction func;
 private static List<Resultat> funcArgs = new ArrayList<>();
 public static Resultat resultat; 
-//#line 348 "Parser.java"
+//#line 347 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -601,7 +599,7 @@ case 6:
 break;
 case 7:
 //#line 44 "grammaire.y"
-{yyval.rval = func.getResultat();
+{yyval.rval = val_peek(0).fval.getResultat();
 											funcArgs.clear();}
 break;
 case 8:
@@ -626,31 +624,31 @@ case 12:
 break;
 case 13:
 //#line 54 "grammaire.y"
-{ func = new Sinus(val_peek(0).rval);}
+{ yyval.fval = new Sinus(val_peek(0).rval);}
 break;
 case 14:
 //#line 55 "grammaire.y"
-{ func = new Cosinus(val_peek(0).rval);}
+{ yyval.fval = new Cosinus(val_peek(0).rval);}
 break;
 case 15:
 //#line 56 "grammaire.y"
-{ func = new Tangente(val_peek(0).rval);}
+{ yyval.fval = new Tangente(val_peek(0).rval);}
 break;
 case 16:
 //#line 57 "grammaire.y"
-{ func = new Minimum(funcArgs);}
+{ yyval.fval = new Minimum(funcArgs);}
 break;
 case 17:
 //#line 58 "grammaire.y"
-{ func = new Maximum(funcArgs);}
+{ yyval.fval = new Maximum(funcArgs);}
 break;
 case 18:
 //#line 59 "grammaire.y"
-{ func = new Moyenne(funcArgs);}
+{ yyval.fval = new Moyenne(funcArgs);}
 break;
 case 19:
 //#line 60 "grammaire.y"
-{ func = new Sqrt(val_peek(0).rval);}
+{ yyval.fval = new Sqrt(val_peek(0).rval);}
 break;
 case 20:
 //#line 63 "grammaire.y"
@@ -709,7 +707,7 @@ case 33:
 //#line 83 "grammaire.y"
 {yyval.bval = val_peek(2).rval.estSuperieurOuEgal(val_peek(0).rval);}
 break;
-//#line 636 "Parser.java"
+//#line 635 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
