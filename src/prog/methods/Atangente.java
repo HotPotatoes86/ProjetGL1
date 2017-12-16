@@ -5,15 +5,15 @@ import prog.results.ResultatDouble;
 import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
-public class Sinus extends Fonction{
+public class Atangente extends Fonction{
 	
 	Resultat res;
 
-	public Sinus(Resultat rval) {
+	public Atangente(Resultat rval) {
 		if (rval instanceof ResultatDouble) {
-			res = new ResultatDouble(Math.sin(((ResultatDouble)rval).getValue()));
+			res = new ResultatDouble(Math.atan(((ResultatDouble)rval).getValue()));
 		}else if (rval instanceof ResultatInteger) {
-			res = new ResultatDouble(Math.sin(((ResultatInteger)rval).getValue()));
+			res = new ResultatDouble(Math.atan(((ResultatInteger)rval).getValue()));
 		}else {
 			res = new ResultatErreur();
 		}
