@@ -54,8 +54,7 @@ public class Cellule {
 	 * @throws IOException 
 	 */
 	public void actualise(Conteneur conteneur) throws IOException, Exception {
-		Calcul c = new Calcul(this,conteneur);
-		c.calcul();
+		conteneur.editerCellule(this.name, this.formule);
 	}
 
 	/**
@@ -140,6 +139,13 @@ public class Cellule {
 	 */
 	public List<Cellule> getCellsUsed() {
 		return this.cellsUsed;
+	}
+	
+	/**
+	 * Renvoie les cellules qui utilisent la cellule courante
+	 */
+	public List<Cellule> getCellsNeedMe() {
+		return this.cellsNeedMe;
 	}
 	
 	/**

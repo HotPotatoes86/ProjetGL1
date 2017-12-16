@@ -16,7 +16,7 @@ import java.util.List;
 %type<rval> operation oneArgument axiome/*Type Resultat*/
 %type<lval> manyArgument listArgument	/*Type List<Resultat>*/
 %type<bval> condition BOOLEAN 			/*Type Boolean*/
-%type<sval> STRING REF 					/*Type String*/
+%type<sval> STRING REF					/*Type String*/
 
 %type<fval> SIN COS TAN MINIMUM MAXIMUM MOY SQRT method /*Type Fonction*/
 
@@ -124,7 +124,7 @@ public static Resultat resultat;
 private static Conteneur conteneur; /*utilisé pour extraire le resultat d'une référence*/
 
 public static Resultat formuleToResultat(String formule, Conteneur conteneur) throws IOException, Exception {
-	this.conteneur = conteneur;
+	Parser.conteneur = conteneur;
 	Parser yyparser;
 	yyparser = new Parser(new StringReader(formule));
 

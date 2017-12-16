@@ -68,6 +68,13 @@ public class Conteneur {
 		}
 		Calcul calc = new Calcul(cellToEdit,this);
 		calc.calcul();
+		//necessaire de copier la liste car elle peut etre modifiee par le calcul
+		List<Cellule> cpy = new ArrayList<>(cellToEdit.getCellsNeedMe());
+		for (Cellule c : cpy) {
+			if (!c.equals(cellToEdit)) {
+				c.actualise(this);
+			}
+		}
 	}
 
 	/**

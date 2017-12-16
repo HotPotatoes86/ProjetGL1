@@ -269,6 +269,7 @@ static String cellFormule;
 
 
 public static List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
+	refs = new ArrayList<>();
 	ParserExtract.conteneur = conteneur;
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(formule));

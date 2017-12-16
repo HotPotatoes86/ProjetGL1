@@ -386,7 +386,7 @@ final static String yyrule[] = {
 "condition : operation SUPEQ operation",
 };
 
-//#line 90 "grammaire.y"
+//#line 94 "grammaire.y"
 
 
 private Yylex lexer;
@@ -412,7 +412,6 @@ public void yyerror (String error) {
 public Parser(Reader r) {
 	lexer = new Yylex(r, this);
 }
-
 
 private static List<Resultat> funcArgs = new ArrayList<>();
 public static Resultat resultat; 
@@ -630,110 +629,110 @@ break;
 case 11:
 //#line 49 "grammaire.y"
 {Cellule cellRef = conteneur.getCellule(val_peek(0).sval.substring(1));
-											if (cellRef==null) {
+											if (cellRef==null){
 												yyval.rval = new ResultatErreur();
-											}else {
+											}else{
 												yyval.rval = cellRef.getResultat();
 											}}
 break;
 case 12:
-//#line 52 "grammaire.y"
+//#line 56 "grammaire.y"
 {yyval.rval = new ResultatBoolean(val_peek(0).bval);}
 break;
 case 13:
-//#line 53 "grammaire.y"
+//#line 57 "grammaire.y"
 {yyval.rval = new ResultatString(val_peek(1).sval);}
 break;
 case 14:
-//#line 54 "grammaire.y"
+//#line 58 "grammaire.y"
 {yyval.rval = val_peek(1).rval;}
 break;
 case 15:
-//#line 57 "grammaire.y"
+//#line 61 "grammaire.y"
 { yyval.fval = new Sinus(val_peek(0).rval);}
 break;
 case 16:
-//#line 58 "grammaire.y"
+//#line 62 "grammaire.y"
 { yyval.fval = new Cosinus(val_peek(0).rval);}
 break;
 case 17:
-//#line 59 "grammaire.y"
+//#line 63 "grammaire.y"
 { yyval.fval = new Tangente(val_peek(0).rval);}
 break;
 case 18:
-//#line 60 "grammaire.y"
+//#line 64 "grammaire.y"
 { yyval.fval = new Minimum(funcArgs);}
 break;
 case 19:
-//#line 61 "grammaire.y"
+//#line 65 "grammaire.y"
 { yyval.fval = new Maximum(funcArgs);}
 break;
 case 20:
-//#line 62 "grammaire.y"
+//#line 66 "grammaire.y"
 { yyval.fval = new Moyenne(funcArgs);}
 break;
 case 21:
-//#line 63 "grammaire.y"
+//#line 67 "grammaire.y"
 { yyval.fval = new Sqrt(val_peek(0).rval);}
 break;
 case 22:
-//#line 66 "grammaire.y"
+//#line 70 "grammaire.y"
 {yyval.rval = val_peek(1).rval;}
 break;
 case 23:
-//#line 69 "grammaire.y"
+//#line 73 "grammaire.y"
 {yyval.lval = val_peek(1).lval;}
 break;
 case 24:
-//#line 72 "grammaire.y"
+//#line 76 "grammaire.y"
 {funcArgs.add(val_peek(0).rval);
 										yyval.lval = funcArgs;}
 break;
 case 25:
-//#line 74 "grammaire.y"
+//#line 78 "grammaire.y"
 {funcArgs.add(val_peek(2).rval);}
 break;
 case 26:
-//#line 77 "grammaire.y"
+//#line 81 "grammaire.y"
 {yyval.bval = val_peek(2).bval && val_peek(0).bval;}
 break;
 case 27:
-//#line 78 "grammaire.y"
+//#line 82 "grammaire.y"
 {yyval.bval = val_peek(2).bval || val_peek(0).bval;}
 break;
 case 28:
-//#line 79 "grammaire.y"
+//#line 83 "grammaire.y"
 {yyval.bval = val_peek(2).bval^val_peek(0).bval;}
 break;
 case 29:
-//#line 80 "grammaire.y"
+//#line 84 "grammaire.y"
 {yyval.bval = val_peek(1).bval;}
 break;
 case 30:
-//#line 81 "grammaire.y"
+//#line 85 "grammaire.y"
 {yyval.bval = val_peek(2).rval.estInferieur(val_peek(0).rval);}
 break;
 case 31:
-//#line 82 "grammaire.y"
+//#line 86 "grammaire.y"
 {yyval.bval = val_peek(2).rval.estSuperieur(val_peek(0).rval);}
 break;
 case 32:
-//#line 83 "grammaire.y"
+//#line 87 "grammaire.y"
 {yyval.bval = val_peek(2).rval.estEgal(val_peek(0).rval);}
 break;
 case 33:
-//#line 84 "grammaire.y"
+//#line 88 "grammaire.y"
 {yyval.bval = val_peek(2).rval.estDifferent(val_peek(0).rval);}
 break;
 case 34:
-//#line 85 "grammaire.y"
+//#line 89 "grammaire.y"
 {yyval.bval = val_peek(2).rval.estInferieurOuEgal(val_peek(0).rval);}
 break;
 case 35:
-//#line 86 "grammaire.y"
+//#line 90 "grammaire.y"
 {yyval.bval = val_peek(2).rval.estSuperieurOuEgal(val_peek(0).rval);}
 break;
-//#line 657 "Parser.java"
+//#line 661 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

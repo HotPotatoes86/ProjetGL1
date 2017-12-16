@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import prog.results.ResultatErreur;
+
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
  * calculer un resultat
@@ -54,7 +56,7 @@ public class Calcul {
 	/**
 	 * Permet d'effectuer le calcul a partir d'une donnee textuelle(formule), cree
 	 * une instance de la classe Resultat (qui peut contenir plusieurs types de
-	 * valeurs : float, double, int...)
+	 * valeurs : double, int...)
 	 * 
 	 * @param cellule
 	 *            Cellule a calculer
@@ -64,24 +66,25 @@ public class Calcul {
 	 * @throws Exception
 	 */
 	public void calcul() throws IOException, Exception {
-		boolean possible = formuleCorrect(formule, conteneur);
-		if (possible) {
-			extractRef();
-			for (Cellule celluleRef : refs) {
+		extractRef();
+		for (Cellule celluleRef : refs) {
+			if (celluleRef.equals(this.cellule) || celluleRef.getCellsUsed().contains(this.cellule)) {
+				cellule.setResultat(new ResultatErreur());
+				return;
+			}else {
 				if (!celluleRef.getIsNumeric()) {
 					celluleRef.actualise(conteneur);
 				}
 				if (celluleRef.getIsNumeric()) {
 					celluleRef.addToCellsNeedMe(cellule);
 					cellule.addToCellsUsed(celluleRef);
-				} else {
+				}else {
+					cellule.setResultat(new ResultatErreur());
 					return;
 				}
 			}
-			cellule.setResultat(Parser.formuleToResultat(formule, conteneur));
-		} else {
-			cellule.setResultat(null);
 		}
+		cellule.setResultat(Parser.formuleToResultat(formule, conteneur));
 	}
 
 	/**
