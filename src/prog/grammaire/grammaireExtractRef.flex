@@ -16,6 +16,7 @@ package prog;
 
 Digit = [0-9]
 Letter = [a-zA-Z]
+Symbole = "+"|"-"|"/"|"*"|"@"|"("|")"|","
 
 %%
 
@@ -24,13 +25,13 @@ Letter = [a-zA-Z]
 
 "|"								{return ParserExtract.PIPE;}
 
-({Letter})+						{yyparser.yylval = new ParserVal(yytext()); 
-									return ParserExtract.FORMULE;}	
-
 {Letter}({Letter}|{Digit}|"_")*	{yyparser.yylval = new ParserVal(yytext()); 
 									return ParserExtract.NAME;}
-												
-[^]|\n|\t  						{}/* ignore all whitespace */
+							
+({Letter}|{Digit}|{Symbole})*		{yyparser.yylval = new ParserVal(yytext()); 
+									return ParserExtract.FORMULE;}	
+
+[^]|\t|\n  						{} /* ignore all whitespace */
 
 
 

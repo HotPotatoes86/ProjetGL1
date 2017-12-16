@@ -1,10 +1,12 @@
 %{
-  import java.io.*;
-  import java.util.ArrayList;
-  import java.util.List;
+package prog;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 %}
 
-%token REF PIPE NAME FORMULE
+%token REF PIPE NAME FORMULE SPACE
 
 %type<sval> REF NAME FORMULE
 
@@ -25,10 +27,8 @@ formuleReference : REF formuleReference 	{String reference = $1;
 				| FORMULE
 				;
 
-importe : NAME PIPE FORMULE 	{cellName = $1; 
-					System.out.println("cellName : " + cellName);
-					cellFormule = $3; 
-					System.out.println("cellFormule : " + cellFormule);}
+importe : NAME PIPE FORMULE SPACE	{cellName = $1; 
+							cellFormule = $3;}
 
 %%
 

@@ -1,3 +1,5 @@
+package prog;
+
 //### This file created by BYACC 1.8(/Java extension  1.15)
 //### Java capabilities added 7 Jan 97, Bob Jamison
 //### Updated : 27 Nov 97  -- Bob Jamison, Joe Nieten
@@ -11,18 +13,10 @@
 //### Please send bug reports to tom@hukatronic.cz
 //### static char yysccsid[] = "@(#)yaccpar	1.8 (Berkeley) 01/20/90";
 
-
-
-package prog;
-
-
-
-//#line 1 "grammaireExtractRef.y"
-
-  import java.io.*;
-  import java.util.ArrayList;
-  import java.util.List;
-//#line 22 "ParserExtract.java"
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+//#line 23 "ParserExtract.java"
 
 
 
@@ -164,45 +158,51 @@ public final static short REF=257;
 public final static short PIPE=258;
 public final static short NAME=259;
 public final static short FORMULE=260;
+public final static short SPACE=261;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
     0,    0,    2,    2,    2,    2,    1,
 };
 final static short yylen[] = {                            2,
-    1,    1,    2,    2,    1,    1,    3,
+    1,    1,    2,    2,    1,    1,    4,
 };
 final static short yydefred[] = {                         0,
-    0,    0,    0,    0,    1,    2,    3,    0,    4,    7,
+    0,    0,    0,    0,    1,    2,    3,    0,    4,    0,
+    7,
 };
 final static short yydgoto[] = {                          4,
     5,    6,
 };
 final static short yysindex[] = {                      -257,
- -256, -252, -256,    0,    0,    0,    0, -251,    0,    0,
+ -256, -252, -256,    0,    0,    0,    0, -251,    0, -253,
+    0,
 };
 final static short yyrindex[] = {                         0,
-    8,    0,   10,    0,    0,    0,    0,    0,    0,    0,
+   10,    0,   11,    0,    0,    0,    0,    0,    0,    0,
+    0,
 };
 final static short yygindex[] = {                         0,
     0,    4,
 };
-final static int YYTABLESIZE=10;
+final static int YYTABLESIZE=11;
 static short yytable[];
 static { yytable();}
 static void yytable(){
 yytable = new short[]{                          1,
-    1,    2,    3,    3,    7,    8,    9,    5,   10,    6,
+    1,    2,    3,    3,    7,    8,    9,   11,   10,    5,
+    6,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
 yycheck = new short[] {                        257,
-  257,  259,  260,  260,    1,  258,    3,    0,  260,    0,
+  257,  259,  260,  260,    1,  258,    3,  261,  260,    0,
+    0,
 };
 }
 final static short YYFINAL=4;
-final static short YYMAXTOKEN=260;
+final static short YYMAXTOKEN=261;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
@@ -220,7 +220,7 @@ null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-null,null,null,"REF","PIPE","NAME","FORMULE",
+null,null,null,"REF","PIPE","NAME","FORMULE","SPACE",
 };
 final static String yyrule[] = {
 "$accept : axiome",
@@ -230,11 +230,10 @@ final static String yyrule[] = {
 "formuleReference : FORMULE formuleReference",
 "formuleReference : REF",
 "formuleReference : FORMULE",
-"importe : NAME PIPE FORMULE",
+"importe : NAME PIPE FORMULE SPACE",
 };
 
-//#line 33 "grammaireExtractRef.y"
-
+//#line 34 "grammaireExtractRef.y"
 
 private YyExtractRef lexer;
 
@@ -252,7 +251,7 @@ private int yylex () {
 
 
 public void yyerror (String error) {
-	//System.err.println ("Error: " + error);
+	System.err.println ("Error: " + error);
 }
 
 
@@ -269,25 +268,21 @@ static String cellFormule;
 
 
 public static List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
-	refs = new ArrayList<>();
 	ParserExtract.conteneur = conteneur;
-	ParserExtract yyparser;
-	yyparser = new ParserExtract(new StringReader(formule));
-	yyparser.yyparse();
+	ParserExtract yyParserExtract;
+	refs = new ArrayList<>();
+	yyParserExtract = new ParserExtract(new StringReader(formule));
+	yyParserExtract.yyparse();
 	return refs;
 }
 
 public static Cellule extractCelluleFromLine(String line) throws IOException, Exception {
-	ParserExtract yyparser;
-	yyparser = new ParserExtract(new StringReader(line));
-
-	yyparser.yyparse();
+	ParserExtract yyParserExtract;
+	yyParserExtract = new ParserExtract(new StringReader(line));
+	yyParserExtract.yyparse();
 	return new Cellule(cellName, cellFormule);
 }
-
-
-/*compilation : byaccj -J grammaire.y*/
-//#line 219 "ParserExtract.java"
+//#line 220 "ParserExtract.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -317,7 +312,6 @@ String yys;    //current token string
 // method: yyparse : parse input and execute indicated items
 //###############################################################
 int yyparse()
-throws Exception
 {
 boolean doaction;
   init_stacks();
@@ -443,25 +437,23 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 3:
-//#line 18 "grammaireExtractRef.y"
+//#line 20 "grammaireExtractRef.y"
 {String reference = val_peek(1).sval; 
 												Cellule cellule = conteneur.getCellule(reference.substring(1));
 												refs.add(cellule);}
 break;
 case 5:
-//#line 22 "grammaireExtractRef.y"
+//#line 24 "grammaireExtractRef.y"
 {String reference = val_peek(0).sval; 
 									Cellule cellule = conteneur.getCellule(reference.substring(1));
 									refs.add(cellule);}
 break;
 case 7:
-//#line 28 "grammaireExtractRef.y"
-{cellName = val_peek(2).sval; 
-					System.out.println("cellName : " + cellName);
-					cellFormule = val_peek(0).sval; 
-					System.out.println("cellFormule : " + cellFormule);}
+//#line 30 "grammaireExtractRef.y"
+{cellName = val_peek(3).sval;
+							cellFormule = val_peek(1).sval;}
 break;
-//#line 387 "ParserExtract.java"
+//#line 386 "ParserExtract.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
@@ -507,11 +499,11 @@ break;
 
 //## run() --- for Thread #######################################
 /**
- * A default run method, used for operating this parser
+ * A default run method, used for operating this ParserExtract
  * object in the background.  It is intended for extending Thread
  * or implementing Runnable.  Turn off with -Jnorun .
  */
-public void run() throws Exception
+public void run()
 {
   yyparse();
 }
@@ -531,7 +523,7 @@ public ParserExtract()
 
 
 /**
- * Create a parser, setting the debug to true or false.
+ * Create a ParserExtract, setting the debug to true or false.
  * @param debugMe true for debugging, false for no debug.
  */
 public ParserExtract(boolean debugMe)
