@@ -68,7 +68,7 @@ public class Calcul {
 	public void calcul() throws IOException, Exception {
 		extractRef();
 		for (Cellule celluleRef : refs) {
-			if (celluleRef.equals(this.cellule) || celluleRef.getCellsUsed().contains(this.cellule)) {
+			if (celluleRef==null || celluleRef.equals(this.cellule) || celluleRef.getCellsUsed().contains(this.cellule)) {
 				cellule.setResultat(new ResultatErreur());
 				return;
 			}else {
