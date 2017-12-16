@@ -153,6 +153,9 @@ public final class SaveManager {
 				res.addCellule(c);
 		}
 		reader.close();
+		for (Cellule c : res.getAllCellules()) {
+			c.actualise(res);
+		}
 		return res;
 	}
 

@@ -17,6 +17,7 @@ package prog;
 Digit = [0-9]
 Letter = [a-zA-Z]
 Symbole = "+"|"-"|"/"|"*"|"@"|"("|")"|","
+Symbole2 = "+"|"-"|"/"|"*"|"("|")"|","
 
 %%
 
@@ -27,8 +28,11 @@ Symbole = "+"|"-"|"/"|"*"|"@"|"("|")"|","
 
 {Letter}({Letter}|{Digit}|"_")*	{yyparser.yylval = new ParserVal(yytext()); 
 									return ParserExtract.NAME;}
+
+({Letter}|{Digit}|{Symbole2})* 	{yyparser.yylval = new ParserVal(yytext()); 
+									return ParserExtract.FORM;}
 							
-({Letter}|{Digit}|{Symbole})*		{yyparser.yylval = new ParserVal(yytext()); 
+"|"({Letter}|{Digit}|{Symbole})*	{yyparser.yylval = new ParserVal(yytext()); 
 									return ParserExtract.FORMULE;}	
 
 [^]|\t|\n  						{} /* ignore all whitespace */

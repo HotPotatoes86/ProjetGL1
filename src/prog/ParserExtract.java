@@ -1,5 +1,3 @@
-package prog;
-
 //### This file created by BYACC 1.8(/Java extension  1.15)
 //### Java capabilities added 7 Jan 97, Bob Jamison
 //### Updated : 27 Nov 97  -- Bob Jamison, Joe Nieten
@@ -12,6 +10,14 @@ package prog;
 //###           14 Mar 02  -- Tomas Hurka -- -d support, static initializer workaround
 //### Please send bug reports to tom@hukatronic.cz
 //### static char yysccsid[] = "@(#)yaccpar	1.8 (Berkeley) 01/20/90";
+
+
+
+
+
+
+//#line 2 "grammaireExtractRef.y"
+package prog;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -158,47 +164,42 @@ public final static short REF=257;
 public final static short PIPE=258;
 public final static short NAME=259;
 public final static short FORMULE=260;
-public final static short SPACE=261;
+public final static short FORM=261;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
     0,    0,    2,    2,    2,    2,    1,
 };
 final static short yylen[] = {                            2,
-    1,    1,    2,    2,    1,    1,    4,
+    1,    1,    2,    2,    1,    1,    2,
 };
 final static short yydefred[] = {                         0,
-    0,    0,    0,    0,    1,    2,    3,    0,    4,    0,
-    7,
+    0,    0,    0,    0,    1,    2,    3,    7,    4,
 };
 final static short yydgoto[] = {                          4,
     5,    6,
 };
 final static short yysindex[] = {                      -257,
- -256, -252, -256,    0,    0,    0,    0, -251,    0, -253,
-    0,
+ -256, -253, -256,    0,    0,    0,    0,    0,    0,
 };
 final static short yyrindex[] = {                         0,
-   10,    0,   11,    0,    0,    0,    0,    0,    0,    0,
-    0,
+    3,    0,    9,    0,    0,    0,    0,    0,    0,
 };
 final static short yygindex[] = {                         0,
-    0,    4,
+    0,    5,
 };
-final static int YYTABLESIZE=11;
+final static int YYTABLESIZE=9;
 static short yytable[];
 static { yytable();}
 static void yytable(){
 yytable = new short[]{                          1,
-    1,    2,    3,    3,    7,    8,    9,   11,   10,    5,
-    6,
+    1,    2,    5,    3,    3,    7,    8,    9,    6,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
 yycheck = new short[] {                        257,
-  257,  259,  260,  260,    1,  258,    3,  261,  260,    0,
-    0,
+  257,  259,    0,  261,  261,    1,  260,    3,    0,
 };
 }
 final static short YYFINAL=4;
@@ -220,17 +221,17 @@ null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-null,null,null,"REF","PIPE","NAME","FORMULE","SPACE",
+null,null,null,"REF","PIPE","NAME","FORMULE","FORM",
 };
 final static String yyrule[] = {
 "$accept : axiome",
 "axiome : importe",
 "axiome : formuleReference",
 "formuleReference : REF formuleReference",
-"formuleReference : FORMULE formuleReference",
+"formuleReference : FORM formuleReference",
 "formuleReference : REF",
-"formuleReference : FORMULE",
-"importe : NAME PIPE FORMULE SPACE",
+"formuleReference : FORM",
+"importe : NAME FORMULE",
 };
 
 //#line 34 "grammaireExtractRef.y"
@@ -282,7 +283,7 @@ public static Cellule extractCelluleFromLine(String line) throws IOException, Ex
 	yyParserExtract.yyparse();
 	return new Cellule(cellName, cellFormule);
 }
-//#line 220 "ParserExtract.java"
+//#line 215 "ParserExtract.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -436,24 +437,40 @@ boolean doaction;
     switch(yyn)
       {
 //########## USER-SUPPLIED ACTIONS ##########
+case 1:
+//#line 16 "grammaireExtractRef.y"
+{}
+break;
+case 2:
+//#line 17 "grammaireExtractRef.y"
+{}
+break;
 case 3:
 //#line 20 "grammaireExtractRef.y"
 {String reference = val_peek(1).sval; 
 												Cellule cellule = conteneur.getCellule(reference.substring(1));
 												refs.add(cellule);}
 break;
+case 4:
+//#line 23 "grammaireExtractRef.y"
+{}
+break;
 case 5:
 //#line 24 "grammaireExtractRef.y"
 {String reference = val_peek(0).sval; 
-									Cellule cellule = conteneur.getCellule(reference.substring(1));
-									refs.add(cellule);}
+												Cellule cellule = conteneur.getCellule(reference.substring(1));
+												refs.add(cellule);}
+break;
+case 6:
+//#line 27 "grammaireExtractRef.y"
+{}
 break;
 case 7:
 //#line 30 "grammaireExtractRef.y"
-{cellName = val_peek(3).sval;
-							cellFormule = val_peek(1).sval;}
+{cellName = val_peek(1).sval; 
+								cellFormule = val_peek(0).sval.substring(1);}
 break;
-//#line 386 "ParserExtract.java"
+//#line 397 "ParserExtract.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

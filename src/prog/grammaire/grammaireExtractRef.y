@@ -6,29 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 %}
 
-%token REF PIPE NAME FORMULE SPACE
+%token REF PIPE NAME FORMULE FORM
 
-%type<sval> REF NAME FORMULE
+%type<sval> REF NAME FORMULE FORM
 
 
 %%
 
-axiome : importe
-	| formuleReference
+axiome : importe		{}
+	| formuleReference	{}
 	;
 
 formuleReference : REF formuleReference 	{String reference = $1; 
 												Cellule cellule = conteneur.getCellule(reference.substring(1));
 												refs.add(cellule);}
-				| FORMULE formuleReference
-				| REF 			{String reference = $1; 
-									Cellule cellule = conteneur.getCellule(reference.substring(1));
-									refs.add(cellule);}
-				| FORMULE
+				| FORM formuleReference		{}
+				| REF 						{String reference = $1; 
+												Cellule cellule = conteneur.getCellule(reference.substring(1));
+												refs.add(cellule);}
+				| FORM 						{}
 				;
 
-importe : NAME PIPE FORMULE SPACE	{cellName = $1; 
-							cellFormule = $3;}
+importe : NAME FORMULE		{cellName = $1; 
+								cellFormule = $2.substring(1);}
 
 %%
 

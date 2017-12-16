@@ -18,7 +18,7 @@ public class Main {
 			SaveManager.sauvegarde("save.nlb", cont);
 			Conteneur newCont = SaveManager.ImportFile("save.nlb");
 			for (Cellule cel : newCont.getAllCellules()) {
-				System.out.println(cel.getName());
+				System.out.println(cel.getName() + " 	" + cel.getFormule() + " 	" + cel.getResultat().getStringResultat());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
