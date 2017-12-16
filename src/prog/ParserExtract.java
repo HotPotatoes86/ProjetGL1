@@ -268,17 +268,15 @@ static String cellName;
 static String cellFormule;
 
 
-public List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
-	this.conteneur = conteneur;
+public static List<Cellule> extractRef(String formule, Conteneur conteneur) throws IOException, Exception {
+	ParserExtract.conteneur = conteneur;
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(formule));
-
 	yyparser.yyparse();
-	
 	return refs;
 }
 
-public Cellule extractCelluleFromLine(String line) throws IOException, Exception {
+public static Cellule extractCelluleFromLine(String line) throws IOException, Exception {
 	ParserExtract yyparser;
 	yyparser = new ParserExtract(new StringReader(line));
 

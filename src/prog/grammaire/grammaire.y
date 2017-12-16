@@ -21,10 +21,10 @@ import java.util.List;
 %type<fval> SIN COS TAN MINIMUM MAXIMUM MOY SQRT method /*Type Fonction*/
 
 %left PLUS MINUS	
-%left TIMES DIVIDE
+%left TIMES DIVIDE MOD
 %right POW
 %left OR XOR
-%left AND
+%left AND SUP
 
 %%
 
@@ -46,8 +46,12 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 											funcArgs.clear();}
 	| DOUBLE							{$$ = new ResultatDouble($1);}
 	| INT 								{$$ = new ResultatInteger($1);}
-	| REF						{Cellule cellRef = conteneur.getCellule($1.substring(1));
-							$$ = cellRef.getResultat();}
+	| REF								{Cellule cellRef = conteneur.getCellule($1.substring(1));
+											if (cellRef==null){
+												$$ = new ResultatErreur();
+											}else{
+												$$ = cellRef.getResultat();
+											}}
 	/*| PAROUV condition PARFER			{$$ = new ResultatBoolean($2);}*/
 	| BOOLEAN 							{$$ = new ResultatBoolean($1);}
 	| QUOTE STRING QUOTE				{$$ = new ResultatString($2);}
@@ -117,9 +121,9 @@ public Parser(Reader r) {
 private static boolean interactive;
 private static List<Resultat> funcArgs = new ArrayList<>();
 public static Resultat resultat; 
-private static Conteneur; /*utilisé pour extraire le resultat d'une référence*/
+private static Conteneur conteneur; /*utilisé pour extraire le resultat d'une référence*/
 
-public Resultat formuleToResultat(String formule, Conteneur conteneur) throws IOException, Exception {
+public static Resultat formuleToResultat(String formule, Conteneur conteneur) throws IOException, Exception {
 	this.conteneur = conteneur;
 	Parser yyparser;
 	yyparser = new Parser(new StringReader(formule));

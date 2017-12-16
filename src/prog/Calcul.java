@@ -78,7 +78,7 @@ public class Calcul {
 					return;
 				}
 			}
-			cellule.setResultat(Parseur.formuleToResultat(formule, conteneur));
+			cellule.setResultat(Parser.formuleToResultat(formule, conteneur));
 		} else {
 			cellule.setResultat(null);
 		}

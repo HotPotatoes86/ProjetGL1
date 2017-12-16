@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -95,23 +94,13 @@ public final class SaveManager {
 	 * @return ResultSetMetaData
 	 */
 	private static ResultSet RetournerResultat(Statement s, String Requete) {
-
 		try {
-
 			ResultSet r = ((java.sql.Statement) s).executeQuery(Requete);
-		
 			return r;
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
-		}
-		
+		}	
 		return null;
-
-		
-
 	}
 	
 	/**
@@ -124,52 +113,27 @@ public final class SaveManager {
 	 * @throws SQLException
 	 */
 
-	public static Conteneur ImportBase(String requete, String url, String user,
-			String password) throws ClassNotFoundException, SQLException {
-
-		
-
+	public static Conteneur ImportBase(String requete, String url, String user,String password) throws ClassNotFoundException, SQLException {
 		try {
-
 			Conteneur c = new Conteneur();
-			
-			Statement s =ConnecterBase(url, user, password)
-					.createStatement();
-			
-		
-
-			ResultSet rs=(ResultSet) RetournerResultat(s, requete);
-			
-			
+			Statement s =ConnecterBase(url, user, password).createStatement();
+			ResultSet rs=(ResultSet) RetournerResultat(s, requete);			
 			Cellule cell = null;
-
 			while (rs.next()) {
-
-				ResultSetMetaData rm=rs.getMetaData();
-				
+				ResultSetMetaData rm=rs.getMetaData();				
 				for (int i = 1; i <=  rm.getColumnCount(); i++){
-
 					cell = new Cellule(((ResultSetMetaData) rm).getColumnName(i).toUpperCase() + "_"
 							+ i, ( (ResultSet) rs).getObject(i).toString());
-				c.addCellule(cell);
-				
+					c.addCellule(cell);
 				}
-
 			}
-
 			(rs).close();
 			(s).close();
-			
 			return c;
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 		}
-
 		return null;
-
 	}
 
 	/**

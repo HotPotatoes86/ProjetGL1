@@ -9,7 +9,7 @@ public class Main {
 		try {
 			System.out.println("Main");
 			cont.editerCellule(c.getName(),c.getFormule());
-			cont.editerCellule("cel2","@cel1+1");
+			cont.editerCellule("cel2","@cel1+@cel1");
 			cont.editerCellule("cel3", "cos(25)");
 			System.out.println(cont.getCellule("cel1").getResultat().getStringResultat());
 			System.out.println(cont.getCellule("cel2").getResultat().getStringResultat());
