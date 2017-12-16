@@ -44,8 +44,8 @@ int yychar;             //the current working character
 //###############################################################
 void debug(String msg)
 {
-  if (yydebug)
-    System.out.println(msg);
+  /*if (yydebug)
+    System.out.println(msg);*/
 }
 
 //########## STATE STACK ##########
@@ -405,7 +405,7 @@ private int yylex () {
 
 
 public void yyerror (String error) {
-	System.err.println ("Error: " + error);
+	//System.err.println ("Error: " + error);
 }
 
 

@@ -148,7 +148,7 @@ public final class SaveManager {
 		BufferedReader reader = new BufferedReader(new FileReader(chemin));
 		String line;
 		while ((line = reader.readLine()) != null) {
-			Cellule c = Parseur.extractLine(line);
+			Cellule c = ParserExtract.extractCelluleFromLine(line);
 			if (c != null)
 				res.addCellule(c);
 		}
