@@ -9,7 +9,7 @@ import java.util.List;
 %}
 
 
-%token STRING INT DOUBLE BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT SIN COS TAN MINIMUM MAXIMUM MOY SQRT REF
+%token STRING INT DOUBLE BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT LN SIN ASIN COS ACOS TAN ATAN MINIMUM MAXIMUM MOY TODEGREE TORADIAN ABS POW ROUND SQRT LEN REF
 
 %type<ival>	INT 						/*Type Int*/
 %type<dval> DOUBLE						/*Type Double*/
@@ -58,13 +58,24 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| PAROUV operation PARFER			{$$ = $2;}
 	;
 
-method : SIN oneArgument		{ $$ = new Sinus($2);}
+method : LN oneArgument		{ $$ = new Ln($2);}
+	| SIN oneArgument		{ $$ = new Sinus($2);}
+	| ASIN oneArgument		{ $$ = new Asinus($2);}
 	| COS oneArgument			{ $$ = new Cosinus($2);}
+	| ACOS oneArgument			{ $$ = new Acosinus($2);}
 	| TAN oneArgument			{ $$ = new Tangente($2);}
+	| ATAN oneArgument			{ $$ = new Atangente($2);}
+	| TODEGREE oneArgument		{ $$ = new ToDegree($2);}
+	| TORADIAN oneArgument		{ $$ = new ToRadian($2);}
 	| MINIMUM manyArgument		{ $$ = new Minimum(funcArgs);}
 	| MAXIMUM manyArgument		{ $$ = new Maximum(funcArgs);}
 	| MOY manyArgument			{ $$ = new Moyenne(funcArgs);}
+	| ABS oneArgument			{ $$ = new Absolute($2);}
+	| POW oneArgument			{ $$ = new Pow($2);}
+	| ROUND oneArgument			{ $$ = new Round($2);}
 	| SQRT oneArgument			{ $$ = new Sqrt($2);}
+	| LEN oneArgument			{ $$ = new Len($2);}
+	| 
 	;
 
 oneArgument : PAROUV operation PARFER		{$$ = $2;}

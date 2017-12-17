@@ -5,6 +5,7 @@ import java.util.List;
 
 import prog.results.Resultat;
 import prog.results.ResultatErreur;
+import prog.results.ResultatBoolean;
 
 public class Minimum extends Fonction{
 	
@@ -19,7 +20,11 @@ public class Minimum extends Fonction{
 		}else {
 			Resultat tmp = lval.get(0); 
 			for (int i=1; i<lval.size(); i++) {
-				if (tmp.estSuperieur(lval.get(i))) tmp = lval.get(i);
+				if (lval.get(i) instanceof ResultatErreur || lval.get(i) instanceof ResultatBoolean) {
+					tmp = new ResultatErreur();
+				}else{
+					if (tmp.estSuperieur(lval.get(i))) tmp = lval.get(i);
+				}
 			}
 			res = tmp;
 		}

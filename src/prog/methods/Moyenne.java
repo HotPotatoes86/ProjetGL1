@@ -20,7 +20,12 @@ public class Moyenne extends Fonction{
 		}else {
 			Resultat tmp = lval.get(0); 
 			for (int i=1; i<lval.size(); i++) {
-				tmp = tmp.addition(lval.get(i));
+				if (lval.get(i) instanceof ResultatErreur || lval.get(i) instanceof ResultatBoolean) {
+					tmp = new ResultatErreur();
+				}else{
+					tmp = tmp.addition(lval.get(i));
+				}
+	
 			}
 			tmp = tmp.division(new ResultatInteger(lval.size()));
 			res = tmp;

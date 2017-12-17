@@ -50,12 +50,21 @@ Letter = [a-zA-Z]
 "not"					{return Parser.NOT;}
 
 "sin"					{return Parser.SIN;}
+"asin"					{return Parser.ASIN;}
 "cos"					{return Parser.COS;}
+"acos"					{return Parser.ACOS;}
 "tan"					{return Parser.TAN;}
+"atan"					{return Parser.ATAN;}
+"todegree"				{return Parser.TODEGREE;}
+"toradian"				{return Parser.TORADIAN;}
+"ln"					{return Parser.LN;}
 "min"					{return Parser.MINIMUM;}
 "max"					{return Parser.MAXIMUM;}
+"abs"					{return Parser.ABS;}
+"pow"					{return Parser.POW;}
+"round"					{return Parser.ROUND;}
 "sqrt"					{return Parser.SQRT;}
-
+"len"					{return Parser.LEN;}
 "true"|"false"			{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;}
 	
