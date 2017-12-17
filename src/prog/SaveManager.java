@@ -44,6 +44,8 @@ public final class SaveManager {
 
 		try {
 			
+			//on charge le driver correspondant au SGBD
+			
 			if (url.contains("jdbc:sqlite:")) {
 
 				Class.forName("org.sqlite.JDBC");
@@ -61,10 +63,14 @@ public final class SaveManager {
 				
 			}else {			
 
+				//si on n'arrive pas à déterminer quel est le sgbd, on retourne null
+				
 				return null;
 
 			}
 
+			//on essaye d'établir une connexion	
+			
 			Connection connection = DriverManager.getConnection(url, user,
 					password);
 
@@ -95,6 +101,9 @@ public final class SaveManager {
 	 */
 	private static ResultSet RetournerResultat(Statement s, String Requete) {
 		try {
+			
+			//on execute la requéte et on récupére le résultat
+			
 			ResultSet r = ((java.sql.Statement) s).executeQuery(Requete);
 			return r;
 		} catch (Exception e) {
@@ -115,21 +124,44 @@ public final class SaveManager {
 
 	public static Conteneur ImportBase(String requete, String url, String user,String password) throws ClassNotFoundException, SQLException {
 		try {
+			
+			
 			Conteneur c = new Conteneur();
+			
+			//on établis une connection
+			
 			Statement s =ConnecterBase(url, user, password).createStatement();
-			ResultSet rs=(ResultSet) RetournerResultat(s, requete);			
+			
+			//on récupére le résultat de la requéte
+			
+			ResultSet rs=(ResultSet) RetournerResultat(s, requete);	
+			
+			//récupére les métadonnées
+			
+			ResultSetMetaData rm = rs.getMetaData();
 			Cellule cell = null;
+			
+			int j=1;
+			
 			while (rs.next()) {
-				ResultSetMetaData rm=rs.getMetaData();				
-				for (int i = 1; i <=  rm.getColumnCount(); i++){
-					cell = new Cellule(((ResultSetMetaData) rm).getColumnName(i).toUpperCase() + "_"
-							+ i, ( (ResultSet) rs).getObject(i).toString());
+
+				//on crée une cellule pour chaque colonne de chaque ligne
+				
+				for(int i=1;i<=rm.getColumnCount();i++){
+										
+					cell=new Cellule(rm.getColumnName(i).toUpperCase()+"_"+j,rs.getString(rm.getColumnName(i)));
 					c.addCellule(cell);
+					
 				}
+				
+				j++;
+			
 			}
+			
 			(rs).close();
 			(s).close();
 			return c;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -147,9 +179,18 @@ public final class SaveManager {
 		Conteneur res = new Conteneur();
 		BufferedReader reader = new BufferedReader(new FileReader(chemin));
 		String line;
+		
+		//On lit chaque ligne du fichier
+		
 		while ((line = reader.readLine()) != null) {
+			
+			//Pour chaque ligne on extrait les données nécessaire à la création d'une cellule
+			
 			Cellule c = ParserExtract.extractCelluleFromLine(line);
 			if (c != null)
+				
+				//On ajoute la nouvelle cellule au conteneur
+				
 				res.addCellule(c);
 		}
 		reader.close();
@@ -171,6 +212,9 @@ public final class SaveManager {
 			throws IOException {
 		PrintWriter writer = new PrintWriter(chemin, "UTF-8");
 		for (Cellule c : conteneur.getAllCellules()) {
+			
+			//Pour chaque cellule du conteneur on écrit une ligne dans le fichier de sauvegarde
+			
 			writer.println(c.getName() + "|" + c.getFormule());
 		}
 		writer.close();
