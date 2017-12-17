@@ -23,7 +23,7 @@ public class ResultatString extends Resultat{
 	}
 	
 	@Override
-	public String getStringResultat() {
+	public String toString() {
 		return value;
 	}
 

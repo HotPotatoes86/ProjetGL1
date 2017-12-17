@@ -24,7 +24,7 @@ public class ResultatInteger extends Resultat{
 	}
 	
 	@Override
-	public String getStringResultat() {
+	public String toString() {
 		return value+"";
 	}
 

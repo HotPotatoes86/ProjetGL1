@@ -17,7 +17,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("3"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().toString().equalsIgnoreCase("3"));
 	}
 	
 	@Test
@@ -29,7 +29,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("5.0"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().toString().equalsIgnoreCase("5.0"));
 	}
 	
 	@Test
@@ -41,7 +41,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("1"));
+		assertTrue("Resultat de la cellule calculee",cont.getCellule("cel").getResultat().toString().equalsIgnoreCase("1"));
 	}
 	
 	@Test
@@ -55,8 +55,8 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Resultat de la cellule cel1",cont.getCellule("cel1").getResultat().getStringResultat().equalsIgnoreCase("2"));
-		assertTrue("Resultat de la cellule cel2",cont.getCellule("cel2").getResultat().getStringResultat().equalsIgnoreCase("4"));
+		assertTrue("Resultat de la cellule cel1",cont.getCellule("cel1").getResultat().toString().equalsIgnoreCase("2"));
+		assertTrue("Resultat de la cellule cel2",cont.getCellule("cel2").getResultat().toString().equalsIgnoreCase("4"));
 	}
 	
 	@Test
@@ -71,8 +71,8 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Resultat de la cellule cel1",cont.getCellule("cel1").getResultat().getStringResultat().equalsIgnoreCase("4"));
-		assertTrue("Resultat de la cellule cel2",cont.getCellule("cel2").getResultat().getStringResultat().equalsIgnoreCase("6"));
+		assertTrue("Resultat de la cellule cel1",cont.getCellule("cel1").getResultat().toString().equalsIgnoreCase("4"));
+		assertTrue("Resultat de la cellule cel2",cont.getCellule("cel2").getResultat().toString().equalsIgnoreCase("6"));
 	}
 	
 	@Test
@@ -89,9 +89,9 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Resultat de la cellule cel0",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("4"));
-		assertTrue("Resultat de la cellule cel1",cont.getCellule("cel1").getResultat().getStringResultat().equalsIgnoreCase("5"));
-		assertTrue("Resultat de la cellule cel2",cont.getCellule("cel2").getResultat().getStringResultat().equalsIgnoreCase("7"));
+		assertTrue("Resultat de la cellule cel0",cont.getCellule("cel").getResultat().toString().equalsIgnoreCase("4"));
+		assertTrue("Resultat de la cellule cel1",cont.getCellule("cel1").getResultat().toString().equalsIgnoreCase("5"));
+		assertTrue("Resultat de la cellule cel2",cont.getCellule("cel2").getResultat().toString().equalsIgnoreCase("7"));
 	}
 	
 	@Test
@@ -105,7 +105,7 @@ public class CalculTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue("Resultat de la cellule cel0",cont.getCellule("cel").getResultat().getStringResultat().equalsIgnoreCase("2"));
+		assertTrue("Resultat de la cellule cel0",cont.getCellule("cel").getResultat().toString().equalsIgnoreCase("2"));
 		assertTrue("Resultat de la cellule cel1",cont.getCellule("cel1").getResultat() instanceof ResultatErreur);
 	}
 }

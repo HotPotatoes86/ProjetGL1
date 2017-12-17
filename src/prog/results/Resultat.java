@@ -10,7 +10,8 @@ public abstract class Resultat {
 	 * Retourne la valeur du resultat sous forme de string
 	 * @return la valeur du resultat sous forme de string
 	 */
-	public abstract String getStringResultat();
+	@Override
+	public abstract String toString();
 	
 	/**
 	 * Methode d'addition avec un resultat

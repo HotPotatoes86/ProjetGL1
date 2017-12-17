@@ -1,25 +1,29 @@
+import java.util.Scanner;
+
 import prog.Cellule;
 import prog.Conteneur;
-import prog.SaveManager;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Conteneur cont = new Conteneur();
-		Cellule c = new Cellule("cel1","(1+3+1)*(2+2)");
+		Scanner sc = new Scanner(System.in);
+		String nom="", formule="";
+		System.out.println("Stop pour quitter");
 		try {
-			
-			cont.editerCellule(c.getName(),c.getFormule());
-			cont.editerCellule("cel2","@cel1+@cel1");
-			cont.editerCellule("cel3", "cos(25)");
-			System.out.println(cont.getCellule("cel1").getResultat().getStringResultat());
-			System.out.println(cont.getCellule("cel2").getResultat().getStringResultat());
-			System.out.println(cont.getCellule("cel3").getResultat().getStringResultat());
-			SaveManager.sauvegarde("save.nlb", cont);
-			Conteneur newCont = SaveManager.ImportFile("save.nlb");
-			for (Cellule cel : newCont.getAllCellules()) {
-				System.out.println(cel.getName() + " 	" + cel.getFormule() + " 	" + cel.getResultat().getStringResultat());
+			while(true) {
+				System.out.println("Nom cellule : ");
+				nom = sc.next();
+				System.out.println("Formule cellule : ");
+				formule = sc.next();
+				if (nom.equalsIgnoreCase("stop") || formule.equalsIgnoreCase("stop")) break;
+				cont.editerCellule(nom, formule);
+				System.out.println("Contenu du conteneur :");
+				for (Cellule c : cont.getAllCellules()) {
+					System.out.println("cellule(" + c.getName() + ") : " + c.getFormule() + " = " + c.getResultat());
+				}
 			}
+			sc.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

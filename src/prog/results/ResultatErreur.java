@@ -3,7 +3,7 @@ package prog.results;
 public class ResultatErreur extends Resultat {
 
 	@Override
-	public String getStringResultat() {
+	public String toString() {
 		return "#@!Erreur!@#";
 	}
 

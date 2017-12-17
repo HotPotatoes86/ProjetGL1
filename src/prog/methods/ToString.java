@@ -12,7 +12,7 @@ public class ToString extends Fonction{
 		if (arg instanceof ResultatErreur) {
 			res = new ResultatErreur();
 		}else {
-			res = new ResultatString(arg.getStringResultat());
+			res = new ResultatString(arg.toString());
 		}
 	}
 	

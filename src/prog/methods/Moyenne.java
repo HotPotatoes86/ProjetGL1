@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prog.results.Resultat;
+import prog.results.ResultatBoolean;
 import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
