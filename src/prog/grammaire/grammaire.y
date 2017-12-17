@@ -9,7 +9,7 @@ import java.util.List;
 %}
 
 
-%token STRING INT DOUBLE BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT LN SIN ASIN COS ACOS TAN ATAN MINIMUM MAXIMUM MOY TODEGREE TORADIAN ABS POW ROUND SQRT LEN REF
+%token STRING INT DOUBLE BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT LN SIN ASIN COS ACOS TAN ATAN MINIMUM MAXIMUM MOY TODEGREE TORADIAN ABS ROUND SQRT TONUM LEN CONCAT TOSTRING SUBSTR REF
 
 %type<ival>	INT 						/*Type Int*/
 %type<dval> DOUBLE						/*Type Double*/
@@ -74,8 +74,11 @@ method : LN oneArgument		{ $$ = new Ln($2);}
 	| POW oneArgument			{ $$ = new Pow($2);}
 	| ROUND oneArgument			{ $$ = new Round($2);}
 	| SQRT oneArgument			{ $$ = new Sqrt($2);}
+	| TONUM oneArgument			{ $$ = new ToNum($2);}
 	| LEN oneArgument			{ $$ = new Len($2);}
-	| 
+	| CONCAT manyArgument		{ $$ = new Concat($2);}
+	| TOSTRING oneArgument		{ $$ = new ToString($2);}
+	| SUBSTR manyArgument		{ $$ = new Substring($2);}
 	;
 
 oneArgument : PAROUV operation PARFER		{$$ = $2;}

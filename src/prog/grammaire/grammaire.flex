@@ -64,7 +64,11 @@ Letter = [a-zA-Z]
 "pow"					{return Parser.POW;}
 "round"					{return Parser.ROUND;}
 "sqrt"					{return Parser.SQRT;}
+"tonum"					{return Parser.TONUM;}
 "len"					{return Parser.LEN;}
+"concat"				{return Parser.CONCAT;}
+"tostring"				{return Parser.TOSTRING;}
+"substr"					{return Parser.SUBSTR;}
 "true"|"false"			{yyparser.yylval = new ParserVal(Boolean.parseBoolean(yytext()));
 							return Parser.BOOLEAN;}
 	
