@@ -1,3 +1,5 @@
+SOURCE=ParseurFormule.java ParseurRef.java Yylex.java
+
 all: ParseurFormule.java ParseurRef.java Yylex.java
 
 ParseurFormule.java: src/prog/grammaire/grammaire.y

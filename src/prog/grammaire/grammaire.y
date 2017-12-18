@@ -20,11 +20,11 @@ import java.util.List;
 
 %type<fval> SIN COS TAN MINIMUM MAXIMUM MOY SQRT method /*Type Fonction*/
 
+%left OR XOR
+%left AND SUP
 %left PLUS MINUS	
 %left TIMES DIVIDE MOD
 %right POW
-%left OR XOR
-%left AND SUP
 
 %%
 
