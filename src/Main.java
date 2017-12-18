@@ -13,9 +13,9 @@ public class Main {
 		try {
 			while(true) {
 				System.out.println("Nom cellule : ");
-				nom = sc.next();
+				nom = sc.nextLine();
 				System.out.println("Formule cellule : ");
-				formule = sc.next();
+				formule = sc.nextLine();
 				if (nom.equalsIgnoreCase("stop") || formule.equalsIgnoreCase("stop")) break;
 				cont.editerCellule(nom, formule);
 				System.out.println("Contenu du conteneur :");

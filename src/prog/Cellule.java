@@ -31,10 +31,8 @@ public class Cellule {
 	/**
 	 * Constructeur de la classe, initialise les attributs de la classe
 	 * 
-	 * @param nom
-	 *            Nom de la cellule
-	 * @param formule
-	 *            Valeur textuelle attribuee a la cellule
+	 * @param nom Nom de la cellule
+	 * @param formule Valeur textuelle attribuee a la cellule
 	 */
 	public Cellule(String nom, String formule) {
 		this.name = nom;
@@ -48,8 +46,7 @@ public class Cellule {
 	/**
 	 * Recalcule la valeur numerique de la cellule
 	 * 
-	 * @param conteneur
-	 *            Conteneur qui contient la cellule
+	 * @param conteneur Conteneur qui contient la cellule
 	 * @throws Exception 
 	 * @throws IOException 
 	 */
@@ -61,8 +58,7 @@ public class Cellule {
 	 * Permet de supprimer la cellule en parametre de l'attribut CellsNeedMe de la
 	 * cellule courante
 	 * 
-	 * @param cellule
-	 *            Cellule qui sera supprimer de la liste CellsNeedMe
+	 * @param cellule Cellule qui sera supprimer de la liste CellsNeedMe
 	 */
 	public void oublier(Cellule cellule) {
 		this.cellsNeedMe.remove(cellule);
@@ -71,8 +67,7 @@ public class Cellule {
 	/**
 	 * Ajoute a la liste cellsUsed les cellules utilisees dans la formule
 	 * 
-	 * @param cellule
-	 *            Cellule a ajouter a la liste des cellules cellsUsed
+	 * @param cellule Cellule a ajouter a la liste des cellules cellsUsed
 	 */
 	public void addToCellsUsed(Cellule cellule) {
 		this.cellsUsed.add(cellule);
@@ -88,8 +83,7 @@ public class Cellule {
 	/**
 	 * ajoute la cellule "cellule" dans la liste des cellules qui l'utilisent
 	 * 
-	 * @param cellule
-	 *            cellule a ajouter a la liste
+	 * @param cellule cellule a ajouter a la liste
 	 */
 	public void addToCellsNeedMe(Cellule cellule) {
 		this.cellsNeedMe.add(cellule);
@@ -98,8 +92,7 @@ public class Cellule {
 	/**
 	 * Modifie la valeur de l'attribut formule
 	 * 
-	 * @param formule
-	 *            Valeur a saisir dans la cellule
+	 * @param formule Valeur a saisir dans la cellule
 	 */
 	public void setFormule(String formule) {
 		this.formule = formule;
@@ -151,8 +144,7 @@ public class Cellule {
 	/**
 	 * Modifie l'attribut resultat
 	 * 
-	 * @param resultat
-	 *            resultat de la formule dans la cellule
+	 * @param resultat resultat de la formule dans la cellule
 	 */
 	public void setResultat(Resultat resultat) {
 		this.resultat = resultat;

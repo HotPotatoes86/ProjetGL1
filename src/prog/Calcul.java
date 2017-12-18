@@ -42,11 +42,9 @@ public class Calcul {
 	/**
 	 * Verifie la formule et renvoie vrai s'elle est correct
 	 * 
-	 * @param formule
-	 *            Valeur textuelle de la cellule a verifier pour voir si le calcul
+	 * @param formule Valeur textuelle de la cellule a verifier pour voir si le calcul
 	 *            est correct
-	 * @param conteneur
-	 *            Conteneur contenant la cellule a calculer (sert a verifier
+	 * @param conteneur Conteneur contenant la cellule a calculer (sert a verifier
 	 *            l'existence des cellules vers lesquelles il y a des references)
 	 */
 	public boolean formuleCorrect(String formule, Conteneur conteneur) {
@@ -58,10 +56,8 @@ public class Calcul {
 	 * une instance de la classe Resultat (qui peut contenir plusieurs types de
 	 * valeurs : double, int...)
 	 * 
-	 * @param cellule
-	 *            Cellule a calculer
-	 * @param conteneur
-	 *            Conteneur contenant la cellule a calculer
+	 * @param cellule Cellule a calculer
+	 * @param conteneur Conteneur contenant la cellule a calculer
 	 * @throws IOException 
 	 * @throws Exception
 	 */
@@ -90,10 +86,8 @@ public class Calcul {
 	/**
 	 * Cree une liste de cellules vers laquelle la formule fait reference
 	 * 
-	 * @param formule
-	 *            Formule de la cellule en cours
-	 * @param conteneur
-	 *            Conteneur contenant les cellules
+	 * @param formule Formule de la cellule en cours
+	 * @param conteneur Conteneur contenant les cellules
 	 * @throws Exception 
 	 * @throws IOException 
 	 */
