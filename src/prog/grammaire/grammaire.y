@@ -1,5 +1,4 @@
 %{
-package prog;
 
 import prog.methods.*;
 import prog.results.*;

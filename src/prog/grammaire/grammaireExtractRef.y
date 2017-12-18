@@ -1,5 +1,4 @@
 %{
-package prog;
 
 import java.io.*;
 import java.util.ArrayList;

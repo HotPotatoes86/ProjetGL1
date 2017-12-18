@@ -8,7 +8,7 @@ package prog;
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>prog/grammaire/grammaire.flex</tt>
  */
-class YyExtractRef {
+class Yylex {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -331,7 +331,7 @@ class YyExtractRef {
   /* user code: */
   private Parser yyparser;
 
-  public YyExtractRef(java.io.Reader r, Parser yyparser) {
+  public Yylex(java.io.Reader r, Parser yyparser) {
     this(r);
     this.yyparser = yyparser;
   }
@@ -342,7 +342,7 @@ class YyExtractRef {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  YyExtractRef(java.io.Reader in) {
+  Yylex(java.io.Reader in) {
     this.zzReader = in;
   }
 

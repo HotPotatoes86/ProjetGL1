@@ -37,7 +37,7 @@ public final class SaveManager {
 			}else if(url.contains("jdbc:mysql:")){
 				Class.forName("com.mysql.jdbc.Driver");	
 			}else {			
-				//si on n'arrive pas a determiner quel est le sgbd, on retourne null
+				//si on arrive pas a determiner le sgbd, on retourne null
 				return null;
 			}
 			//on essaye d'etablir une connexion	
