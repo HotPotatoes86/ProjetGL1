@@ -90,8 +90,7 @@ public class Conteneur {
 		if (nom.length()>0) {
 			if ((nom.charAt(0)>='a' && nom.charAt(0)<='z') || (nom.charAt(0)>='A' && nom.charAt(0)<='Z')) {
 				for (int i=1; i<nom.length(); i++) {
-					if (!((nom.charAt(i)>='a' && nom.charAt(i)<='z') || (nom.charAt(i)>='A' && nom.charAt(i)<='Z') || 
-							(nom.charAt(i)>='A' && nom.charAt(i)<='Z') || nom.charAt(i)=='_')){
+					if (!((nom.charAt(i)>='a' && nom.charAt(i)<='z') || (nom.charAt(i)>='A' && nom.charAt(i)<='Z') || (nom.charAt(i)>='0' && nom.charAt(i)<='9') || nom.charAt(i)=='_')){
 						return false;
 					}
 				}
