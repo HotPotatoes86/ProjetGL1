@@ -140,6 +140,7 @@ public final class SaveManager {
 	public static void sauvegarde(String chemin, Conteneur conteneur) throws IOException {
 		File file = new File(chemin);
 		if(file.exists()) {
+			//un fichier de sauvegarde existe donc on cree une back up en le renommant
 			File backup = new File(chemin + ".bak");
 			FileUtils.copyFile(file, backup);
 		}
