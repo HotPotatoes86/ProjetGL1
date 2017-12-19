@@ -11,8 +11,6 @@ import prog.results.ResultatInteger;
 public class Moyenne extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
-
-	Resultat res;
 	
 	public Moyenne(List<Resultat> lval) {
 		args = lval;

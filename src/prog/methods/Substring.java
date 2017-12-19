@@ -11,8 +11,6 @@ import prog.results.ResultatErreur;
 public class Substring extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
-
-	Resultat res;
 	
 	public Substring(List<Resultat> lval) {
 		args = lval;

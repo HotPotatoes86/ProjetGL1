@@ -6,8 +6,6 @@ import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
 public class Sqrt extends Fonction{
-	
-	Resultat res;
 
 	public Sqrt(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

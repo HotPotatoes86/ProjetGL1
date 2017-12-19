@@ -10,8 +10,6 @@ import prog.results.ResultatBoolean;
 public class Maximum extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
-
-	Resultat res;
 	
 	public Maximum(List<Resultat> lval) {
 		args = lval;

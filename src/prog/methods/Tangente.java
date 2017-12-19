@@ -6,8 +6,6 @@ import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
 public class Tangente extends Fonction{
-	
-	Resultat res;
 
 	public Tangente(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

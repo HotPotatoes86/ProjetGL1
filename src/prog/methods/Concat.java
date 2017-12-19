@@ -10,8 +10,6 @@ import prog.results.ResultatErreur;
 public class Concat extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
-
-	Resultat res;
 	
 	public Concat(List<Resultat> lval) {
 		args = lval;

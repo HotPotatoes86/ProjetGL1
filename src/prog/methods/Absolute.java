@@ -6,8 +6,6 @@ import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
 public class Absolute extends Fonction{
-	
-	Resultat res;
 
 	public Absolute(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

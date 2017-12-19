@@ -7,8 +7,6 @@ import prog.results.ResultatInteger;
 
 public class ToRadian extends Fonction{
 	
-	Resultat res;
-
 	public ToRadian(Resultat rval) {
 		if (rval instanceof ResultatDouble) {
 			res = new ResultatDouble(Math.toRadians(((ResultatDouble)rval).getValue()));

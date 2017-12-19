@@ -7,8 +7,6 @@ import prog.results.ResultatInteger;
 
 public class Atangente extends Fonction{
 	
-	Resultat res;
-
 	public Atangente(Resultat rval) {
 		if (rval instanceof ResultatDouble) {
 			res = new ResultatDouble(Math.atan(((ResultatDouble)rval).getValue()));

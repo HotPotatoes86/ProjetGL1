@@ -55,26 +55,53 @@ public class Conteneur {
 	 * @throws Exception 
 	 */
 	public void editerCellule(String nom, String formule) throws IOException, Exception {
-		Cellule cellToEdit = getCellule(nom);
-		if(cellToEdit != null) {
-			cellToEdit.setFormule(formule);
-			for (Cellule cellAOublier : cellToEdit.getCellsUsed()) {
-				cellAOublier.oublier(cellToEdit);
+		if (verifieNom(nom)) {
+			Cellule cellToEdit = getCellule(nom);
+			if(cellToEdit != null) {
+				cellToEdit.setFormule(formule);
+				for (Cellule cellAOublier : cellToEdit.getCellsUsed()) {
+					cellAOublier.oublier(cellToEdit);
+				}
+				cellToEdit.clearCellsUsed();
+			}else {
+				cellToEdit = new Cellule(nom,formule);
+				this.addCellule(cellToEdit);
 			}
-			cellToEdit.clearCellsUsed();
+			Calcul calc = new Calcul(cellToEdit,this);
+			calc.calcul();
+			//necessaire de copier la liste car elle peut etre modifiee par le calcul
+			List<Cellule> cpy = new ArrayList<>(cellToEdit.getCellsNeedMe());
+			for (Cellule c : cpy) {
+				if (!c.equals(cellToEdit)) {
+					c.actualise(this);
+				}
+			}
 		}else {
-			cellToEdit = new Cellule(nom,formule);
-			this.addCellule(cellToEdit);
+			throw new Exception("Nom de cellule incorrect");
 		}
-		Calcul calc = new Calcul(cellToEdit,this);
-		calc.calcul();
-		//necessaire de copier la liste car elle peut etre modifiee par le calcul
-		List<Cellule> cpy = new ArrayList<>(cellToEdit.getCellsNeedMe());
-		for (Cellule c : cpy) {
-			if (!c.equals(cellToEdit)) {
-				c.actualise(this);
+	}
+	
+	/**
+	 * Verifie si le nom de la cellule est correct, c'est a dire s'il commence par une lettre et ne contient que les lettres, chiffres ou '_'
+	 * @param nom nom de la cellule que l'on verifie
+	 * @return true si le nom est correct, sinon false
+	 */
+	private boolean verifieNom(String nom) {
+		if (nom.length()>0) {
+			if ((nom.charAt(0)>='a' && nom.charAt(0)<='z') || (nom.charAt(0)>='A' && nom.charAt(0)<='Z')) {
+				for (int i=1; i<nom.length(); i++) {
+					if (!((nom.charAt(i)>='a' && nom.charAt(i)<='z') || (nom.charAt(i)>='A' && nom.charAt(i)<='Z') || 
+							(nom.charAt(i)>='A' && nom.charAt(i)<='Z') || nom.charAt(i)=='_')){
+						return false;
+					}
+				}
+			}else {
+				return false;
 			}
+		}else {
+			return false;
 		}
+		return true;
 	}
 
 	/**

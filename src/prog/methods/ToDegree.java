@@ -6,8 +6,6 @@ import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
 public class ToDegree extends Fonction{
-	
-	Resultat res;
 
 	public ToDegree(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

@@ -2,8 +2,6 @@ package prog;
 
 import java.sql.Statement;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -139,12 +137,22 @@ public final class SaveManager {
 	 */
 	public static void sauvegarde(String chemin, Conteneur conteneur) throws IOException {
 		File file = new File(chemin);
+		PrintWriter writer;
 		if(file.exists()) {
+			File file2 = new File(chemin+".bak");
+			file2.createNewFile();
 			//un fichier de sauvegarde existe donc on cree une back up en le renommant
-			File backup = new File(chemin + ".bak");
-			FileUtils.copyFile(file, backup);
+			BufferedReader reader = new BufferedReader(new FileReader(chemin));
+			writer = new PrintWriter(chemin+".bak", "UTF-8");
+			String line;
+			//On lit chaque ligne du fichier
+			while ((line = reader.readLine()) != null) {
+				//et pour chaque ligne on ecrit dans le fichier bak
+				writer.println(line);
+			}
+			reader.close();
 		}
-		PrintWriter writer = new PrintWriter(chemin, "UTF-8");
+		writer = new PrintWriter(chemin, "UTF-8");
 		for (Cellule c : conteneur.getAllCellules()) {
 			//Pour chaque cellule du conteneur on ecrit une ligne dans le fichier de sauvegarde
 			writer.println(c.getName() + "|" + c.getFormule());

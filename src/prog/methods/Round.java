@@ -6,8 +6,6 @@ import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
 public class Round extends Fonction{
-	
-	Resultat res;
 
 	public Round(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

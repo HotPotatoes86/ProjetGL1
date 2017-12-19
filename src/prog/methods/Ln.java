@@ -6,8 +6,6 @@ import prog.results.ResultatInteger;
 import prog.results.ResultatErreur;
 
 public class Ln extends Fonction{
-
-	Resultat res;
 	
 	public Ln(Resultat arg) {
 		if (arg instanceof ResultatDouble) {

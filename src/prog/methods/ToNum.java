@@ -7,8 +7,6 @@ import prog.results.ResultatDouble;
 import prog.results.ResultatErreur;
 
 public class ToNum extends Fonction{
-
-	Resultat res;
 	
 	public ToNum(Resultat arg) {
 		if (arg instanceof ResultatString) {

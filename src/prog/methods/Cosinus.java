@@ -3,8 +3,6 @@ package prog.methods;
 import prog.results.*;
 
 public class Cosinus extends Fonction{
-	
-	Resultat res;
 
 	public Cosinus(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

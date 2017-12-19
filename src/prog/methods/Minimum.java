@@ -10,8 +10,6 @@ import prog.results.ResultatBoolean;
 public class Minimum extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
-
-	Resultat res;
 	
 	public Minimum(List<Resultat> lval) {
 		args = lval;

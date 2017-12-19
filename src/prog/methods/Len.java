@@ -6,8 +6,6 @@ import prog.results.ResultatInteger;
 import prog.results.ResultatErreur;
 
 public class Len extends Fonction{
-
-	Resultat res;
 	
 	public Len(Resultat arg) {
 		if (arg instanceof ResultatString) {

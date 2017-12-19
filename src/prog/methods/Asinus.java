@@ -6,8 +6,6 @@ import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
 
 public class Asinus extends Fonction{
-	
-	Resultat res;
 
 	public Asinus(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

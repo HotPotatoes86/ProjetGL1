@@ -5,8 +5,6 @@ import prog.results.ResultatString;
 import prog.results.ResultatErreur;
 
 public class ToString extends Fonction{
-
-	Resultat res;
 	
 	public ToString(Resultat arg) {
 		if (arg instanceof ResultatErreur) {

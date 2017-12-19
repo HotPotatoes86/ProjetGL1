@@ -3,8 +3,6 @@ package prog.methods;
 import prog.results.*;
 
 public class Acosinus extends Fonction{
-	
-	Resultat res;
 
 	public Acosinus(Resultat rval) {
 		if (rval instanceof ResultatDouble) {

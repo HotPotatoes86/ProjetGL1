@@ -11,8 +11,6 @@ import prog.results.ResultatErreur;
 public class Pow extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
-
-	Resultat res;
 	
 	public Pow(List<Resultat> lval) {
 		args = lval;
