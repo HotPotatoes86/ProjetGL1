@@ -21,7 +21,7 @@ Symbole2 = "+"|"-"|"/"|"*"|"("|")"|","
 
 %%
 
-"@"{Letter}+{Digit}*			{yyparser.yylval = new ParserVal(yytext()); 
+"@"{Letter}({Letter}|{Digit})*	{yyparser.yylval = new ParserVal(yytext()); 
 									return ParserExtract.REF;}
 
 "|"								{return ParserExtract.PIPE;}

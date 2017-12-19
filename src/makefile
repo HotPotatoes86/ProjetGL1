@@ -59,15 +59,14 @@ $(BIN):
 grammaire:
 	byaccj -J -Jclass=Parser -Jpackage=prog $(SRC)/grammaire/grammaire.y
 	mv Parser.java $(SRC)/.
-	mv ParserVal.java $(SRC)/.
+	rm -f ParserVal.java
 	sed -i "s/package prog;/package prog;\nimport java.util.List;\nimport prog.methods.Fonction;\nimport prog.results.Resultat;/g" $(SRC)/ParserVal.java
 	byaccj -J -Jclass=ParserExtract -Jpackage=prog $(SRC)/grammaire/grammaireExtractRef.y
 	mv ParserExtract.java $(SRC)/.
 	rm -f ParserExtractVal.java
 	sed -i 's/ParserExtractVal/ParserVal/g' $(SRC)/ParserExtract.java
 	jflex -d $(SRC) $(SRC)/grammaire/grammaireExtractRef.flex
-	sed -i 's/Yylex/YyExtractRef/g' $(SRC)/Yylex.java
-	mv $(SRC)/Yylex.java $(SRC)/YyExtractRef.java
+#	sed -i 's/Yylex/YyExtractRef/g' $(SRC)/YyExtractRef.java
 	jflex -d $(SRC) $(SRC)/grammaire/grammaire.flex
 
 
@@ -78,10 +77,10 @@ clean :
 	@/bin/rm -rf $(BIN)
 
 fclean : clean
-	@echo "suppression des fichier Yylex.java, Parser.java, ParserExtract.java et ParserVal.java"
+	@echo "suppression des fichier Yylex.java, YyExtractRef.java, Parser.java et ParserExtract.java"
 	@/bin/rm -f $(SRC)/Yylex.java
+	@/bin/rm -f $(SRC)/YyExtractRef.java
 	@/bin/rm -f $(SRC)/Parser.java
-	@/bin/rm -f $(SRC)/ParserVal.java
 	@/bin/rm -f $(SRC)/ParserExtract.java
 #	@echo "suppression de la lib $(LIB)"
 #	@/bin/rm -f $(LIB)

@@ -5,6 +5,20 @@ import prog.Kernel;
 
 public class Main {
 
+	private static String clean(String str)
+	{
+		String strbis = new String(str);
+		int i = 0;
+		while (i >= 0)
+		{
+			i = strbis.indexOf("\b");
+			if (i == 0)
+				strbis = new String (strbis.substring(1));
+			else if (i > 0)
+				strbis = new String(strbis.substring(0, i-1) + strbis.substring(i+1));
+		}
+		return strbis;
+	}
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String nom="", formule="", chemin="", action="";
@@ -13,23 +27,23 @@ public class Main {
 		try {
 			while(boucle) {
 				System.out.println("Action : editer | sauvegarder | importer");
-				action = sc.nextLine();
+				action = clean(sc.nextLine());
 				switch(action){
 				case "editer":
 					System.out.println("Quel nom ?");
-					nom = sc.nextLine();
+					nom = clean(sc.nextLine());
 					System.out.println("Quelle formule ?");
-					formule = sc.nextLine();
+					formule = clean(sc.nextLine());
 					Kernel.editer(nom, formule);
 					break;
 				case "sauvegarder":
 					System.out.println("Quel chemin ?");
-					chemin = sc.nextLine();
+					chemin = clean(sc.nextLine());
 					Kernel.sauvegarder(chemin);
 					break;
 				case "importer":
 					System.out.println("Quel chemin ?");
-					chemin = sc.nextLine();
+					chemin = clean(sc.nextLine());
 					Kernel.importerFichier(chemin);
 					break;
 				case "stop":

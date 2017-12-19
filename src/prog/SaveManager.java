@@ -2,8 +2,6 @@ package prog;
 
 import java.sql.Statement;
 
-import tmp.ParserExtract;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

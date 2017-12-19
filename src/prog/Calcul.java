@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prog.results.ResultatErreur;
-import tmp.Parser;
-import tmp.ParserExtract;
 
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
