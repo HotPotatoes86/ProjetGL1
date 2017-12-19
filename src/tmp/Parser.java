@@ -18,8 +18,10 @@
 
 //#line 1 "grammaire.y"
 
-package prog;
+package tmp;
 
+import prog.Cellule;
+import prog.Conteneur;
 import prog.methods.*;
 import prog.results.*;
 import java.io.*;

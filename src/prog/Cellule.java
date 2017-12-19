@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prog.results.Resultat;
+import prog.results.ResultatErreur;
 
 /**
  * Cellules contenues dans le conteneur, permet d'y attribuer des formules qui
@@ -20,10 +21,6 @@ public class Cellule {
 	 */
 	private String formule;
 	/**
-	 * Boolean permettant de savoir s'il y a une valeur numerique a la cellule
-	 */
-	private boolean isNumeric = false;
-	/**
 	 * Nom de la cellule
 	 */
 	private String name;
@@ -37,10 +34,9 @@ public class Cellule {
 	public Cellule(String nom, String formule) {
 		this.name = nom;
 		this.formule = formule;
-		this.isNumeric = false;
 		this.cellsNeedMe = new ArrayList<>();
 		this.cellsUsed = new ArrayList<>();
-		this.resultat=null;
+		this.resultat=new ResultatErreur();
 	}
 
 	/**
@@ -96,7 +92,6 @@ public class Cellule {
 	 */
 	public void setFormule(String formule) {
 		this.formule = formule;
-		this.isNumeric = false;
 	}
 
 	/**
@@ -104,13 +99,6 @@ public class Cellule {
 	 */
 	public String getFormule() {
 		return this.formule;
-	}
-
-	/**
-	 * Renvoie la valeur de l'attribut "isNumeric"
-	 */
-	public boolean getIsNumeric() {
-		return this.isNumeric;
 	}
 
 	/**
@@ -148,7 +136,6 @@ public class Cellule {
 	 */
 	public void setResultat(Resultat resultat) {
 		this.resultat = resultat;
-		if (this.resultat!=null) this.isNumeric=true;
 	}
 
 }

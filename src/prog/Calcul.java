@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prog.results.ResultatErreur;
+import tmp.Parser;
+import tmp.ParserExtract;
 
 /**
  * Classe communiquant avec la grammaire pour interpreter les formules et
@@ -68,10 +70,10 @@ public class Calcul {
 				cellule.setResultat(new ResultatErreur());
 				return;
 			}else {
-				if (!celluleRef.getIsNumeric()) {
+				if (celluleRef.getResultat()!=null) {
 					celluleRef.actualise(conteneur);
 				}
-				if (celluleRef.getIsNumeric()) {
+				if (celluleRef.getResultat()!=null) {
 					celluleRef.addToCellsNeedMe(cellule);
 					cellule.addToCellsUsed(celluleRef);
 				}else {

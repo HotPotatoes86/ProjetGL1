@@ -17,12 +17,15 @@
 
 
 //#line 2 "grammaireExtractRef.y"
-package prog;
+package tmp;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 //#line 23 "ParserExtract.java"
+
+import prog.Cellule;
+import prog.Conteneur;
 
 
 
