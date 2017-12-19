@@ -137,7 +137,7 @@ public static Resultat resultat;
 private static Conteneur conteneur; /*utilisé pour extraire le resultat d'une référence*/
 
 public static Resultat formuleToResultat(String formule, Conteneur conteneur) throws IOException, Exception {
-	Parser.conteneur = conteneur;
+        resultat =new ResultatErreur();
 	Parser yyparser;
 	yyparser = new Parser(new StringReader(formule));
 
