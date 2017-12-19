@@ -60,7 +60,6 @@ grammaire:
 	byaccj -J -Jclass=Parser -Jpackage=prog $(SRC)/grammaire/grammaire.y
 	mv Parser.java $(SRC)/.
 	rm -f ParserVal.java
-	sed -i "s/package prog;/package prog;\nimport java.util.List;\nimport prog.methods.Fonction;\nimport prog.results.Resultat;/g" $(SRC)/ParserVal.java
 	byaccj -J -Jclass=ParserExtract -Jpackage=prog $(SRC)/grammaire/grammaireExtractRef.y
 	mv ParserExtract.java $(SRC)/.
 	rm -f ParserExtractVal.java
