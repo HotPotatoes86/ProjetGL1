@@ -2,7 +2,10 @@ package prog;
 
 import java.sql.Statement;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -135,6 +138,11 @@ public final class SaveManager {
 	 * @throws IOException
 	 */
 	public static void sauvegarde(String chemin, Conteneur conteneur) throws IOException {
+		File file = new File(chemin);
+		if(file.exists()) {
+			File backup = new File(chemin + ".bak");
+			FileUtils.copyFile(file, backup);
+		}
 		PrintWriter writer = new PrintWriter(chemin, "UTF-8");
 		for (Cellule c : conteneur.getAllCellules()) {
 			//Pour chaque cellule du conteneur on ecrit une ligne dans le fichier de sauvegarde

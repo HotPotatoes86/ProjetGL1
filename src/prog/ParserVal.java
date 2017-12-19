@@ -42,6 +42,9 @@ public List<Resultat> lval;
 
 public boolean bval;
 
+/**
+ * Fonction value of this 'union'
+ */
 public Fonction fval;
 
 //#############################################
@@ -100,6 +103,10 @@ public ParserVal(List<Resultat> val)
   lval=val;
 }
 
+/**
+ * Initialize me as a Fonction
+ * @param val
+ */
 public ParserVal(Fonction val)
 {
   fval=val;
