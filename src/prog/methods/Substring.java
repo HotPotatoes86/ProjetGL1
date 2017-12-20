@@ -14,9 +14,10 @@ public class Substring extends Fonction{
 	
 	public Substring(List<Resultat> lval) {
 		args = lval;
-		if (lval.size() <= 1 || lval.size() > 3) {
+		if (lval.size() < 2 || lval.size() > 3) {
 			res = new ResultatErreur();
 		}else {
+			System.out.println("bonjour");
 			if (lval.get(0) instanceof ResultatString) {
 				if (lval.size() == 2 && lval.get(1) instanceof ResultatInteger){
 					res = new ResultatString(((ResultatString)lval.get(0)).getValue().substring(((ResultatInteger)lval.get(1)).getValue()));
