@@ -27,7 +27,7 @@ public class Main {
 		char[] password;
 		Conteneur co = new Conteneur ();
 		boolean boucle = true;
-		System.out.println("Stop pour quitter");
+		System.out.println("stop pour quitter");
 		try {
 			while(boucle) {
 				System.out.println("Action : editer | sauvegarder | importer | importer-bd");
@@ -62,8 +62,8 @@ public class Main {
 					user = clean(sc.nextLine());
 					
 					System.out.println("Quel mot de passe ?");
-					//password = clean(sc.nextLine());
-					password  = System.console().readPassword();
+					//password = clean(sc.nextLine());	//affiche le mot de passe
+					password  = System.console().readPassword(); //n'affiche pas le mot de passe
 					
 					
 					System.out.println("De quelle table voulez-vous extraire les données ?");
@@ -76,12 +76,14 @@ public class Main {
 					break;
 				default: System.out.println("Action invalide");
 				}
-				System.out.println("==============================================");
-				System.out.println("===============Contenu du conteneur===========");
-				for (Cellule c : Kernel.getConteneur().getAllCellules()){
-					System.out.println("@" + c.getName() + "(" + c.getFormule() + ") = " + c.getResultat());
+				if (boucle){
+					System.out.println("==============================================");
+					System.out.println("===============Contenu du conteneur===========");
+					for (Cellule c : Kernel.getConteneur().getAllCellules()){
+						System.out.println("@" + c.getName() + "(" + c.getFormule() + ") = " + c.getResultat());
+					}
+					System.out.println("==============================================");
 				}
-				System.out.println("==============================================");
 			}
 			sc.close();
 		} catch (Exception e) {

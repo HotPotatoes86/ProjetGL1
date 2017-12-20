@@ -13,8 +13,17 @@ import prog.results.ResultatErreur;
  */
 public class Cellule {
 
+	/**
+	 * Cellules qui utilisent une reference sur la cellule courante
+	 */
 	private List<Cellule> cellsNeedMe;
+	/**
+	 * Cellules qui sont utilisees dans la formule de la cellule courante
+	 */
 	private List<Cellule> cellsUsed;
+	/**
+	 *	Resultat du calcul a partir de la formule de la cellule
+	 */
 	private Resultat resultat;
 	/**
 	 * Valeur textuelle de la cellule
@@ -24,6 +33,9 @@ public class Cellule {
 	 * Nom de la cellule
 	 */
 	private String name;
+	/**
+	 * Permet de savoir si la cellule est en cours de calcul, permet d'eviter les conflits
+	 */
 	private Boolean enCalcul;
 
 	/**
@@ -140,11 +152,19 @@ public class Cellule {
 		this.resultat = resultat;
 	}
 
+	/**
+	 *	Getter sur l'attribut en calcul
+	 *	@return l'attribut en calcul
+	 */
 	public Boolean getEnCalcul()
 	{
 		return this.enCalcul;
 	}
 
+	/**
+	 *	Setter sur l'attribut en calcul
+	 *	@param c valeur attribuee a l'attribut
+	 */
 	public void setEnCalcul(Boolean c)
 	{
 		this.enCalcul = c;
