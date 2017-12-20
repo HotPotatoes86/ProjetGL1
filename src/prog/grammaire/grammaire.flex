@@ -60,8 +60,9 @@ Letter = [a-zA-Z]
 "ln"					{return Parser.LN;}
 "min"					{return Parser.MINIMUM;}
 "max"					{return Parser.MAXIMUM;}
+"moy"					{return Parser.MOY;}
 "abs"					{return Parser.ABS;}
-"pow"					{return Parser.POW;}
+"pow"					{return Parser.POWER;}
 "round"					{return Parser.ROUND;}
 "sqrt"					{return Parser.SQRT;}
 "tonum"					{return Parser.TONUM;}
@@ -78,7 +79,7 @@ Letter = [a-zA-Z]
 {Digit}+"."{Digit}+		{yyparser.yylval = new ParserVal(Double.parseDouble(yytext())); 
 							return Parser.DOUBLE;}
 
-{Letter}*				{yyparser.yylval = new ParserVal(yytext()); 
+"\""[^\"]*"\""				{yyparser.yylval = new ParserVal(yytext().substring(1, yytext().length() - 1)); 
 							return Parser.STRING;}
 
 [^]|\n|\t  				{}/* ignore all whitespace */

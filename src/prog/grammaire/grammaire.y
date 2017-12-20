@@ -8,7 +8,7 @@ import java.util.List;
 %}
 
 
-%token STRING INT DOUBLE BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT LN SIN ASIN COS ACOS TAN ATAN MINIMUM MAXIMUM MOY TODEGREE TORADIAN ABS ROUND SQRT TONUM LEN CONCAT TOSTRING SUBSTR REF
+%token STRING INT DOUBLE BOOLEAN PLUS MINUS TIMES DIVIDE MOD POW INF SUP EQ DIFF INFEQ SUPEQ PAROUV PARFER PIPE COMMA QUOTE IF THEN ELSE OR AND XOR NOT LN SIN ASIN COS ACOS TAN ATAN MINIMUM MAXIMUM MOY TODEGREE TORADIAN ABS ROUND SQRT TONUM LEN CONCAT TOSTRING SUBSTR REF POWER
 
 %type<ival>	INT 						/*Type Int*/
 %type<dval> DOUBLE						/*Type Double*/
@@ -17,12 +17,13 @@ import java.util.List;
 %type<bval> condition BOOLEAN 			/*Type Boolean*/
 %type<sval> STRING REF					/*Type String*/
 
-%type<fval> SIN COS TAN MINIMUM MAXIMUM MOY SQRT method /*Type Fonction*/
+%type<fval> LN SIN ASIN COS ACOS TAN ATAN MINIMUM MAXIMUM MOY TODEGREE TORADIAN ABS ROUND SQRT TONUM LEN CONCAT TOSTRING SUBSTR POWER method /*Type Fonction*/
 
 %left OR XOR
 %left AND SUP
 %left PLUS MINUS	
 %left TIMES DIVIDE MOD
+%left NEG
 %right POW
 
 %%
@@ -41,9 +42,16 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| operation DIVIDE operation		{$$ = $1.division($3);}
 	| operation TIMES operation			{$$ = $1.multiplication($3);}
 	| operation MOD operation			{$$ = $1.modulo($3);}
+	| operation POW operation			{funcArgs.add($1);
+											funcArgs.add($3);
+											Pow tmp = new Pow(funcArgs);
+											$$ = tmp.getResultat();
+											funcArgs.clear();}
 	| method							{$$ = $1.getResultat();
 											funcArgs.clear();}
+	| MINUS DOUBLE	%prec NEG			{$$ = new ResultatDouble(-$2);}
 	| DOUBLE							{$$ = new ResultatDouble($1);}
+	| MINUS INT %prec NEG 						{$$ = new ResultatInteger(-$2);}
 	| INT 								{$$ = new ResultatInteger($1);}
 	| REF								{Cellule cellRef = conteneur.getCellule($1.substring(1));
 											if (cellRef==null){
@@ -53,7 +61,7 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 											}}
 	/*| PAROUV condition PARFER			{$$ = new ResultatBoolean($2);}*/
 	| BOOLEAN 							{$$ = new ResultatBoolean($1);}
-	| QUOTE STRING QUOTE				{$$ = new ResultatString($2);}
+	| STRING							{$$ = new ResultatString($1);}
 	| PAROUV operation PARFER			{$$ = $2;}
 	;
 
@@ -70,12 +78,12 @@ method : LN oneArgument		{ $$ = new Ln($2);}
 	| MAXIMUM manyArgument		{ $$ = new Maximum(funcArgs);}
 	| MOY manyArgument			{ $$ = new Moyenne(funcArgs);}
 	| ABS oneArgument			{ $$ = new Absolute($2);}
-	| POW manyArgument			{ $$ = new Pow($2);}
+	| POWER manyArgument		{ $$ = new Pow($2);}
 	| ROUND oneArgument			{ $$ = new Round($2);}
 	| SQRT oneArgument			{ $$ = new Sqrt($2);}
 	| TONUM oneArgument			{ $$ = new ToNum($2);}
 	| LEN oneArgument			{ $$ = new Len($2);}
-	| CONCAT manyArgument		{ $$ = new Concat($2);}
+	| CONCAT manyArgument		{ $$ = new Concat(funcArgs);}
 	| TOSTRING oneArgument		{ $$ = new ToString($2);}
 	| SUBSTR manyArgument		{ $$ = new Substring($2);}
 	;
@@ -88,7 +96,7 @@ manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
 
 listArgument : operation			{funcArgs.add($1);
 										$$ = funcArgs;}
-	| operation COMMA listArgument	{funcArgs.add($1);}
+	| listArgument COMMA operation	{funcArgs.add($3);}
 	;
 
 condition : condition AND condition {$$ = $1 && $3;}

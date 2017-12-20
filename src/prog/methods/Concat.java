@@ -13,13 +13,16 @@ public class Concat extends Fonction{
 	
 	public Concat(List<Resultat> lval) {
 		args = lval;
-		if (lval.size()<=0 || lval.size() > 2) {
+		System.out.println(lval.size());
+		if (lval.size() < 2) {
 			res = new ResultatErreur();
 		}else {
-			if (lval.get(0) instanceof ResultatString && lval.get(1) instanceof ResultatString) {
-				res = lval.get(0).addition(lval.get(1));
-			}else {
+			if (!(lval.get(0) instanceof ResultatString)) {
 				res = new ResultatErreur();
+			}else {
+				res = lval.get(0);
+				for(int i = 1; i < lval.size(); i++)
+					res = res.addition(lval.get(i));
 			}
 		}
 	}
