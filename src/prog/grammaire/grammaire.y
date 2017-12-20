@@ -50,7 +50,7 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 											funcArgs.clear();}
 	| MINUS DOUBLE	%prec NEG			{$$ = new ResultatDouble(-$2);}
 	| DOUBLE							{$$ = new ResultatDouble($1);}
-	| MINUS INT %prec NEG 						{$$ = new ResultatInteger(-$2);}
+	| MINUS INT %prec NEG 				{$$ = new ResultatInteger(-$2);}
 	| INT 								{$$ = new ResultatInteger($1);}
 	| REF								{Cellule cellRef = conteneur.getCellule($1.substring(1));
 											if (cellRef==null){
