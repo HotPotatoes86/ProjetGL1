@@ -63,8 +63,10 @@ public class ResultatInteger extends Resultat{
 	@Override
 	public Resultat division(Resultat res) {
 		if (res instanceof ResultatDouble) {
+			if (((ResultatDouble)res).getValue()==0) return new ResultatErreur();
 			return new ResultatDouble(value/((ResultatDouble)res).getValue());
 		}else if (res instanceof ResultatInteger) {
+			if (((ResultatInteger)res).getValue()==0) return new ResultatErreur();
 			return new ResultatInteger(value/((ResultatInteger)res).getValue());
 		}
 		return new ResultatErreur();
