@@ -57,17 +57,17 @@ $(BIN):
 	@mkdir $(BIN)/
 
 grammaire:
-	byaccj -J -Jclass=Parser -Jpackage=prog $(SRC)/grammaire/grammaire.y
-	mv Parser.java $(SRC)/.
-	rm -f ParserVal.java
-	byaccj -J -Jclass=ParserExtract -Jpackage=prog $(SRC)/grammaire/grammaireExtractRef.y
-	mv ParserExtract.java $(SRC)/.
-	rm -f ParserExtractVal.java
-	sed -i 's/ParserExtractVal/ParserVal/g' $(SRC)/ParserExtract.java
-	jflex -d $(SRC) $(SRC)/grammaire/grammaireExtractRef.flex
-#	sed -i 's/Yylex/YyExtractRef/g' $(SRC)/YyExtractRef.java
-	jflex -d $(SRC) $(SRC)/grammaire/grammaire.flex
-
+	@echo "compilation de la grammaire"
+	@byaccj -J -Jclass=Parser -Jpackage=prog $(SRC)/grammaire/grammaire.y
+	@mv Parser.java $(SRC)/.
+	@rm -f ParserVal.java
+	@byaccj -J -Jclass=ParserExtract -Jpackage=prog $(SRC)/grammaire/grammaireExtractRef.y
+	@mv ParserExtract.java $(SRC)/.
+	@rm -f ParserExtractVal.java
+	@sed -i 's/ParserExtractVal/ParserVal/g' $(SRC)/ParserExtract.java
+	@jflex -d $(SRC) $(SRC)/grammaire/grammaireExtractRef.flex >/dev/null
+	@jflex -d $(SRC) $(SRC)/grammaire/grammaire.flex >/dev/null
+	@echo "grammaire compilé"
 
 
 
@@ -76,9 +76,11 @@ clean :
 	@/bin/rm -rf $(BIN)
 
 fclean : clean
-	@echo "suppression des fichier Yylex.java, YyExtractRef.java, Parser.java et ParserExtract.java"
+	@echo "suppression des fichier Yylex.java, Yylex.java~, YyExtractRef.java, YyExtractRef.java~, Parser.java et ParserExtract.java"
 	@/bin/rm -f $(SRC)/Yylex.java
+	@/bin/rm -f $(SRC)/Yylex.java~
 	@/bin/rm -f $(SRC)/YyExtractRef.java
+	@/bin/rm -f $(SRC)/YyExtractRef.java~
 	@/bin/rm -f $(SRC)/Parser.java
 	@/bin/rm -f $(SRC)/ParserExtract.java
 #	@echo "suppression de la lib $(LIB)"

@@ -94,14 +94,7 @@ method : LN oneArgument		{ $$ = new Ln($2);}
 oneArgument : PAROUV operation PARFER		{$$ = $2;}
 			;
 
-<<<<<<< HEAD
 /* plusieurs arguments (une liste d'arguments) pour la fonction */
-manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
-			;
-
-/* ajoute les resultats a la liste d'arguments de la fonction */
-listArgument : operation			{funcArgs.add($1);
-										$$ = funcArgs;}
 manyArgument : PAROUV listArgument PARFER 	{}
 			;
 
