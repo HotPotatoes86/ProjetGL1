@@ -71,9 +71,6 @@ public class Calcul {
 				return;
 			}else {
 				if (celluleRef.getResultat()!=null) {
-					celluleRef.actualise(conteneur);
-				}
-				if (celluleRef.getResultat()!=null) {
 					celluleRef.addToCellsNeedMe(cellule);
 					cellule.addToCellsUsed(celluleRef);
 				}else {

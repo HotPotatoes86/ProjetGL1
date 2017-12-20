@@ -29,7 +29,8 @@ formuleReference : REF formuleReference 	{String reference = $1;
 														System.err.println("error : "+f);
 													}
 												}
-												refs.add(cellule);}
+												if (!refs.contains(cellule))
+													refs.add(cellule);}
 				| FORM formuleReference		{}
 				| REF 						{String reference = $1; 
 												Cellule cellule = conteneur.getCellule(reference.substring(1));
@@ -44,7 +45,8 @@ formuleReference : REF formuleReference 	{String reference = $1;
 														System.err.println("error : "+f);
 													}
 												}
-												refs.add(cellule);}
+												if (!refs.contains(cellule))
+													refs.add(cellule);}
 				| FORM 						{}
 				;
 

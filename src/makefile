@@ -1,6 +1,6 @@
 NAME = Projet
 CC = javac
-CFLAGS = -cp .:/lib/mysql-connector-java-5.1.45-bin.jar
+CFLAGS = -cp .:lib/mysql-connector-java-5.1.45-bin.jar:lib/sqlite-jdbc-3.21.0.jar:lib/sqlite-jdbc-3.8.11.2.jar
 SOURCE = Calcul.java Conteneur.java SaveManager.java ParserExtract.java Parser.java ParserVal.java YyExtractRef.java Yylex.java
 SOURCE_METHODS = Absolute.java Acosinus.java Asinus.java Atangente.java Concat.java \
 Cosinus.java Fonction.java Len.java Ln.java Maximum.java Minimum.java Moyenne.java \

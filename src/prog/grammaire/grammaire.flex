@@ -82,4 +82,7 @@ Letter = [a-zA-Z]
 "\""[^\"]*"\""				{yyparser.yylval = new ParserVal(yytext().substring(1, yytext().length() - 1)); 
 							return Parser.STRING;}
 
-[^]|\n|\t  				{}/* ignore all whitespace */
+\n|\t  				{}/* ignore all whitespace */
+
+[^\ ]					{return Parser.UNKNOWN;}
+[^]						{}
