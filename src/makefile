@@ -1,6 +1,6 @@
 NAME = Projet
 CC = javac
-CFLAGS = 
+CFLAGS = -cp .:/lib/mysql-connector-java-5.1.45-bin.jar
 SOURCE = Calcul.java Conteneur.java SaveManager.java ParserExtract.java Parser.java ParserVal.java YyExtractRef.java Yylex.java
 SOURCE_METHODS = Absolute.java Acosinus.java Asinus.java Atangente.java Concat.java \
 Cosinus.java Fonction.java Len.java Ln.java Maximum.java Minimum.java Moyenne.java \
@@ -30,20 +30,20 @@ all : grammaire $(BIN) $(addprefix $(BIN)/$(SRC)/, $(OBJECT)) $(addprefix $(BIN)
 
 $(BIN)/$(SRC)/%.class:$(SRC)/%.java
 	@echo "compilation du fichier $^"
-	@$(CC) -d $(BIN) $^
+	@$(CC) -d $(BIN) $^ $(CFLAGS)
 
 $(BIN)/$(SRC)/$(RES)/%.class:$(SRC)/$(RES)/%.java 
 	@echo "compilation du fichier $^"
-	@$(CC) -d $(BIN)/ $^
+	@$(CC) -d $(BIN)/ $^ $(CFLAGS)
 
 
 $(BIN)/$(SRC)/$(FNC)/%.class:$(SRC)/$(FNC)/%.java
 	@echo "compilation du fichier $^"
-	@$(CC) -d $(BIN)/ $^
+	@$(CC) -d $(BIN)/ $^ $(CFLAGS)
 
 $(BIN)/Main.class:Main.java
 	@echo "compilation du fichier $^"
-	@$(CC) -d $(BIN)/ $^
+	@$(CC) -d $(BIN)/ $^ $(CFLAGS)
 
 $(DOC):
 	@echo "création du répertoire $(DOC)/"

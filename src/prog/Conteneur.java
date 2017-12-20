@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public class Conteneur {
 
-	List<Cellule> cellules;
+	public List<Cellule> cellules;
 
 	/**
 	 * Constructeur de la classe conteneur, cree un conteneur de cellules vide

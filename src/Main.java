@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 import prog.Cellule;
 import prog.Kernel;
+import prog.Conteneur;
+import prog.SaveManager;
 
 public class Main {
 
@@ -21,12 +23,14 @@ public class Main {
 	}
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		String nom="", formule="", chemin="", action="";
+		String nom="", formule="", chemin="", action="",user="",requete="", table ="";
+		char[] password;
+		Conteneur co = new Conteneur ();
 		boolean boucle = true;
 		System.out.println("Stop pour quitter");
 		try {
 			while(boucle) {
-				System.out.println("Action : editer | sauvegarder | importer");
+				System.out.println("Action : editer | sauvegarder | importer | importer-bd");
 				action = clean(sc.nextLine());
 				switch(action){
 				case "editer":
@@ -48,6 +52,27 @@ public class Main {
 					break;
 				case "stop":
 					boucle = false;
+					break;
+				case "importer-bd":
+					
+					System.out.println("Quel url ?");
+					chemin = clean(sc.nextLine());
+					
+					System.out.println("Quel utilisateur ?");
+					user = clean(sc.nextLine());
+					
+					System.out.println("Quel mot de passe ?");
+					//password = clean(sc.nextLine());
+					password  = System.console().readPassword();
+					
+					
+					System.out.println("De quelle table voulez-vous extraire les données ?");
+					table = clean(sc.nextLine());
+					
+					requete = "select * from "+table;
+					
+					Kernel.importerBase(requete,chemin,user,new String(password));
+									
 					break;
 				default: System.out.println("Action invalide");
 				}
