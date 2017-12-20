@@ -62,10 +62,12 @@ public class Calcul {
 	 * @throws Exception
 	 */
 	public void calcul() throws IOException, Exception {
+		this.cellule.setEnCalcul(true);
 		extractRef();
 		for (Cellule celluleRef : refs) {
-			if (celluleRef==null || celluleRef.equals(this.cellule) || celluleRef.getCellsUsed().contains(this.cellule)) {
+			if (celluleRef==null || celluleRef.getEnCalcul() || celluleRef.getCellsUsed().contains(this.cellule)) {
 				cellule.setResultat(new ResultatErreur());
+				this.cellule.setEnCalcul(false);
 				return;
 			}else {
 				if (celluleRef.getResultat()!=null) {
@@ -75,12 +77,14 @@ public class Calcul {
 					celluleRef.addToCellsNeedMe(cellule);
 					cellule.addToCellsUsed(celluleRef);
 				}else {
+					this.cellule.setEnCalcul(false);
 					cellule.setResultat(new ResultatErreur());
 					return;
 				}
 			}
 		}
 		cellule.setResultat(Parser.formuleToResultat(formule, conteneur));
+		this.cellule.setEnCalcul(false);
 	}
 
 	/**

@@ -138,6 +138,7 @@ private static Conteneur conteneur; /*utilisé pour extraire le resultat d'une r
 
 public static Resultat formuleToResultat(String formule, Conteneur conteneur) throws IOException, Exception {
         resultat =new ResultatErreur();
+		Parser.conteneur = conteneur;
 	Parser yyparser;
 	yyparser = new Parser(new StringReader(formule));
 

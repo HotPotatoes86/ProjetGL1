@@ -24,6 +24,7 @@ public class Cellule {
 	 * Nom de la cellule
 	 */
 	private String name;
+	private Boolean enCalcul;
 
 	/**
 	 * Constructeur de la classe, initialise les attributs de la classe
@@ -37,6 +38,7 @@ public class Cellule {
 		this.cellsNeedMe = new ArrayList<>();
 		this.cellsUsed = new ArrayList<>();
 		this.resultat=new ResultatErreur();
+		this.enCalcul = false;
 	}
 
 	/**
@@ -136,6 +138,16 @@ public class Cellule {
 	 */
 	public void setResultat(Resultat resultat) {
 		this.resultat = resultat;
+	}
+
+	public Boolean getEnCalcul()
+	{
+		return this.enCalcul;
+	}
+
+	public void setEnCalcul(Boolean c)
+	{
+		this.enCalcul = c;
 	}
 
 }
