@@ -7,7 +7,7 @@ import prog.results.Resultat;
 import prog.results.ResultatBoolean;
 import prog.results.ResultatErreur;
 import prog.results.ResultatInteger;
-
+import prog.results.ResultatDouble;
 public class Moyenne extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
@@ -26,7 +26,7 @@ public class Moyenne extends Fonction{
 				}
 	
 			}
-			tmp = tmp.division(new ResultatInteger(lval.size()));
+			tmp = tmp.division(new ResultatDouble(lval.size()));
 			res = tmp;
 		}
 	}
