@@ -101,12 +101,10 @@ manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
 /* ajoute les resultats a la liste d'arguments de la fonction */
 listArgument : operation			{funcArgs.add($1);
 										$$ = funcArgs;}
-=======
 manyArgument : PAROUV listArgument PARFER 	{}
 			;
 
 listArgument : operation			{funcArgs.add($1);}
->>>>>>> master
 	| listArgument COMMA operation	{funcArgs.add($3);}
 	;
 
