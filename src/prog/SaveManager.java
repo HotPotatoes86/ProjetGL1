@@ -91,22 +91,17 @@ public final class SaveManager {
 			while (rs.next()) {
 				//on cree une cellule pour chaque colonne de chaque ligne
 				for(int i=1;i<=rm.getColumnCount();i++){
-				
-				
-				        if(rm.getColumnTypeName(i).equals("VARCHAR")){
-				
+				        if(rm.getColumnTypeName(i).equalsIgnoreCase("VARCHAR") || rm.getColumnTypeName(i).equalsIgnoreCase("TEXT") || rm.getColumnTypeName(i).equalsIgnoreCase("VARCHAR2")){
 					        cell=new Cellule(rm.getColumnName(i).toUpperCase()+"_"+j,'"'+rs.getString(rm.getColumnName(i))+'"');
 					        c.addCellule(cell);
 					        cell.actualise(c);
-					}else{
-					
+						}else{
 					        cell=new Cellule(rm.getColumnName(i).toUpperCase()+"_"+j,rs.getString(rm.getColumnName(i)));
 					        c.addCellule(cell);
 					        cell.actualise(c);
 					
-					
+						}
 					}
-				}
 				j++;
 			}
 			(rs).close();

@@ -9,8 +9,15 @@ import prog.results.Resultat;
  */
 public abstract class Fonction {
 	
+	/**
+	 *	Resutat de la fonction
+	 */
 	protected Resultat res;
 	
+	/**
+	 *	Renvoie le resultat obtenu par la fonction
+	 *	@return le resultat obtenu par la fonction
+	 */
 	public abstract Resultat getResultat();
 
 }

@@ -36,6 +36,7 @@ axiome :  operation			{resultat = $1;}
 										};}
 		;
 
+/* operations de base */
 operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| operation MINUS operation			{$$ = $1.soustraction($3);}
 	| operation DIVIDE operation		{$$ = $1.division($3);}
@@ -65,6 +66,7 @@ operation : operation PLUS operation	{$$ = $1.addition($3);}
 	| UNKNOWN							{$$ = new ResultatErreur();}
 	;
 
+/* fonctions avec un ou plusieurs arguments */
 method : LN oneArgument		{ $$ = new Ln($2);}
 	| SIN oneArgument		{ $$ = new Sinus($2);}
 	| ASIN oneArgument		{ $$ = new Asinus($2);}
@@ -88,9 +90,18 @@ method : LN oneArgument		{ $$ = new Ln($2);}
 	| SUBSTR manyArgument		{ $$ = new Substring(funcArgs);}
 	;
 
+/* un seul argument pour la fonction */
 oneArgument : PAROUV operation PARFER		{$$ = $2;}
 			;
 
+<<<<<<< HEAD
+/* plusieurs arguments (une liste d'arguments) pour la fonction */
+manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
+			;
+
+/* ajoute les resultats a la liste d'arguments de la fonction */
+listArgument : operation			{funcArgs.add($1);
+										$$ = funcArgs;}
 manyArgument : PAROUV listArgument PARFER 	{}
 			;
 
@@ -98,6 +109,7 @@ listArgument : operation			{funcArgs.add($1);}
 	| listArgument COMMA operation	{funcArgs.add($3);}
 	;
 
+/* gere les conditions */
 condition : condition AND condition {$$ = $1 && $3;}
 	|condition OR condition			{$$ = $1 || $3;}
 	|condition XOR condition		{$$ = $1^$3;}
@@ -139,13 +151,13 @@ public Parser(Reader r) {
 
 
 private static boolean interactive;
-private static List<Resultat> funcArgs = new ArrayList<>();
-public static Resultat resultat; 
-private static Conteneur conteneur; /*utilisé pour extraire le resultat d'une référence*/
+private static List<Resultat> funcArgs = new ArrayList<>(); /* utilise pour les fonctions a plusieurs arguments */
+public static Resultat resultat; /* Resultat renvoye par le parser a la fin de l'analyse */
+private static Conteneur conteneur; /*utilise pour extraire le resultat d'une reference*/
 
 public static Resultat formuleToResultat(String formule, Conteneur conteneur) throws IOException, Exception {
-        resultat =new ResultatErreur();
-		Parser.conteneur = conteneur;
+    resultat =new ResultatErreur();
+	Parser.conteneur = conteneur;
 	Parser yyparser;
 	yyparser = new Parser(new StringReader(formule));
 
