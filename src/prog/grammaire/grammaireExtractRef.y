@@ -18,10 +18,32 @@ axiome : importe		{}
 
 formuleReference : REF formuleReference 	{String reference = $1; 
 												Cellule cellule = conteneur.getCellule(reference.substring(1));
+												if (cellule == null)
+												{
+													try{
+														cellule = new Cellule(reference.substring(1), "");
+														conteneur.addCellule(cellule);
+													}catch (IOException e){
+														System.err.println("IO error : "+e);
+													}catch (Exception f) {
+														System.err.println("error : "+f);
+													}
+												}
 												refs.add(cellule);}
 				| FORM formuleReference		{}
 				| REF 						{String reference = $1; 
 												Cellule cellule = conteneur.getCellule(reference.substring(1));
+												if (cellule == null)
+												{
+													try{
+														cellule = new Cellule(reference.substring(1), "");
+														conteneur.addCellule(cellule);
+													}catch (IOException e){
+														System.err.println("IO error : "+e);
+													}catch (Exception f) {
+														System.err.println("error : "+f);
+													}
+												}
 												refs.add(cellule);}
 				| FORM 						{}
 				;

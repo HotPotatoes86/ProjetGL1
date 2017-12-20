@@ -13,7 +13,6 @@ import java.util.List;
 %type<ival>	INT 						/*Type Int*/
 %type<dval> DOUBLE						/*Type Double*/
 %type<rval> operation oneArgument axiome/*Type Resultat*/
-%type<lval> manyArgument listArgument	/*Type List<Resultat>*/
 %type<bval> condition BOOLEAN 			/*Type Boolean*/
 %type<sval> STRING REF					/*Type String*/
 
@@ -80,7 +79,7 @@ method : LN oneArgument		{ $$ = new Ln($2);}
 	| MAXIMUM manyArgument		{ $$ = new Maximum(funcArgs);}
 	| MOY manyArgument			{ $$ = new Moyenne(funcArgs);}
 	| ABS oneArgument			{ $$ = new Absolute($2);}
-	| POWER manyArgument		{ $$ = new Pow($2);}
+	| POWER manyArgument		{ $$ = new Pow(funcArgs);}
 	| ROUND oneArgument			{ $$ = new Round($2);}
 	| SQRT oneArgument			{ $$ = new Sqrt($2);}
 	| TONUM oneArgument			{ $$ = new ToNum($2);}
@@ -94,6 +93,7 @@ method : LN oneArgument		{ $$ = new Ln($2);}
 oneArgument : PAROUV operation PARFER		{$$ = $2;}
 			;
 
+<<<<<<< HEAD
 /* plusieurs arguments (une liste d'arguments) pour la fonction */
 manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
 			;
@@ -101,6 +101,12 @@ manyArgument : PAROUV listArgument PARFER 	{$$ = $2;}
 /* ajoute les resultats a la liste d'arguments de la fonction */
 listArgument : operation			{funcArgs.add($1);
 										$$ = funcArgs;}
+=======
+manyArgument : PAROUV listArgument PARFER 	{}
+			;
+
+listArgument : operation			{funcArgs.add($1);}
+>>>>>>> master
 	| listArgument COMMA operation	{funcArgs.add($3);}
 	;
 
