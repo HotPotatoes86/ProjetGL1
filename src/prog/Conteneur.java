@@ -3,6 +3,8 @@ package prog;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Entitee qui regroupe toutes les cellules
@@ -87,20 +89,13 @@ public class Conteneur {
 	 * @return true si le nom est correct, sinon false
 	 */
 	private boolean verifieNom(String nom) {
-		if (nom.length()>0) {
-			if ((nom.charAt(0)>='a' && nom.charAt(0)<='z') || (nom.charAt(0)>='A' && nom.charAt(0)<='Z')) {
-				for (int i=1; i<nom.length(); i++) {
-					if (!((nom.charAt(i)>='a' && nom.charAt(i)<='z') || (nom.charAt(i)>='A' && nom.charAt(i)<='Z') || (nom.charAt(i)>='0' && nom.charAt(i)<='9') || nom.charAt(i)=='_')){
-						return false;
-					}
-				}
-			}else {
-				return false;
-			}
-		}else {
+		String patternString = "^[a-zA-Z][a-zA-Z0-9_]*";
+		Pattern pattern = Pattern.compile(patternString);
+		Matcher matcher = pattern.matcher(nom);
+		if (matcher.matches())
+			return true;
+		else
 			return false;
-		}
-		return true;
 	}
 
 	/**
