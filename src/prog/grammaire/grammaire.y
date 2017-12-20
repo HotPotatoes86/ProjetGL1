@@ -122,7 +122,7 @@ private int yylex () {
 
 
 public void yyerror (String error) {
-	System.err.println ("Error: " + error);
+	//System.err.println ("Error: " + error);
 }
 
 
