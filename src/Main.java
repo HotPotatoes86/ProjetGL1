@@ -7,7 +7,7 @@ import prog.Conteneur;
 import prog.SaveManager;
 
 /**
- * Classe Main permettant de montrer les fonctionnalités du noyau fonctionnel
+ * Classe Main permettant de montrer les fonctionnalites du noyau fonctionnel
  * Utilise pendant la demonstration de la soutenance finale
  * @author Groupe 4
  *

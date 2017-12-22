@@ -1,3 +1,5 @@
+ARCHIVE=Projet_groupe_4
+EXTENSION=.zip
 NAME = Projet
 CC = javac
 CFLAGS = -cp .:lib/mysql-connector-java-5.1.45-bin.jar:lib/sqlite-jdbc-3.21.0.jar:lib/sqlite-jdbc-3.8.11.2.jar
@@ -20,6 +22,7 @@ DOC = Doc
 .PHONY : all, clean, grammaire, clean_grammaire, doc, clean_doc, re, archive, test, test_calcul, test_cellule, test_conteneur, test_saveManager
 
 all : $(BIN) $(addprefix $(BIN)/$(SRC)/, $(OBJECT)) $(addprefix $(BIN)/$(SRC)/$(RES)/, $(OBJECT_RESULTS)) $(addprefix $(BIN)/$(SRC)/$(FNC)/, $(OBJECT_METHODS)) $(BIN)/Main.class
+	@echo "java -cp .:lib/*:bin Main" > exec.sh
 
 $(BIN)/$(SRC)/%.class:$(SRC)/%.java
 	@echo "compilation du fichier $^"
@@ -64,6 +67,9 @@ grammaire:
 clean :
 	@echo "suppression du répertoire $(BIN)/"
 	@/bin/rm -rf $(BIN)
+	@echo "suppression de l'archive"
+	@/bin/rm -f $(ARCHIVE)$(EXTENSION)
+	@/bin/rm -f exec.sh
 
 clean_grammaire :
 	@echo "suppression des fichier Yylex.java, Yylex.java~, YyExtractRef.java, YyExtractRef.java~, Parser.java et ParserExtract.java"
@@ -85,7 +91,7 @@ clean_doc :
 
 re : fclean all
 
-archive : clean_grammaire clean_doc
+archive : clean
 	@/bin/rm -rf $(ARCHIVE)
 	@mkdir $(ARCHIVE)
 	@rsync -r --exclude=$(ARCHIVE) --exclude=$(ARCHIVE)$(EXTENSION) * $(ARCHIVE)/
