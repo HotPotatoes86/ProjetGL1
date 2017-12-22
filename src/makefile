@@ -85,7 +85,7 @@ clean_doc :
 
 re : fclean all
 
-archive : fclean clean_doc
+archive : clean_grammaire clean_doc
 	@/bin/rm -rf $(ARCHIVE)
 	@mkdir $(ARCHIVE)
 	@rsync -r --exclude=$(ARCHIVE) --exclude=$(ARCHIVE)$(EXTENSION) * $(ARCHIVE)/
