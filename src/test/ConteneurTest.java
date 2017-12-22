@@ -35,6 +35,9 @@ public class ConteneurTest {
 		assertTrue("cellule presente dans conteneur",c.getCellule("cel")!=null);
 		c.removeCellule("cel");
 		Iterator<Cellule> it = c.getCelluleIterator();
+		/*while (it.hasNext()) {
+			System.out.println(it.next());
+		}*/
 		assertTrue("cellule supprimee du conteneur",!it.hasNext());
 	}
 }

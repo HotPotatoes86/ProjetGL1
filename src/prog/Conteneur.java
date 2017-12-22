@@ -104,7 +104,9 @@ public class Conteneur {
 	 * @param cellule nom de la cellule
 	 */
 	public void removeCellule(String cellule) {
-		for (Cellule c : this.cellules) {
+		List<Cellule> tmp = new ArrayList<>();
+		tmp.addAll(this.cellules);
+		for (Cellule c : tmp) {
 			if (c.getName().equals(cellule)) {
 				this.cellules.remove(c);
 			}
