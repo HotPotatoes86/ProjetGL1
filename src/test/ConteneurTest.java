@@ -1,7 +1,12 @@
 package test;
 
 import static org.junit.Assert.*;
+
+import java.util.Iterator;
+
 import org.junit.Test;
+
+import prog.Cellule;
 import prog.Conteneur;
 
 public class ConteneurTest {
@@ -29,6 +34,7 @@ public class ConteneurTest {
 		}
 		assertTrue("cellule presente dans conteneur",c.getCellule("cel")!=null);
 		c.removeCellule("cel");
-		assertTrue("cellule supprimee du conteneur",c.getAllCellules().isEmpty());
+		Iterator<Cellule> it = c.getCelluleIterator();
+		assertTrue("cellule supprimee du conteneur",!it.hasNext());
 	}
 }

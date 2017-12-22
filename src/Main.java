@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Scanner;
 
 import prog.Cellule;
@@ -5,6 +6,12 @@ import prog.Kernel;
 import prog.Conteneur;
 import prog.SaveManager;
 
+/**
+ * Classe Main permettant de montrer les fonctionnalités du noyau fonctionnel
+ * Utilise pendant la demonstration de la soutenance finale
+ * @author Groupe 4
+ *
+ */
 public class Main {
 
 	private static String clean(String str)
@@ -21,6 +28,7 @@ public class Main {
 		}
 		return strbis;
 	}
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String nom="", formule="", chemin="", action="",user="",requete="", table ="";
@@ -79,7 +87,9 @@ public class Main {
 				if (boucle){
 					System.out.println("==============================================");
 					System.out.println("===============Contenu du conteneur===========");
-					for (Cellule c : Kernel.getConteneur().getAllCellules()){
+					Iterator<Cellule> it = Kernel.getConteneur().getCelluleIterator();
+					while (it.hasNext()) {
+						Cellule c = it.next();
 						System.out.println("@" + c.getName() + "(" + c.getFormule() + ") = " + c.getResultat());
 					}
 					System.out.println("==============================================");

@@ -1,7 +1,7 @@
 package prog;
 
 import java.sql.Statement;
-
+import java.util.Iterator;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -132,7 +132,9 @@ public final class SaveManager {
 				res.addCellule(c);
 		}
 		reader.close();
-		for (Cellule c : res.getAllCellules()) {
+		Iterator<Cellule> it = res.getCelluleIterator();
+		while(it.hasNext()) {
+			Cellule c = it.next();
 			c.actualise(res);
 		}
 		return res;
@@ -162,8 +164,10 @@ public final class SaveManager {
 			reader.close();
 		}
 		writer = new PrintWriter(chemin, "UTF-8");
-		for (Cellule c : conteneur.getAllCellules()) {
+		Iterator<Cellule> it = conteneur.getCelluleIterator();
+		while(it.hasNext()) {
 			//Pour chaque cellule du conteneur on ecrit une ligne dans le fichier de sauvegarde
+			Cellule c = it.next();
 			writer.println(c.getName() + "|" + c.getFormule());
 		}
 		writer.close();

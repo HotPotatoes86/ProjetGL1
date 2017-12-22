@@ -2,6 +2,7 @@ package prog;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -111,10 +112,11 @@ public class Conteneur {
 	}
 
 	/**
-	 * Retourne la liste des cellules contenues dans le conteneur
+	 * Retourne un iterateur sur les cellules contenues dans le conteneur
+	 * @return un iterateur sur les cellules contenues dans le conteneur
 	 */
-	public List<Cellule> getAllCellules() {
-		return this.cellules;
+	public Iterator<Cellule> getCelluleIterator(){
+		return this.cellules.iterator();
 	}
 
 }
