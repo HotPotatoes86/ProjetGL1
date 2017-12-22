@@ -16,7 +16,7 @@ public class ConteneurTest {
 			e.printStackTrace();
 		}
 		assertTrue("cellule presente dans conteneur",c.getCellule("cel")!=null);
-		assertTrue("valeur de cellule modifiée",c.getCellule("cel").getFormule().compareTo("newval")==0);
+		assertTrue("valeur de cellule modifiee",c.getCellule("cel").getFormule().compareTo("newval")==0);
 	}
 	
 	@Test
@@ -29,6 +29,6 @@ public class ConteneurTest {
 		}
 		assertTrue("cellule presente dans conteneur",c.getCellule("cel")!=null);
 		c.removeCellule("cel");
-		assertTrue("cellule supprimée du conteneur",c.getAllCellules().isEmpty());
+		assertTrue("cellule supprimee du conteneur",c.getAllCellules().isEmpty());
 	}
 }

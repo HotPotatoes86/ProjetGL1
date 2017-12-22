@@ -17,16 +17,9 @@ RES = results
 FNC = methods
 DOC = Doc
 
-.PHONY : all, clean, fclean, doc, clean_doc, re
+.PHONY : all, clean, grammaire, clean_grammaire, doc, clean_doc, re, archive, test, test_calcul, test_cellule, test_conteneur, test_saveManager
 
-#all : $(BIN) $(TMP) $(BIN)/$(NAME)
-
-#$(BIN)/$(NAME): $(addprefix $(TMP)/, $(OBJECT)) $(TMP)/Main.o
-#	@$(CC) $(CFLAGS) $^ -o $@ -I $(INCLUDES)/
-#	@echo "compilation effectuée"
-
-#lib : $(TMP) $(LIB)
-all : grammaire $(BIN) $(addprefix $(BIN)/$(SRC)/, $(OBJECT)) $(addprefix $(BIN)/$(SRC)/$(RES)/, $(OBJECT_RESULTS)) $(addprefix $(BIN)/$(SRC)/$(FNC)/, $(OBJECT_METHODS)) $(BIN)/Main.class
+all : $(BIN) $(addprefix $(BIN)/$(SRC)/, $(OBJECT)) $(addprefix $(BIN)/$(SRC)/$(RES)/, $(OBJECT_RESULTS)) $(addprefix $(BIN)/$(SRC)/$(FNC)/, $(OBJECT_METHODS)) $(BIN)/Main.class
 
 $(BIN)/$(SRC)/%.class:$(SRC)/%.java
 	@echo "compilation du fichier $^"
@@ -48,9 +41,6 @@ $(BIN)/Main.class:Main.java
 $(DOC):
 	@echo "création du répertoire $(DOC)/"
 	@mkdir $(DOC)/
-#$(BIN):
-#	@echo "création du répertoire $(BIN)/"
-#	@mkdir $(BIN)/
 
 $(BIN):
 	@echo "creation du répertoire $(BIN) et de ses sous répertoires"
@@ -75,7 +65,7 @@ clean :
 	@echo "suppression du répertoire $(BIN)/"
 	@/bin/rm -rf $(BIN)
 
-fclean : clean
+clean_grammaire :
 	@echo "suppression des fichier Yylex.java, Yylex.java~, YyExtractRef.java, YyExtractRef.java~, Parser.java et ParserExtract.java"
 	@/bin/rm -f $(SRC)/Yylex.java
 	@/bin/rm -f $(SRC)/Yylex.java~
@@ -83,10 +73,6 @@ fclean : clean
 	@/bin/rm -f $(SRC)/YyExtractRef.java~
 	@/bin/rm -f $(SRC)/Parser.java
 	@/bin/rm -f $(SRC)/ParserExtract.java
-#	@echo "suppression de la lib $(LIB)"
-#	@/bin/rm -f $(LIB)
-#	@echo "suppression du répertoire $(BIN)/"
-#	@/bin/rm -rf $(BIN)
 
 doc : $(DOC)
 	@echo "génération de la doc"
@@ -99,10 +85,35 @@ clean_doc :
 
 re : fclean all
 
-.PHONY:archive
 archive : fclean clean_doc
 	@/bin/rm -rf $(ARCHIVE)
 	@mkdir $(ARCHIVE)
 	@rsync -r --exclude=$(ARCHIVE) --exclude=$(ARCHIVE)$(EXTENSION) * $(ARCHIVE)/
 	zip -r $(ARCHIVE)$(EXTENSION) $(ARCHIVE)
 	@/bin/rm -rf $(ARCHIVE)
+
+#test#
+test:test_calcul test_cellule test_conteneur test_saveManager
+
+test_cellule: $(BIN)
+	@echo "test cellule"
+	@javac -d $(BIN)/ -cp .:test/lib/junit.jar test/CelluleTest.java
+	@java -cp .:test/lib/junit.jar:hamcrest-core.jar:$(BIN) org.junit.runner.JUnitCore test.CelluleTest
+
+test_calcul:$(BIN)
+	@echo "test calcul"
+	@javac -d $(BIN)/ -cp .:test/lib/junit.jar test/CalculTest.java
+	@java -cp .:test/lib/junit.jar:hamcrest-core.jar:$(BIN) org.junit.runner.JUnitCore test.CalculTest
+
+test_conteneur:$(BIN)
+	@echo "test conteneur"
+	@javac -d $(BIN)/ -cp .:test/lib/junit.jar test/ConteneurTest.java
+	@java -cp .:test/lib/junit.jar:hamcrest-core.jar:$(BIN) org.junit.runner.JUnitCore test.ConteneurTest
+
+test_saveManager:$(BIN)
+	@echo "test SaveManager"
+	@javac -d $(BIN)/ -cp .:test/lib/junit.jar test/SaveManagerTest.java
+	@java -cp .:test/lib/junit.jar:hamcrest-core.jar:$(BIN) org.junit.runner.JUnitCore test.SaveManagerTest
+
+
+
