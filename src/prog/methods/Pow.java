@@ -12,6 +12,14 @@ public class Pow extends Fonction{
 	
 	List<Resultat> args = new ArrayList<>();
 	
+	private int powInt(int a, int b) {
+		int res = a;
+		for (int i=1; i<b; i++) {
+			res*=a;
+		}
+		return res;
+	}
+	
 	public Pow(List<Resultat> lval) {
 		args = lval;
 		if (lval.size()<=0 || lval.size() > 2) {
@@ -19,12 +27,16 @@ public class Pow extends Fonction{
 		}else {
 			if (lval.get(0) instanceof ResultatDouble && lval.get(1) instanceof ResultatDouble) {
 				res = new ResultatDouble(Math.pow(((ResultatDouble)lval.get(0)).getValue(), ((ResultatDouble)lval.get(1)).getValue()));
+				
 			}else if (lval.get(0) instanceof ResultatDouble && lval.get(1) instanceof ResultatInteger) {
 				res = new ResultatDouble(Math.pow(((ResultatDouble)lval.get(0)).getValue(), ((ResultatInteger)lval.get(1)).getValue()));
+				
 			}else if (lval.get(0) instanceof ResultatInteger && lval.get(1) instanceof ResultatDouble) {
 				res = new ResultatDouble(Math.pow(((ResultatInteger)lval.get(0)).getValue(), ((ResultatDouble)lval.get(1)).getValue()));
+				
 			}else if (lval.get(0) instanceof ResultatInteger && lval.get(1) instanceof ResultatInteger) {
-				res = new ResultatDouble(Math.pow(((ResultatInteger)lval.get(0)).getValue(), ((ResultatInteger)lval.get(1)).getValue()));
+				res = new ResultatInteger(powInt(((ResultatInteger)lval.get(0)).getValue(), ((ResultatInteger)lval.get(1)).getValue()));
+				
 			}else {
 				res = new ResultatErreur();
 			}

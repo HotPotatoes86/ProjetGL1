@@ -67,7 +67,7 @@ public class ResultatInteger extends Resultat{
 			return new ResultatDouble(value/((ResultatDouble)res).getValue());
 		}else if (res instanceof ResultatInteger) {
 			if (((ResultatInteger)res).getValue()==0) return new ResultatErreur();
-			return new ResultatInteger(value/((ResultatInteger)res).getValue());
+			return new ResultatDouble((double)value/((ResultatInteger)res).getValue());
 		}
 		return new ResultatErreur();
 	}

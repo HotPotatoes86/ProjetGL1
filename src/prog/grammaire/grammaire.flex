@@ -24,7 +24,7 @@ Letter = [a-zA-Z]
 "-"						{return Parser.MINUS;}
 "*"						{return Parser.TIMES;}
 "/"						{return Parser.DIVIDE;}
-"mod"					{return Parser.MOD;}
+"%"						{return Parser.MOD;}
 "^"						{return Parser.POW;}
 	
 "<"						{return Parser.INF;}
